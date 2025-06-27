@@ -2,21 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  MapPin, 
-  Camera, 
-  Users, 
-  Clock, 
-  Star, 
-  CheckCircle,
-  ArrowRight,
-  Calendar,
-  DollarSign,
-  Award,
-  Binoculars,
-  Mountain,
-  TreePine
-} from 'lucide-react';
+import { MapPin, Camera, Users, Clock, Star, CheckCircle, ArrowRight, Calendar, DollarSign, Award, Binary as Binoculars, Mountain, TreePine } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Ngorongoro = () => {
