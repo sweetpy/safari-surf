@@ -1,19 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  MapPin, 
-  Clock, 
-  Users, 
-  Star, 
-  ArrowRight, 
-  Calendar,
-  Camera,
-  Mountain,
-  Palmtree,
-  Binoculars,
-  Heart
-} from 'lucide-react';
+import { MapPin, Clock, Users, Star, ArrowRight, Calendar, Camera, Mountain, Palmtree, Binary as Binoculars, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Itineraries = () => {
