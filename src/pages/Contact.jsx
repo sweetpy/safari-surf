@@ -17,9 +17,8 @@ import {
   ArrowRight,
   Loader
 } from 'lucide-react';
-import emailjs from 'emailjs-com';
-import toast from 'react-hot-toast';
 import { sendRentalNotification } from '../utils/emailService';
+import toast from 'react-hot-toast';
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -58,33 +57,45 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Create a notification toast that persists during submission
+    const toastId = toast.loading('Processing your rental request...');
+    
     try {
-      // Send notifications immediately to both email addresses and SMS
-      const notificationResult = await sendRentalNotification(formData);
+      // Start sending notification immediately in the background
+      const notificationPromise = sendRentalNotification(formData);
       
-      // Even if notification fails, continue with form processing
-      console.log("Notification status:", notificationResult.success ? "Success" : "Failed but continuing");
-      
-      // Show success state
+      // Show success state immediately while notification is still processing
       setIsSubmitting(false);
       setIsSubmitted(true);
-      toast.success('Your rental request has been submitted! We\'ll contact you shortly.');
       
-      // Navigate to checkout page after delay
+      // Update the toast to show success
+      toast.success('Your WiFi rental request has been received! We\'ll contact you shortly.', {
+        id: toastId
+      });
+      
+      // Wait for notification to complete
+      const result = await notificationPromise;
+      console.log("Notification result:", result);
+      
+      // Navigate to checkout page after a short delay
       setTimeout(() => {
         navigate('/checkout', {
           state: {
             rental: formData
           }
         });
-      }, 2000);
+      }, 1500);
       
     } catch (error) {
       console.error('Form submission error:', error);
       setIsSubmitting(false);
-      toast.error('There was an issue processing your request. Please try WhatsApp instead.');
       
-      // Attempt WhatsApp fallback
+      // Update the toast to show error
+      toast.error('There was a connection issue. Please try WhatsApp instead.', {
+        id: toastId
+      });
+      
+      // Create WhatsApp message as fallback
       const whatsappMessage = `Hello! I'd like to rent a WiFi device.
       
 Name: ${formData.name}
@@ -93,8 +104,11 @@ Phone: ${formData.phone}
 Plan: ${formData.plan}
 Location: ${formData.location}
 Start Date: ${formData.startDate}
-Additional Info: ${formData.message}`;
+Additional Info: ${formData.message}
 
+CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
+
+      // Open WhatsApp with the message
       window.open(`https://wa.me/255764928408?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     }
   };
@@ -275,7 +289,7 @@ Additional Info: ${formData.message}`;
                           className="h-full bg-green-500" 
                           initial={{ width: 0 }}
                           animate={{ width: "100%" }}
-                          transition={{ duration: 2 }}
+                          transition={{ duration: 1.5 }}
                         />
                       </div>
                     </div>
@@ -424,6 +438,13 @@ Additional Info: ${formData.message}`;
                       />
                     </div>
 
+                    <div className="bg-green-50 p-4 rounded-xl border border-green-100 mb-4">
+                      <p className="text-green-800 text-sm flex items-start">
+                        <CheckCircle className="h-5 w-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" />
+                        <span>We accept cash on delivery! Pay when you receive your device with cash (USD or TZS) or mobile money.</span>
+                      </p>
+                    </div>
+
                     <button
                       type="submit"
                       disabled={isSubmitting}
@@ -477,7 +498,8 @@ Additional Info: ${formData.message}`;
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-900 mb-1">Confirm & Pay</h4>
-                        <p className="text-gray-600 mb-2">Receive confirmation and payment details</p>
+                        <p className="text-gray-600 mb-2">Receive confirmation and payment options</p>
+                        <p className="text-sm text-green-600 font-medium">Cash on delivery available!</p>
                       </div>
                     </div>
 
