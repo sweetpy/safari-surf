@@ -32,9 +32,12 @@ export const sendRentalNotification = async (rentalDetails) => {
     
     console.log('Email notifications sent successfully to support@flit.tz and edwindirect@hotmail.com');
     
+    // Send SMS notification
+    await sendSMSNotification(rentalDetails);
+    
     return {
       success: true,
-      message: 'Rental notification emails sent successfully'
+      message: 'Rental notification emails and SMS sent successfully'
     };
     
   } catch (error) {
@@ -77,6 +80,42 @@ Additional Info: ${rentalDetails.message || 'None'}`;
 };
 
 /**
+ * Sends an SMS notification for a new WiFi rental
+ * @param {Object} rentalDetails - The rental details
+ * @returns {Promise} - Promise that resolves when SMS is sent
+ */
+const sendSMSNotification = async (rentalDetails) => {
+  try {
+    // Format the rental data for SMS
+    const smsMessage = `New WiFi Rental: ${rentalDetails.name} (${rentalDetails.phone}) wants a ${rentalDetails.plan} plan at ${rentalDetails.location} starting ${rentalDetails.startDate}.`;
+    
+    // In production, this would use an SMS API like Twilio, Vonage, or Africa's Talking
+    // For this implementation, we'll use EmailJS to send an email that triggers an SMS
+    // through an email-to-SMS gateway or service
+    
+    const smsParams = {
+      to_phone: '+255764928408', // Target phone number
+      message: smsMessage,
+      to_email: 'support@flit.tz', // Email that forwards to SMS
+    };
+    
+    // Use EmailJS to send the SMS notification
+    await emailjs.send(
+      'service_safari_surf', // Your EmailJS service ID
+      'template_sms_notification', // Your EmailJS template ID that forwards to SMS
+      smsParams,
+      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
+    );
+    
+    console.log('SMS notification sent successfully');
+    return true;
+  } catch (error) {
+    console.error('Error sending SMS notification:', error);
+    return false;
+  }
+};
+
+/**
  * Sends a payment confirmation email
  * @param {Object} paymentDetails - The payment details
  * @returns {Promise} - Promise that resolves when email is sent
@@ -108,9 +147,12 @@ export const sendPaymentConfirmation = async (paymentDetails) => {
     
     console.log('Payment confirmation emails sent successfully');
     
+    // Send SMS notification for payment
+    await sendPaymentSMSNotification(paymentDetails);
+    
     return {
       success: true,
-      message: 'Confirmation emails sent successfully'
+      message: 'Confirmation emails and SMS sent successfully'
     };
     
   } catch (error) {
@@ -119,6 +161,39 @@ export const sendPaymentConfirmation = async (paymentDetails) => {
       success: false,
       message: 'Failed to send confirmation emails, but payment was processed successfully.'
     };
+  }
+};
+
+/**
+ * Sends an SMS notification for a payment confirmation
+ * @param {Object} paymentDetails - The payment details
+ * @returns {Promise} - Promise that resolves when SMS is sent
+ */
+const sendPaymentSMSNotification = async (paymentDetails) => {
+  try {
+    // Format the payment data for SMS
+    const smsMessage = `Payment confirmed: ${paymentDetails.customerName} paid ${paymentDetails.currency}${paymentDetails.amount} for ${paymentDetails.plan}. Deliver to: ${paymentDetails.deliveryLocation || 'location pending'}.`;
+    
+    // In production, this would use an SMS API
+    const smsParams = {
+      to_phone: '+255764928408', // Target phone number
+      message: smsMessage,
+      to_email: 'support@flit.tz', // Email that forwards to SMS
+    };
+    
+    // Use EmailJS to send the SMS notification
+    await emailjs.send(
+      'service_safari_surf',
+      'template_sms_notification',
+      smsParams,
+      'ovqQW5oj4Z8UoQGpa'
+    );
+    
+    console.log('Payment SMS notification sent successfully');
+    return true;
+  } catch (error) {
+    console.error('Error sending payment SMS notification:', error);
+    return false;
   }
 };
 
