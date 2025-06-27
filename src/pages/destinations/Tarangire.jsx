@@ -2,20 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  MapPin, 
-  Star, 
-  Camera, 
-  TreePine, 
-  Users, 
-  Clock,
-  Calendar,
-  Phone,
-  ArrowRight,
-  CheckCircle,
-  Binoculars,
-  Mountain
-} from 'lucide-react';
+import { MapPin, Star, Camera, TreePine, Users, Clock, Calendar, Phone, ArrowRight, CheckCircle, Binary as Binoculars, Mountain } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Tarangire = () => {
