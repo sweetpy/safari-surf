@@ -1,19 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  Camera, 
-  MapPin, 
-  Clock, 
-  Users, 
-  Star,
-  CheckCircle,
-  ArrowRight,
-  Calendar,
-  Binoculars,
-  Tent,
-  Award
-} from 'lucide-react';
+import { Camera, MapPin, Clock, Users, Star, CheckCircle, ArrowRight, Calendar, Binary as Binoculars, Tent, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Safaris = () => {
