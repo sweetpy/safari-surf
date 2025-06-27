@@ -22,15 +22,12 @@ export const sendRentalNotification = async (rentalDetails) => {
       cc_email: 'edwindirect@hotmail.com'
     };
     
-    // Use EmailJS to send the email (would need to be configured with your EmailJS credentials)
-    // This will run on the client side as we're just doing email notifications
-    
-    // Send the email to both support@flit.tz and edwindirect@hotmail.com
+    // Use EmailJS to send the email to both support@flit.tz and edwindirect@hotmail.com
     await emailjs.send(
       'service_safari_surf', // Your EmailJS service ID
       'template_rental_notification', // Your EmailJS template ID
       emailParams,
-      'YOUR_EMAILJS_USER_ID' // Your EmailJS user ID
+      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
     );
     
     console.log('Email notifications sent successfully to support@flit.tz and edwindirect@hotmail.com');
@@ -106,7 +103,7 @@ export const sendPaymentConfirmation = async (paymentDetails) => {
       'service_safari_surf', // Your EmailJS service ID
       'template_payment_confirmation', // Your EmailJS template ID
       emailParams,
-      'YOUR_EMAILJS_USER_ID' // Your EmailJS user ID
+      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
     );
     
     console.log('Payment confirmation emails sent successfully');
@@ -148,7 +145,7 @@ export const sendRentalReminder = async (rentalDetails) => {
       'service_safari_surf', // Your EmailJS service ID
       'template_rental_reminder', // Your EmailJS template ID
       emailParams,
-      'YOUR_EMAILJS_USER_ID' // Your EmailJS user ID
+      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
     );
     
     console.log('Rental reminder email sent successfully');
