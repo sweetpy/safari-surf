@@ -18,7 +18,6 @@ import Contact from './pages/Contact';
 import Booking from './pages/Booking';
 
 // Destination Pages
-import Zanzibar from './pages/destinations/Zanzibar';
 import Serengeti from './pages/destinations/Serengeti';
 import Kilimanjaro from './pages/destinations/Kilimanjaro';
 import Ngorongoro from './pages/destinations/Ngorongoro';
@@ -51,7 +50,6 @@ function App() {
               <Route path="/booking" element={<Booking />} />
               
               {/* Destination Routes */}
-              <Route path="/destinations/zanzibar" element={<Zanzibar />} />
               <Route path="/destinations/serengeti" element={<Serengeti />} />
               <Route path="/destinations/kilimanjaro" element={<Kilimanjaro />} />
               <Route path="/destinations/ngorongoro" element={<Ngorongoro />} />
