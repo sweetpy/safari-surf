@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Wifi, Phone } from 'lucide-react';
+import { Menu, X, Compass, Phone, Globe, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -16,15 +17,34 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'Coverage', path: '/coverage' },
-    { name: 'FAQ', path: '/faq' },
+  const navigationItems = [
+    { 
+      name: 'Destinations', 
+      path: '/destinations',
+      dropdown: [
+        { name: 'Zanzibar', path: '/destinations/zanzibar' },
+        { name: 'Serengeti', path: '/destinations/serengeti' },
+        { name: 'Kilimanjaro', path: '/destinations/kilimanjaro' },
+        { name: 'Ngorongoro', path: '/destinations/ngorongoro' },
+        { name: 'Tarangire', path: '/destinations/tarangire' },
+        { name: 'Arusha', path: '/destinations/arusha' }
+      ]
+    },
+    { name: 'Safaris', path: '/safaris' },
+    { name: 'Itineraries', path: '/itineraries' },
+    { 
+      name: 'Travel Guides', 
+      path: '/guides',
+      dropdown: [
+        { name: 'Visa to Tanzania', path: '/guides/visa-to-tanzania' },
+        { name: 'Best Time to Visit', path: '/guides/best-time-to-visit-tanzania' },
+        { name: 'Safari Costs', path: '/guides/tanzania-safari-cost' },
+        { name: 'Packing List', path: '/guides/tanzania-packing-list' },
+        { name: 'Travel Budget', path: '/guides/tanzania-travel-budget' }
+      ]
+    },
     { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Contact', path: '/contact' }
   ];
 
   return (
@@ -41,43 +61,67 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <Wifi className="h-10 w-10 text-orange-500 group-hover:text-orange-600 transition-colors" />
+              <Compass className="h-10 w-10 text-orange-500 group-hover:text-orange-600 transition-colors" />
               <div className="absolute -inset-1 bg-orange-500/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div>
               <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'} group-hover:text-orange-500 transition-colors`}>
-                Safari Surf
+                Tanzania Travel Hub
               </h1>
-              <p className={`text-sm ${isScrolled ? 'text-gray-600' : 'text-gray-200'}`}>WiFi Solutions</p>
+              <p className={`text-sm ${isScrolled ? 'text-gray-600' : 'text-gray-200'}`}>Your Safari Companion</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
+            {navigationItems.map((item) => (
+              <div 
                 key={item.name}
-                to={item.path}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors ${
-                  location.pathname === item.path
-                    ? 'text-orange-500'
-                    : isScrolled
-                    ? 'text-gray-700 hover:text-orange-500'
-                    : 'text-white hover:text-orange-300'
-                }`}
+                className="relative"
+                onMouseEnter={() => setActiveDropdown(item.dropdown ? item.name : null)}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                {item.name}
-                {location.pathname === item.path && (
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-500"
-                    layoutId="activeTab"
-                  />
-                )}
-              </Link>
+                <Link
+                  to={item.path}
+                  className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium transition-colors ${
+                    location.pathname === item.path || location.pathname.startsWith(item.path)
+                      ? 'text-orange-500'
+                      : isScrolled
+                      ? 'text-gray-700 hover:text-orange-500'
+                      : 'text-white hover:text-orange-300'
+                  }`}
+                >
+                  <span>{item.name}</span>
+                  {item.dropdown && <ChevronDown className="h-4 w-4" />}
+                </Link>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {item.dropdown && activeDropdown === item.name && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2"
+                    >
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.name}
+                          to={dropdownItem.path}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                        >
+                          {dropdownItem.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </nav>
 
-          {/* Contact Button & Mobile Menu */}
+          {/* Action Buttons & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <a
               href="https://wa.me/255764928408"
@@ -88,6 +132,14 @@ const Header = () => {
               <Phone className="h-4 w-4" />
               <span>WhatsApp</span>
             </a>
+
+            <Link
+              to="/booking"
+              className="hidden sm:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full transition-colors font-medium"
+            >
+              <Globe className="h-4 w-4" />
+              <span>Book Now</span>
+            </Link>
 
             {/* Mobile menu button */}
             <button
@@ -112,29 +164,55 @@ const Header = () => {
             className="lg:hidden bg-white shadow-lg"
           >
             <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'text-orange-500 bg-orange-50'
-                      : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'
-                  } rounded-md`}
-                >
-                  {item.name}
-                </Link>
+              {navigationItems.map((item) => (
+                <div key={item.name}>
+                  <Link
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`block px-3 py-2 text-base font-medium transition-colors ${
+                      location.pathname === item.path
+                        ? 'text-orange-500 bg-orange-50'
+                        : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'
+                    } rounded-md`}
+                  >
+                    {item.name}
+                  </Link>
+                  {item.dropdown && (
+                    <div className="ml-4 mt-2 space-y-2">
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.name}
+                          to={dropdownItem.path}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block px-3 py-1 text-sm text-gray-600 hover:text-orange-500 transition-colors"
+                        >
+                          {dropdownItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
-              <a
-                href="https://wa.me/255764928408"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full transition-colors font-medium mt-4"
-              >
-                <Phone className="h-4 w-4" />
-                <span>Contact via WhatsApp</span>
-              </a>
+              
+              <div className="border-t pt-4 space-y-2">
+                <a
+                  href="https://wa.me/255764928408"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full transition-colors font-medium"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>Contact via WhatsApp</span>
+                </a>
+                <Link
+                  to="/booking"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-full transition-colors font-medium"
+                >
+                  <Globe className="h-4 w-4" />
+                  <span>Book Your Safari</span>
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
