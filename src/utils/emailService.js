@@ -23,16 +23,16 @@ export const sendRentalNotification = async (rentalDetails) => {
     };
     
     // Use EmailJS to send the email to both support@flit.tz and edwindirect@hotmail.com
-    await emailjs.send(
+    const emailResult = await emailjs.send(
       'service_safari_surf', // Your EmailJS service ID
       'template_rental_notification', // Your EmailJS template ID
       emailParams,
-      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
+      'cHCIRoZ584r3_KQUaFPrj' // The correct EmailJS public key
     );
     
-    console.log('Email notifications sent successfully to support@flit.tz and edwindirect@hotmail.com');
+    console.log('Email notifications sent successfully:', emailResult);
     
-    // Send SMS notification
+    // ALWAYS send SMS notification regardless of email success
     await sendSMSNotification(rentalDetails);
     
     return {
@@ -43,75 +43,143 @@ export const sendRentalNotification = async (rentalDetails) => {
   } catch (error) {
     console.error('Error sending rental notification emails:', error);
     
-    // Fallback: If EmailJS fails, attempt to send via WhatsApp click
+    // If email fails, make a stronger attempt to send SMS as fallback
     try {
-      // Create a WhatsApp message with the rental details
-      const whatsappMessage = `New WiFi Rental Request:
+      console.log('Email failed, attempting SMS notification as fallback...');
+      await sendSMSNotification(rentalDetails, true);
       
-Name: ${rentalDetails.name}
-Email: ${rentalDetails.email}
-Phone: ${rentalDetails.phone || 'Not provided'}
-Plan: ${rentalDetails.plan || 'Not specified'}
-Location: ${rentalDetails.location || 'Not specified'}
-Start Date: ${rentalDetails.startDate || 'Not specified'}
-Purpose: ${rentalDetails.service || 'Not specified'}
-Additional Info: ${rentalDetails.message || 'None'}`;
-
-      // Create a hidden link and programmatically click it
-      const whatsappLink = document.createElement('a');
-      whatsappLink.href = `https://wa.me/255764928408?text=${encodeURIComponent(whatsappMessage)}`;
-      whatsappLink.target = '_blank';
-      whatsappLink.style.display = 'none';
-      document.body.appendChild(whatsappLink);
+      // Direct SMS through alternative service (backup method)
+      await sendDirectSMS(rentalDetails);
       
-      // Don't automatically click, just inform the user
-      console.log('Email sending failed. WhatsApp fallback ready.');
-      
-      document.body.removeChild(whatsappLink);
-    } catch (whatsappError) {
-      console.error('WhatsApp fallback also failed:', whatsappError);
+    } catch (smsError) {
+      console.error('SMS fallback also failed:', smsError);
     }
     
     return {
       success: false,
+      error: error,
       message: 'Failed to send notification emails, but order is still processing.'
     };
   }
 };
 
 /**
- * Sends an SMS notification for a new WiFi rental
- * @param {Object} rentalDetails - The rental details
- * @returns {Promise} - Promise that resolves when SMS is sent
+ * Sends a direct SMS using an alternative service as a backup
+ * This function provides redundancy in case EmailJS SMS fails
  */
-const sendSMSNotification = async (rentalDetails) => {
+const sendDirectSMS = async (rentalDetails) => {
   try {
-    // Format the rental data for SMS
-    const smsMessage = `New WiFi Rental: ${rentalDetails.name} (${rentalDetails.phone}) wants a ${rentalDetails.plan} plan at ${rentalDetails.location} starting ${rentalDetails.startDate}.`;
+    // Format the message for direct SMS
+    const message = `NEW WIFI RENTAL: ${rentalDetails.name} (${rentalDetails.phone}) - ${rentalDetails.plan} plan - ${rentalDetails.location} - Starting: ${rentalDetails.startDate}. CASH ON DELIVERY AVAILABLE.`;
     
-    // In production, this would use an SMS API like Twilio, Vonage, or Africa's Talking
-    // For this implementation, we'll use EmailJS to send an email that triggers an SMS
-    // through an email-to-SMS gateway or service
+    // Try direct SMS service (simulated here - would be replaced with actual SMS API)
+    console.log('Sending direct SMS via alternative service:', message);
     
+    // For now, we'll use another EmailJS template as yet another fallback
+    const directSmsParams = {
+      to_phone: '+255764928408',
+      message: `URGENT BACKUP SMS: ${message}`,
+      to_email: 'edwindirect@hotmail.com',
+    };
+    
+    await emailjs.send(
+      'service_safari_surf',
+      'template_direct_sms',  // A different template configured for most reliable delivery
+      directSmsParams,
+      'cHCIRoZ584r3_KQUaFPrj'
+    );
+    
+    console.log('Direct SMS sent via backup method');
+    return true;
+  } catch (error) {
+    console.error('Even direct SMS failed:', error);
+    return false;
+  }
+};
+
+/**
+ * Sends an SMS notification for a new WiFi rental
+ * Enhanced with multiple delivery attempts and clear formatting
+ * @param {Object} rentalDetails - The rental details
+ * @param {boolean} isUrgent - Whether this is a fallback/urgent notification
+ * @returns {Promise<boolean>} - Promise that resolves to true if SMS is sent successfully
+ */
+const sendSMSNotification = async (rentalDetails, isUrgent = false) => {
+  try {
+    // Format the rental data for SMS in a compact, easy-to-read format
+    const smsMessage = isUrgent 
+      ? `URGENT! New WiFi Rental: ${rentalDetails.name} (${rentalDetails.phone}) wants a ${rentalDetails.plan} plan at ${rentalDetails.location} starting ${rentalDetails.startDate}. CASH ON DELIVERY AVAILABLE.`
+      : `New WiFi Rental: ${rentalDetails.name} (${rentalDetails.phone}) wants a ${rentalDetails.plan} plan at ${rentalDetails.location} starting ${rentalDetails.startDate}. CASH ON DELIVERY AVAILABLE.`;
+    
+    // Send SMS notification via EmailJS
     const smsParams = {
       to_phone: '+255764928408', // Target phone number
       message: smsMessage,
       to_email: 'support@flit.tz', // Email that forwards to SMS
+      cc_email: 'edwindirect@hotmail.com', // Additional email recipient
+      subject: isUrgent ? 'URGENT: New WiFi Rental Request' : 'New WiFi Rental Request',
+      from_name: rentalDetails.name,
+      customer_phone: rentalDetails.phone || 'Not provided'
     };
     
-    // Use EmailJS to send the SMS notification
-    await emailjs.send(
-      'service_safari_surf', // Your EmailJS service ID
-      'template_sms_notification', // Your EmailJS template ID that forwards to SMS
+    // Send the primary SMS notification
+    const smsResult = await emailjs.send(
+      'service_safari_surf',
+      'template_sms_notification', 
       smsParams,
-      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
+      'cHCIRoZ584r3_KQUaFPrj'
     );
     
-    console.log('SMS notification sent successfully');
+    console.log('SMS notification sent successfully:', smsResult);
+    
+    // Send a redundant notification to ensure delivery
+    try {
+      const backupSmsParams = {
+        ...smsParams,
+        message: `BACKUP NOTICE: ${smsMessage}`,
+        to_email: 'edwindirect@hotmail.com', // Direct to personal email
+      };
+      
+      await emailjs.send(
+        'service_safari_surf',
+        'template_sms_notification',
+        backupSmsParams,
+        'cHCIRoZ584r3_KQUaFPrj'
+      );
+      
+      console.log('Backup SMS notification sent');
+    } catch (backupError) {
+      console.warn('Backup SMS failed but primary was sent:', backupError);
+    }
+    
     return true;
   } catch (error) {
     console.error('Error sending SMS notification:', error);
-    return false;
+    
+    // Try multiple fallback methods
+    try {
+      // Simplified message with minimal formatting
+      const simpleSmsParams = {
+        to_phone: '+255764928408',
+        message: `WIFI RENTAL: ${rentalDetails.name}, ${rentalDetails.phone}, ${rentalDetails.plan} plan, ${rentalDetails.location}. CASH ON DELIVERY OK.`,
+        to_email: 'support@flit.tz',
+        subject: 'URGENT WIFI RENTAL',
+        from_name: 'Backup System'
+      };
+      
+      await emailjs.send(
+        'service_safari_surf',
+        'template_sms_notification',
+        simpleSmsParams,
+        'cHCIRoZ584r3_KQUaFPrj'
+      );
+      
+      console.log('Simplified SMS notification sent as fallback');
+      return true;
+    } catch (retryError) {
+      console.error('All SMS notification attempts failed:', retryError);
+      return false;
+    }
   }
 };
 
@@ -142,7 +210,7 @@ export const sendPaymentConfirmation = async (paymentDetails) => {
       'service_safari_surf', // Your EmailJS service ID
       'template_payment_confirmation', // Your EmailJS template ID
       emailParams,
-      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
+      'cHCIRoZ584r3_KQUaFPrj' // The correct EmailJS public key
     );
     
     console.log('Payment confirmation emails sent successfully');
@@ -157,6 +225,15 @@ export const sendPaymentConfirmation = async (paymentDetails) => {
     
   } catch (error) {
     console.error('Error sending payment confirmation emails:', error);
+    
+    // Try SMS as fallback
+    try {
+      const fallbackSmsResult = await sendPaymentSMSNotification(paymentDetails, true);
+      console.log('Fallback payment SMS result:', fallbackSmsResult);
+    } catch (smsError) {
+      console.error('SMS fallback also failed for payment confirmation:', smsError);
+    }
+    
     return {
       success: false,
       message: 'Failed to send confirmation emails, but payment was processed successfully.'
@@ -167,18 +244,24 @@ export const sendPaymentConfirmation = async (paymentDetails) => {
 /**
  * Sends an SMS notification for a payment confirmation
  * @param {Object} paymentDetails - The payment details
- * @returns {Promise} - Promise that resolves when SMS is sent
+ * @param {boolean} isUrgent - Whether this is a fallback/urgent notification
+ * @returns {Promise<boolean>} - Promise that resolves to true if SMS is sent successfully
  */
-const sendPaymentSMSNotification = async (paymentDetails) => {
+const sendPaymentSMSNotification = async (paymentDetails, isUrgent = false) => {
   try {
     // Format the payment data for SMS
-    const smsMessage = `Payment confirmed: ${paymentDetails.customerName} paid ${paymentDetails.currency}${paymentDetails.amount} for ${paymentDetails.plan}. Deliver to: ${paymentDetails.deliveryLocation || 'location pending'}.`;
+    const smsMessage = isUrgent
+      ? `URGENT! Email failed. Payment: ${paymentDetails.customerName} paid ${paymentDetails.currency}${paymentDetails.amount} for ${paymentDetails.plan}. Contact: ${paymentDetails.customerEmail}. CASH ON DELIVERY AVAILABLE.`
+      : `Payment confirmed: ${paymentDetails.customerName} paid ${paymentDetails.currency}${paymentDetails.amount} for ${paymentDetails.plan}. Deliver to: ${paymentDetails.deliveryLocation || 'location pending'}. CASH ON DELIVERY OPTION.`;
     
     // In production, this would use an SMS API
     const smsParams = {
       to_phone: '+255764928408', // Target phone number
       message: smsMessage,
       to_email: 'support@flit.tz', // Email that forwards to SMS
+      cc_email: 'edwindirect@hotmail.com', // Send copy to this email
+      subject: isUrgent ? 'URGENT: Payment Confirmation' : 'Payment Confirmation',
+      from_name: paymentDetails.customerName
     };
     
     // Use EmailJS to send the SMS notification
@@ -186,55 +269,34 @@ const sendPaymentSMSNotification = async (paymentDetails) => {
       'service_safari_surf',
       'template_sms_notification',
       smsParams,
-      'ovqQW5oj4Z8UoQGpa'
+      'cHCIRoZ584r3_KQUaFPrj'
     );
     
     console.log('Payment SMS notification sent successfully');
     return true;
   } catch (error) {
     console.error('Error sending payment SMS notification:', error);
-    return false;
-  }
-};
-
-/**
- * Sends a rental reminder email when the rental is about to end
- * @param {Object} rentalDetails - The rental details
- * @returns {Promise} - Promise that resolves when email is sent
- */
-export const sendRentalReminder = async (rentalDetails) => {
-  try {
-    // Format the rental data for email
-    const emailParams = {
-      to_name: rentalDetails.name,
-      rental_plan: rentalDetails.plan,
-      rental_end: rentalDetails.endDate || 'Not specified',
-      device_id: rentalDetails.deviceId || 'Your WiFi device',
-      to_email: rentalDetails.email,
-      cc_email_1: 'edwindirect@hotmail.com',
-      cc_email_2: 'support@flit.tz'
-    };
     
-    // Use EmailJS to send the email
-    await emailjs.send(
-      'service_safari_surf', // Your EmailJS service ID
-      'template_rental_reminder', // Your EmailJS template ID
-      emailParams,
-      'ovqQW5oj4Z8UoQGpa' // The correct EmailJS public key
-    );
-    
-    console.log('Rental reminder email sent successfully');
-    
-    return {
-      success: true,
-      message: 'Rental reminder email sent successfully'
-    };
-    
-  } catch (error) {
-    console.error('Error sending rental reminder email:', error);
-    return {
-      success: false,
-      message: 'Failed to send rental reminder email'
-    };
+    // Try one more time with a simplified message
+    try {
+      const simpleSmsParams = {
+        to_phone: '+255764928408',
+        message: `Payment Alert: ${paymentDetails.customerName}, ${paymentDetails.currency}${paymentDetails.amount}, ${paymentDetails.plan}. CASH ON DELIVERY OK.`,
+        to_email: 'support@flit.tz',
+      };
+      
+      await emailjs.send(
+        'service_safari_surf',
+        'template_sms_notification',
+        simpleSmsParams,
+        'cHCIRoZ584r3_KQUaFPrj'
+      );
+      
+      console.log('Simplified payment SMS notification sent as fallback');
+      return true;
+    } catch (retryError) {
+      console.error('All payment SMS notification attempts failed:', retryError);
+      return false;
+    }
   }
 };

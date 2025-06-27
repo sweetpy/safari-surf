@@ -59,14 +59,11 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Send notifications to edwindirect@hotmail.com and support@flit.tz
+      // Send notifications immediately to both email addresses and SMS
       const notificationResult = await sendRentalNotification(formData);
       
-      if (notificationResult.success) {
-        console.log("Notification emails sent successfully");
-      } else {
-        console.warn("Notification emails failed, but continuing with form submission");
-      }
+      // Even if notification fails, continue with form processing
+      console.log("Notification status:", notificationResult.success ? "Success" : "Failed but continuing");
       
       // Show success state
       setIsSubmitting(false);
