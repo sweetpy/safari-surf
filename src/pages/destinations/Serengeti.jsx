@@ -2,19 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  MapPin, 
-  Calendar, 
-  Users, 
-  Star, 
-  Camera, 
-  Binoculars,
-  TreePine,
-  ArrowRight,
-  Clock,
-  Award,
-  Phone
-} from 'lucide-react';
+import { MapPin, Calendar, Users, Star, Camera, Binary as Binoculars, TreePine, ArrowRight, Clock, Award, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Serengeti = () => {
