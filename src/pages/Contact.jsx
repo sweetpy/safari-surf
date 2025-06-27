@@ -436,11 +436,11 @@ const Contact = () => {
                 <h3 className="text-2xl font-bold mb-4">Our Response Promise</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <div className="text-3xl font-bold mb-2">< 5 min</div>
+                    <div className="text-3xl font-bold mb-2">&lt; 5 min</div>
                     <div className="text-orange-100">WhatsApp Response</div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold mb-2">< 2 hrs</div>
+                    <div className="text-3xl font-bold mb-2">&lt; 2 hrs</div>
                     <div className="text-orange-100">Email Response</div>
                   </div>
                 </div>
