@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Compass, Phone, Globe, ChevronDown } from 'lucide-react';
+import { Menu, X, Wifi, Phone, Globe, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -18,33 +18,22 @@ const Header = () => {
   }, []);
 
   const navigationItems = [
+    { name: 'Services', path: '/services' },
+    { name: 'Pricing', path: '/pricing' },
+    { name: 'Coverage', path: '/coverage' },
     { 
-      name: 'Destinations', 
-      path: '/destinations',
+      name: 'Travel Hub', 
+      path: '/travel',
       dropdown: [
-        { name: 'Zanzibar', path: '/destinations/zanzibar' },
-        { name: 'Serengeti', path: '/destinations/serengeti' },
-        { name: 'Kilimanjaro', path: '/destinations/kilimanjaro' },
-        { name: 'Ngorongoro', path: '/destinations/ngorongoro' },
-        { name: 'Tarangire', path: '/destinations/tarangire' },
-        { name: 'Arusha', path: '/destinations/arusha' }
+        { name: 'Destinations', path: '/travel/destinations' },
+        { name: 'Safari Tours', path: '/travel/safaris' },
+        { name: 'Travel Guides', path: '/travel/guides' },
+        { name: 'Itineraries', path: '/travel/itineraries' },
+        { name: 'Travel Blog', path: '/travel/blog' }
       ]
     },
-    { name: 'Safaris', path: '/safaris' },
-    { name: 'Itineraries', path: '/itineraries' },
-    { 
-      name: 'Travel Guides', 
-      path: '/guides',
-      dropdown: [
-        { name: 'Visa to Tanzania', path: '/guides/visa-to-tanzania' },
-        { name: 'Best Time to Visit', path: '/guides/best-time-to-visit-tanzania' },
-        { name: 'Safari Costs', path: '/guides/tanzania-safari-cost' },
-        { name: 'Packing List', path: '/guides/tanzania-packing-list' },
-        { name: 'Travel Budget', path: '/guides/tanzania-travel-budget' }
-      ]
-    },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'About', path: '/about' },
+    { name: 'Support', path: '/faq' }
   ];
 
   return (
@@ -61,14 +50,14 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <Compass className="h-10 w-10 text-orange-500 group-hover:text-orange-600 transition-colors" />
+              <Wifi className="h-10 w-10 text-orange-500 group-hover:text-orange-600 transition-colors" />
               <div className="absolute -inset-1 bg-orange-500/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div>
               <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'} group-hover:text-orange-500 transition-colors`}>
-                Tanzania Travel Hub
+                Safari Surf WiFi
               </h1>
-              <p className={`text-sm ${isScrolled ? 'text-gray-600' : 'text-gray-200'}`}>Your Safari Companion</p>
+              <p className={`text-sm ${isScrolled ? 'text-gray-600' : 'text-gray-200'}`}>Rent WiFi On The Spot</p>
             </div>
           </Link>
 
@@ -134,11 +123,11 @@ const Header = () => {
             </a>
 
             <Link
-              to="/booking"
+              to="/contact"
               className="hidden sm:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full transition-colors font-medium"
             >
-              <Globe className="h-4 w-4" />
-              <span>Book Now</span>
+              <Wifi className="h-4 w-4" />
+              <span>Rent WiFi Now</span>
             </Link>
 
             {/* Mobile menu button */}
@@ -205,12 +194,12 @@ const Header = () => {
                   <span>Contact via WhatsApp</span>
                 </a>
                 <Link
-                  to="/booking"
+                  to="/contact"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-full transition-colors font-medium"
                 >
-                  <Globe className="h-4 w-4" />
-                  <span>Book Your Safari</span>
+                  <Wifi className="h-4 w-4" />
+                  <span>Rent WiFi Now</span>
                 </Link>
               </div>
             </div>

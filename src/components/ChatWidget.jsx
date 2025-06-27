@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, X, Send, Phone } from 'lucide-react';
+import { MessageCircle, X, Send, Phone, Wifi } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ChatWidget = () => {
@@ -7,19 +7,19 @@ const ChatWidget = () => {
   const [messages, setMessages] = useState([
     {
       type: 'bot',
-      text: "Hello! 👋 I'm here to help you plan your Tanzania adventure. What can I assist you with today?",
+      text: "Hello! 👋 I'm here to help you rent WiFi instantly. What can I assist you with today?",
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [inputText, setInputText] = useState('');
 
   const quickReplies = [
-    "Safari packages",
-    "Best time to visit",
-    "Visa requirements", 
-    "Kilimanjaro climbing",
-    "Zanzibar holidays",
-    "Custom itinerary"
+    "Rent WiFi now",
+    "Pricing plans",
+    "Coverage areas", 
+    "Daily rentals",
+    "Weekly rentals",
+    "Business plans"
   ];
 
   const handleSendMessage = (text) => {
@@ -38,7 +38,7 @@ const ChatWidget = () => {
     setTimeout(() => {
       const botResponse = {
         type: 'bot',
-        text: `Thanks for your interest in "${text}"! Our travel experts will contact you shortly via WhatsApp to provide detailed information and personalized recommendations. You can also reach us directly at +255 764 928 408.`,
+        text: `Great! I can help you with "${text}". For instant WiFi rental, contact us via WhatsApp at +255 764 928 408. We can have you connected within minutes!`,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, botResponse]);
@@ -75,10 +75,10 @@ const ChatWidget = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
-                    <MessageCircle className="h-5 w-5" />
+                    <Wifi className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Tanzania Travel Assistant</h3>
+                    <h3 className="font-semibold">WiFi Rental Assistant</h3>
                     <p className="text-orange-100 text-sm">Online now</p>
                   </div>
                 </div>
@@ -157,7 +157,7 @@ const ChatWidget = () => {
                   className="inline-flex items-center space-x-2 text-green-600 hover:text-green-700 text-sm font-medium"
                 >
                   <Phone className="h-4 w-4" />
-                  <span>Chat on WhatsApp</span>
+                  <span>Rent WiFi via WhatsApp</span>
                 </a>
               </div>
             </div>
