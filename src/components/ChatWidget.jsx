@@ -108,7 +108,7 @@ const ChatWidget = () => {
   const [messages, setMessages] = useState([
     {
       type: 'bot',
-      text: "Hello! 👋 I'm your AI WiFi Rental Assistant. How can I help you rent a portable WiFi device today?",
+      text: "Hello! 👋 I'm Sophia, your WiFi Rental Assistant. How can I help you rent a portable WiFi device today?",
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -167,8 +167,7 @@ const ChatWidget = () => {
           setIsTyping(false);
         }, 1000 + Math.random() * 1000); // Simulate variable response time for realism
       })
-      .catch(error => {
-        console.error('Error getting AI response:', error);
+      .catch(() => {
         setIsTyping(false);
         
         // Fallback response
@@ -224,7 +223,7 @@ const ChatWidget = () => {
                     <Sparkles className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">AI WiFi Assistant</h3>
+                    <h3 className="font-semibold">Sophia</h3>
                     <p className="text-orange-100 text-sm">Online now</p>
                   </div>
                 </div>

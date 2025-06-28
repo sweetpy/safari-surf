@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Wifi, Phone, ChevronDown, Plane } from 'lucide-react';
+import { Menu, X, Wifi, Phone, ChevronDown, Plane, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -32,11 +32,18 @@ const Header = () => {
         { name: 'Itineraries', path: '/travel/itineraries' },
         { name: 'WiFi Blog', path: '/blog' },
         { name: 'Travel Tech Blog', path: '/travel/blog' },
-        { name: 'Airport WiFi Guide', path: '/blog/how-to-get-airport-wifi-tanzania-guide' }
       ]
     },
-    { name: 'About', path: '/about' },
-    { name: 'Support', path: '/faq' }
+    { 
+      name: 'About & Support', 
+      path: '#',
+      dropdown: [
+        { name: 'About Us', path: '/about' },
+        { name: 'FAQ & Support', path: '/faq' },
+        { name: 'Airport WiFi', path: '/airport-wifi' },
+        { name: 'Contact Us', path: '/contact' }
+      ]
+    }
   ];
 
   return (
@@ -81,6 +88,7 @@ const Header = () => {
                       ? 'text-gray-700 hover:text-orange-500'
                       : 'text-white hover:text-orange-300'
                   }`}
+                  onClick={(e) => item.path === '#' && e.preventDefault()}
                 >
                   <span>{item.name}</span>
                   {item.dropdown && <ChevronDown className="h-4 w-4" />}
@@ -129,7 +137,7 @@ const Header = () => {
               className="hidden sm:flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
             >
               <Plane className="h-4 w-4" />
-              <span>Rent WiFi on Arrival</span>
+              <span>Airport WiFi</span>
             </Link>
 
             <Link
@@ -165,30 +173,39 @@ const Header = () => {
             <div className="px-4 py-6 space-y-4">
               {navigationItems.map((item) => (
                 <div key={item.name}>
-                  <Link
-                    to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-2 text-base font-medium transition-colors ${
-                      location.pathname === item.path
-                        ? 'text-orange-500 bg-orange-50'
-                        : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'
-                    } rounded-md`}
-                  >
-                    {item.name}
-                  </Link>
-                  {item.dropdown && (
-                    <div className="ml-4 mt-2 space-y-2">
-                      {item.dropdown.map((dropdownItem) => (
-                        <Link
-                          key={dropdownItem.name}
-                          to={dropdownItem.path}
-                          onClick={() => setIsMenuOpen(false)}
-                          className="block px-3 py-1 text-sm text-gray-600 hover:text-orange-500 transition-colors"
-                        >
-                          {dropdownItem.name}
-                        </Link>
-                      ))}
+                  {item.dropdown ? (
+                    <div>
+                      <div
+                        className={`flex items-center justify-between px-3 py-2 text-base font-medium transition-colors text-gray-700 hover:text-orange-500 hover:bg-gray-50 rounded-md`}
+                      >
+                        <span>{item.name}</span>
+                        <ChevronDown className="h-4 w-4" />
+                      </div>
+                      <div className="ml-4 mt-2 space-y-2">
+                        {item.dropdown.map((dropdownItem) => (
+                          <Link
+                            key={dropdownItem.name}
+                            to={dropdownItem.path}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="block px-3 py-1 text-sm text-gray-600 hover:text-orange-500 transition-colors"
+                          >
+                            {dropdownItem.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block px-3 py-2 text-base font-medium transition-colors ${
+                        location.pathname === item.path
+                          ? 'text-orange-500 bg-orange-50'
+                          : 'text-gray-700 hover:text-orange-500 hover:bg-gray-50'
+                      } rounded-md`}
+                    >
+                      {item.name}
+                    </Link>
                   )}
                 </div>
               ))}

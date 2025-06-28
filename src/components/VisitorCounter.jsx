@@ -37,6 +37,10 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
+    // Reset visitor counter data
+    localStorage.removeItem('customerId');
+    localStorage.removeItem('customerCountryData');
+    
     // Initialize customer tracking
     const initCustomerCount = () => {
       // Check if this customer has been counted before

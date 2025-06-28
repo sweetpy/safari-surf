@@ -135,8 +135,7 @@ const AirportWiFi = () => {
       });
       
       // Wait for notification to complete
-      const result = await notificationPromise;
-      console.log("Notification result:", result);
+      await notificationPromise;
       
       // Navigate to checkout page after a short delay
       setTimeout(() => {
@@ -238,6 +237,17 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
     }
   ];
 
+  const handleWhatsAppSupport = () => {
+    window.open('https://wa.me/255764928408', '_blank');
+  };
+
+  const scrollToForm = () => {
+    const bookingForm = document.getElementById('booking-form');
+    if (bookingForm) {
+      bookingForm.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -278,22 +288,20 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-                <Link
-                  to="#booking-form"
+                <button
+                  onClick={scrollToForm}
                   className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full text-lg font-bold shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
                 >
                   <span>📦 Reserve Now</span>
-                </Link>
+                </button>
                 
-                <a
-                  href="https://wa.me/255764928408"
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <button
+                  onClick={handleWhatsAppSupport}
                   className="bg-blue-700 text-white hover:bg-blue-800 px-8 py-3 rounded-full text-lg font-semibold transition-colors flex items-center justify-center space-x-2"
                 >
                   <Phone className="h-5 w-5 mr-2" />
                   <span>WhatsApp Support</span>
-                </a>
+                </button>
               </div>
             </motion.div>
           </div>
@@ -784,11 +792,9 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                 </div>
 
                 {/* Quick Contact */}
-                <a
-                  href="https://wa.me/255764928408"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-green-500 text-white rounded-2xl p-6 text-center hover:bg-green-600 transition-colors shadow-lg"
+                <button
+                  onClick={handleWhatsAppSupport}
+                  className="block w-full bg-green-500 text-white rounded-2xl p-6 text-center hover:bg-green-600 transition-colors shadow-lg"
                 >
                   <Phone className="h-8 w-8 mx-auto mb-3" />
                   <h3 className="text-xl font-bold mb-2">Need Help?</h3>
@@ -796,7 +802,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   <span className="inline-block px-6 py-2 bg-white text-green-600 rounded-full font-semibold">
                     Message on WhatsApp
                   </span>
-                </a>
+                </button>
               </motion.div>
             </div>
           </div>
@@ -836,15 +842,13 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
             
             <div className="mt-12 text-center">
               <p className="text-gray-500 mb-6">Still have questions about our WiFi on arrival service?</p>
-              <a
-                href="https://wa.me/255764928408"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={handleWhatsAppSupport}
                 className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-md"
               >
                 <Phone className="h-5 w-5" />
                 <span>Contact Us</span>
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -924,19 +928,20 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                 Book your WiFi device now and we'll meet you as soon as you land. No more connectivity stress after arrival.
               </p>
               <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="#booking-form" className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 font-semibold transition-colors shadow-md">
+                <button
+                  onClick={scrollToForm}
+                  className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 font-semibold transition-colors shadow-md"
+                >
                   <Plane className="h-5 w-5" />
                   <span>Rent WiFi on Arrival</span>
-                </a>
-                <a
-                  href="https://wa.me/255764928408"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </button>
+                <button
+                  onClick={handleWhatsAppSupport}
                   className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl border-2 border-white/30 hover:bg-white/10 font-semibold transition-colors"
                 >
                   <Phone className="h-5 w-5" />
                   <span>WhatsApp Support</span>
-                </a>
+                </button>
               </div>
             </motion.div>
           </div>
