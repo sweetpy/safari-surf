@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe } from 'lucide-react';
-import { CountUp } from 'react-countup';
+import CountUp from 'react-countup';
 
 // Initialize with top countries but zero counts
 const topCountries = [
