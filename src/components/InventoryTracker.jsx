@@ -53,7 +53,11 @@ const calculateInventory = () => {
   }
   
   // Save today's inventory
-  localStorage.setItem(`inventory_${today}`, baseInventory.toString());
+  try {
+    localStorage.setItem(`inventory_${today}`, baseInventory.toString());
+  } catch (error) {
+    console.error("Error saving inventory to localStorage:", error);
+  }
   return baseInventory;
 };
 
@@ -75,7 +79,11 @@ const calculateTomorrowInventory = (todayInventory) => {
   const tomorrowInventory = todayInventory + Math.floor(Math.random() * 7) + 8;
   
   // Save tomorrow's inventory
-  localStorage.setItem(`inventory_${tomorrowKey}`, tomorrowInventory.toString());
+  try {
+    localStorage.setItem(`inventory_${tomorrowKey}`, tomorrowInventory.toString());
+  } catch (error) {
+    console.error("Error saving tomorrow's inventory to localStorage:", error);
+  }
   return tomorrowInventory;
 };
 
@@ -92,67 +100,92 @@ const InventoryTracker = () => {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Initialize inventory
-    const currentInventory = calculateInventory();
-    const nextDayInventory = calculateTomorrowInventory(currentInventory);
-    
-    setInventory(currentInventory);
-    setTomorrowInventory(nextDayInventory);
-    setIsLowStock(currentInventory <= LOW_INVENTORY_THRESHOLD);
-    setDayName(getDayName());
-    setTomorrowName(getTomorrowDayName());
-    setIsInitialized(true);
-    
-    // Store tomorrow's inventory in localStorage
-    localStorage.setItem('tomorrowInventory', nextDayInventory.toString());
-    
-    // Small chance to decrease inventory randomly
-    const decreaseInterval = setInterval(() => {
-      // 5% chance of inventory decrease when user is active on the site
-      if (Math.random() < 0.05 && document.visibilityState === 'visible') {
-        setInventory(prev => {
-          const newInventory = Math.max(1, prev - 1);
-          localStorage.setItem(`inventory_${getTodayKey()}`, newInventory.toString());
-          
-          // Show notification about recent decrease
-          setRecentlyDecreased(true);
-          setTimeout(() => setRecentlyDecreased(false), 10000); // Hide after 10 seconds
-          
-          // Check if we've reached low stock
-          setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
-          
-          return newInventory;
-        });
-      }
-    }, 30000); // Check every 30 seconds
-    
-    // Reset inventory at midnight
-    const checkDate = setInterval(() => {
-      const currentDate = getTodayKey();
-      const savedDate = localStorage.getItem('lastInventoryDate');
+    try {
+      // Initialize inventory
+      const currentInventory = calculateInventory();
+      const nextDayInventory = calculateTomorrowInventory(currentInventory);
       
-      if (savedDate && savedDate !== currentDate) {
-        // It's a new day, recalculate inventory
-        const newInventory = calculateInventory();
-        const newTomorrowInventory = calculateTomorrowInventory(newInventory);
-        
-        setInventory(newInventory);
-        setTomorrowInventory(newTomorrowInventory);
-        setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
-        setDayName(getDayName());
-        setTomorrowName(getTomorrowDayName());
-        
-        // Store tomorrow's inventory
-        localStorage.setItem('tomorrowInventory', newTomorrowInventory.toString());
-      }
+      setInventory(currentInventory);
+      setTomorrowInventory(nextDayInventory);
+      setIsLowStock(currentInventory <= LOW_INVENTORY_THRESHOLD);
+      setDayName(getDayName());
+      setTomorrowName(getTomorrowDayName());
+      setIsInitialized(true);
       
-      localStorage.setItem('lastInventoryDate', currentDate);
-    }, 60000); // Check every minute
-    
-    return () => {
-      clearInterval(decreaseInterval);
-      clearInterval(checkDate);
-    };
+      // Store tomorrow's inventory in localStorage
+      localStorage.setItem('tomorrowInventory', nextDayInventory.toString());
+      
+      console.log("Inventory initialized:", { 
+        currentInventory, 
+        nextDayInventory,
+        isLowStock: currentInventory <= LOW_INVENTORY_THRESHOLD,
+        dayName: getDayName(),
+        tomorrowName: getTomorrowDayName()
+      });
+      
+      // Small chance to decrease inventory randomly
+      const decreaseInterval = setInterval(() => {
+        try {
+          // 5% chance of inventory decrease when user is active on the site
+          if (Math.random() < 0.05 && document.visibilityState === 'visible') {
+            setInventory(prev => {
+              const newInventory = Math.max(1, prev - 1);
+              try {
+                localStorage.setItem(`inventory_${getTodayKey()}`, newInventory.toString());
+              } catch (error) {
+                console.error("Error updating inventory in localStorage:", error);
+              }
+              
+              // Show notification about recent decrease
+              setRecentlyDecreased(true);
+              setTimeout(() => setRecentlyDecreased(false), 10000); // Hide after 10 seconds
+              
+              // Check if we've reached low stock
+              setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
+              
+              return newInventory;
+            });
+          }
+        } catch (error) {
+          console.error("Error in inventory decrease interval:", error);
+        }
+      }, 30000); // Check every 30 seconds
+      
+      // Reset inventory at midnight
+      const checkDate = setInterval(() => {
+        try {
+          const currentDate = getTodayKey();
+          const savedDate = localStorage.getItem('lastInventoryDate');
+          
+          if (savedDate && savedDate !== currentDate) {
+            // It's a new day, recalculate inventory
+            const newInventory = calculateInventory();
+            const newTomorrowInventory = calculateTomorrowInventory(newInventory);
+            
+            setInventory(newInventory);
+            setTomorrowInventory(newTomorrowInventory);
+            setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
+            setDayName(getDayName());
+            setTomorrowName(getTomorrowDayName());
+            
+            // Store tomorrow's inventory
+            localStorage.setItem('tomorrowInventory', newTomorrowInventory.toString());
+          }
+          
+          localStorage.setItem('lastInventoryDate', currentDate);
+        } catch (error) {
+          console.error("Error checking date for inventory reset:", error);
+        }
+      }, 60000); // Check every minute
+      
+      return () => {
+        clearInterval(decreaseInterval);
+        clearInterval(checkDate);
+      };
+    } catch (error) {
+      console.error("Error in InventoryTracker initialization:", error);
+      setIsInitialized(true); // Still mark as initialized to avoid breaking UI
+    }
   }, []);
 
   if (!isInitialized) {

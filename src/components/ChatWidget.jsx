@@ -144,6 +144,9 @@ const ChatWidget = () => {
   const handleSendMessage = (text) => {
     if (!text.trim()) return;
 
+    // For debugging
+    console.log("Sending message:", text);
+
     const userMessage = {
       type: 'user',
       text,

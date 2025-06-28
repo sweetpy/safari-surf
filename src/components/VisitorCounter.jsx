@@ -25,67 +25,100 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Initialize with zero counts as requested
+    // Initialize and track visitors
     const initializeCounter = () => {
-      // Reset the base count to 0
-      localStorage.setItem('baseCustomerCount', JSON.stringify(0));
-      
-      // Reset all country counts to 0
-      const defaultCountries = [
-        { code: 'us', name: 'United States', count: 0 },
-        { code: 'gb', name: 'United Kingdom', count: 0 },
-        { code: 'de', name: 'Germany', count: 0 },
-        { code: 'fr', name: 'France', count: 0 },
-        { code: 'ca', name: 'Canada', count: 0 },
-        { code: 'au', name: 'Australia', count: 0 },
-        { code: 'nl', name: 'Netherlands', count: 0 },
-        { code: 'za', name: 'South Africa', count: 0 },
-        { code: 'se', name: 'Sweden', count: 0 },
-        { code: 'it', name: 'Italy', count: 0 },
-        { code: 'tz', name: 'Tanzania', count: 0 },
-        { code: 'ke', name: 'Kenya', count: 0 }
-      ];
-      
-      localStorage.setItem('customerCountryData', JSON.stringify(defaultCountries));
-      
-      // Check if this is a new visitor session
-      const visitorId = localStorage.getItem('visitorId');
-      const todayKey = getTodayKey();
-      const todayVisits = getStoredData(`visits_${todayKey}`, 0);
-      
-      if (!visitorId) {
-        // Generate visitor ID and increment counters for new visitors
-        const newVisitorId = 'v_' + Math.random().toString(36).substring(2);
-        localStorage.setItem('visitorId', newVisitorId);
+      try {
+        // Get existing counter data or initialize with zeros if not present
+        let customerCount = getStoredData('customerCount', 0);
         
-        // Increment today's visits
-        localStorage.setItem(`visits_${todayKey}`, JSON.stringify(todayVisits + 1));
+        // Get or initialize country data
+        const countriesData = getStoredData('customerCountryData', [
+          { code: 'us', name: 'United States', count: 0 },
+          { code: 'gb', name: 'United Kingdom', count: 0 },
+          { code: 'de', name: 'Germany', count: 0 },
+          { code: 'fr', name: 'France', count: 0 },
+          { code: 'ca', name: 'Canada', count: 0 },
+          { code: 'au', name: 'Australia', count: 0 },
+          { code: 'nl', name: 'Netherlands', count: 0 },
+          { code: 'za', name: 'South Africa', count: 0 },
+          { code: 'se', name: 'Sweden', count: 0 },
+          { code: 'it', name: 'Italy', count: 0 },
+          { code: 'tz', name: 'Tanzania', count: 0 },
+          { code: 'ke', name: 'Kenya', count: 0 }
+        ]);
         
-        // Select a random country for this visitor
-        const randomIndex = Math.floor(Math.random() * defaultCountries.length);
-        const randomCountry = defaultCountries[randomIndex];
+        // Check if this is a new visitor session
+        const sessionId = sessionStorage.getItem('visitorSessionId');
+        const visitorId = localStorage.getItem('visitorId');
+        const lastVisitDate = localStorage.getItem('lastVisitDate');
+        const todayKey = getTodayKey();
         
-        // Update the country count
-        const updatedCountries = defaultCountries.map(country => 
-          country.code === randomCountry.code 
-            ? { ...country, count: country.count + 1 } 
-            : country
-        );
+        console.log("Visitor counter debug:", { 
+          sessionId, 
+          visitorId, 
+          lastVisitDate, 
+          todayKey, 
+          customerCount 
+        });
         
-        localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
-        
-        // Show a popup with the country
-        setCurrentCountry(randomCountry);
-        setShowCountryPopup(true);
-        setTimeout(() => setShowCountryPopup(false), 5000);
-        
-        // Set the counts
-        setCount(updatedCountries.reduce((sum, country) => sum + country.count, 0));
-        setTopFive([...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5));
-      } else {
-        // Return user, just load existing counts
-        setCount(defaultCountries.reduce((sum, country) => sum + country.count, 0));
-        setTopFive([...defaultCountries].sort((a, b) => b.count - a.count).slice(0, 5));
+        // If no session ID exists, this is a new session
+        if (!sessionId) {
+          // Generate a session ID
+          const newSessionId = 'session_' + Math.random().toString(36).substring(2);
+          sessionStorage.setItem('visitorSessionId', newSessionId);
+          
+          // If no visitor ID exists or it's a different day, count as new visitor
+          const isNewVisitor = !visitorId || lastVisitDate !== todayKey;
+          
+          if (isNewVisitor) {
+            // Generate or update visitor ID
+            const newVisitorId = 'v_' + Math.random().toString(36).substring(2);
+            localStorage.setItem('visitorId', newVisitorId);
+            localStorage.setItem('lastVisitDate', todayKey);
+            
+            // Increment customer count - add 1 by default
+            customerCount = customerCount + 1;
+            localStorage.setItem('customerCount', customerCount.toString());
+            
+            // Select a random country for this visitor
+            const randomIndex = Math.floor(Math.random() * countriesData.length);
+            const randomCountry = countriesData[randomIndex];
+            
+            // Update the country count
+            const updatedCountries = countriesData.map(country => 
+              country.code === randomCountry.code 
+                ? { ...country, count: country.count + 1 } 
+                : country
+            );
+            
+            localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
+            
+            // Show a popup with the country
+            setCurrentCountry(randomCountry);
+            setShowCountryPopup(true);
+            setTimeout(() => setShowCountryPopup(false), 5000);
+            
+            console.log("New visitor detected, incremented count to", customerCount);
+            
+            // Set the counts
+            setCount(customerCount);
+            setTopFive([...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5));
+          } else {
+            // Return visitor, just load existing counts
+            setCount(customerCount);
+            setTopFive([...countriesData].sort((a, b) => b.count - a.count).slice(0, 5));
+            console.log("Return visitor detected, current count:", customerCount);
+          }
+        } else {
+          // Existing session, just load current counts
+          setCount(customerCount);
+          setTopFive([...countriesData].sort((a, b) => b.count - a.count).slice(0, 5));
+          console.log("Existing session detected, current count:", customerCount);
+        }
+      } catch (error) {
+        console.error("Error initializing visitor counter:", error);
+        // Fallback to zero count on error
+        setCount(0);
       }
       
       setIsInitialized(true);
@@ -95,49 +128,60 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
     
     // Set up occasional increment simulation
     const intervalId = setInterval(() => {
-      // Only increment occasionally (about 30-40% of the time)
-      if (Math.random() > 0.65) {
-        const countries = getStoredData('customerCountryData', []);
-        if (countries.length > 0) {
-          // Select a random country weighted by existing popularity
-          const totalWeight = countries.reduce((sum, country) => sum + country.count, 0);
-          let randomValue = Math.random() * totalWeight;
-          let selectedCountry = countries[0];
+      try {
+        // Increment occasionally (about 40% of the time)
+        if (Math.random() < 0.4) {
+          let customerCount = parseInt(localStorage.getItem('customerCount') || '0', 10);
+          let countriesData = getStoredData('customerCountryData', []);
           
-          for (const country of countries) {
-            randomValue -= country.count;
-            if (randomValue <= 0) {
-              selectedCountry = country;
-              break;
+          if (countriesData.length > 0) {
+            // Increment customer count
+            customerCount += 1;
+            localStorage.setItem('customerCount', customerCount.toString());
+            
+            // Select a random country weighted by existing popularity
+            const totalWeight = countriesData.reduce((sum, country) => sum + (country.count || 0) + 1, 0);
+            let randomValue = Math.random() * totalWeight;
+            let selectedCountry = countriesData[0];
+            
+            for (const country of countriesData) {
+              randomValue -= (country.count || 0) + 1;
+              if (randomValue <= 0) {
+                selectedCountry = country;
+                break;
+              }
             }
-          }
-          
-          // Update country count
-          const updatedCountries = countries.map(country => 
-            country.code === selectedCountry.code 
-              ? { ...country, count: country.count + 1 } 
-              : country
-          );
-          
-          localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
-          
-          // Update state
-          const newCount = updatedCountries.reduce((sum, country) => sum + country.count, 0);
-          setCount(newCount);
-          
-          // Update top five
-          const newTopFive = [...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5);
-          setTopFive(newTopFive);
-          
-          // Small chance to show a country popup for returning users
-          if (Math.random() > 0.9) {
-            setCurrentCountry(selectedCountry);
-            setShowCountryPopup(true);
-            setTimeout(() => setShowCountryPopup(false), 5000);
+            
+            // Update country count
+            const updatedCountries = countriesData.map(country => 
+              country.code === selectedCountry.code 
+                ? { ...country, count: (country.count || 0) + 1 } 
+                : country
+            );
+            
+            localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
+            
+            // Update state
+            setCount(customerCount);
+            
+            // Update top five
+            const newTopFive = [...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5);
+            setTopFive(newTopFive);
+            
+            // Small chance to show a country popup
+            if (Math.random() > 0.85) {
+              setCurrentCountry(selectedCountry);
+              setShowCountryPopup(true);
+              setTimeout(() => setShowCountryPopup(false), 5000);
+            }
+            
+            console.log("Auto-incremented count to", customerCount);
           }
         }
+      } catch (error) {
+        console.error("Error in auto-increment:", error);
       }
-    }, 10000 + Math.random() * 20000); // Random interval between 10-30 seconds
+    }, 15000 + Math.random() * 10000); // Random interval between 15-25 seconds
     
     return () => clearInterval(intervalId);
   }, []);
