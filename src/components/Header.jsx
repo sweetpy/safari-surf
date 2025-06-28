@@ -130,7 +130,6 @@ const Header = () => {
               aria-label="Chat on WhatsApp"
               title="60 second average response time"
             >
-              <Phone className="h-4 w-4" />
               <span>💬 Chat Now – 60s Avg Response</span>
             </a>
 
@@ -140,7 +139,6 @@ const Header = () => {
                 className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 aria-label="Airport pickup WiFi service"
               >
-                <Plane className="h-4 w-4" />
                 <span className="whitespace-nowrap">✈️ Airport Pickup (DAR • JRO • ZNZ)</span>
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
@@ -154,7 +152,6 @@ const Header = () => {
                 className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 aria-label="Home or hotel WiFi delivery"
               >
-                <Home className="h-4 w-4" />
                 <span className="whitespace-nowrap">🏠 Home / Hotel Delivery</span>
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
@@ -230,7 +227,6 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
-                  <Plane className="h-4 w-4" />
                   <span>✈️ Airport Pickup (DAR • JRO • ZNZ)</span>
                 </Link>
                 <a
@@ -239,7 +235,6 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
-                  <Phone className="h-4 w-4" />
                   <span>💬 Chat Now – 60s Avg Response</span>
                 </a>
                 <Link
@@ -247,7 +242,6 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
-                  <Home className="h-4 w-4" />
                   <span>🏠 Home / Hotel Delivery</span>
                 </Link>
               </div>
