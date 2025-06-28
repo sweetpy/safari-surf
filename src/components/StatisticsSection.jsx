@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Users, MapPin, Wifi, Award, Globe, TrendingUp } from 'lucide-react';
@@ -7,6 +7,50 @@ import VisitorCounter from './VisitorCounter';
 const StatisticsSection = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [showDetails, setShowDetails] = useState(false);
+  const [countryData, setCountryData] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    // Load customer country data
+    const loadCountryData = () => {
+      const customerCountryData = localStorage.getItem('customerCountryData');
+      if (customerCountryData) {
+        const parsedData = JSON.parse(customerCountryData);
+        
+        // Calculate total count
+        const total = parsedData.reduce((sum, country) => sum + country.count, 0);
+        setTotalCount(total);
+        
+        // Calculate percentages and sort by count
+        const dataWithPercentages = parsedData.map(country => ({
+          ...country,
+          percentage: ((country.count / total) * 100).toFixed(1) + '%'
+        })).sort((a, b) => b.count - a.count);
+        
+        setCountryData(dataWithPercentages);
+      } else {
+        // Default data with percentages if no data exists
+        const defaultData = [
+          { code: 'us', name: 'United States', count: 1250, percentage: '25.0%' },
+          { code: 'gb', name: 'United Kingdom', count: 875, percentage: '17.5%' },
+          { code: 'de', name: 'Germany', count: 625, percentage: '12.5%' },
+          { code: 'ca', name: 'Canada', count: 500, percentage: '10.0%' },
+          { code: 'au', name: 'Australia', count: 375, percentage: '7.5%' }
+        ];
+        
+        setCountryData(defaultData);
+        setTotalCount(defaultData.reduce((sum, country) => sum + country.count, 0));
+      }
+      setIsLoading(false);
+    };
+    
+    loadCountryData();
+    
+    // Update data occasionally
+    const intervalId = setInterval(loadCountryData, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
   
   const stats = [
     {
@@ -35,13 +79,8 @@ const StatisticsSection = () => {
     }
   ];
   
-  const topCountries = [
-    { code: 'us', name: 'United States', percentage: '0%' },
-    { code: 'gb', name: 'United Kingdom', percentage: '0%' },
-    { code: 'de', name: 'Germany', percentage: '0%' },
-    { code: 'ca', name: 'Canada', percentage: '0%' },
-    { code: 'au', name: 'Australia', percentage: '0%' }
-  ];
+  // Get top 5 countries
+  const topCountries = countryData.slice(0, 5);
   
   return (
     <section ref={ref} className="py-12 bg-gray-50">
@@ -99,7 +138,7 @@ const StatisticsSection = () => {
           
           {!showDetails ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-              {topCountries.slice(0, 5).map((country, index) => (
+              {topCountries.map((country, index) => (
                 <motion.div
                   key={country.code}
                   initial={{ opacity: 0, y: 10 }}

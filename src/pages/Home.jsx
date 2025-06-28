@@ -268,17 +268,43 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Device info */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <div className="w-32 h-32 bg-white p-2 rounded-lg shadow-lg">
-                  <img 
-                    src="https://images.pexels.com/photos/16030958/pexels-photo-16030958.jpeg?auto=compress&cs=tinysrgb&w=600" 
-                    alt="Portable WiFi Device" 
-                    className="w-full h-full object-cover rounded"
-                  />
+              {/* Weekly Package Device Showcase */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-orange-100">
+                <div className="relative">
+                  <div className="w-40 h-40 overflow-hidden rounded-xl shadow-lg">
+                    <img 
+                      src="https://images.pexels.com/photos/3534924/pexels-photo-3534924.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                      alt="Pocket-sized WiFi Device" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute -top-4 -right-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full transform rotate-12 shadow-lg">
+                    Weekly Package
+                  </div>
                 </div>
-                <div className="text-center md:text-left">
-                  <div className="font-bold text-xl mb-2">Pocket-sized. Connects up to 10 devices. Speeds up to 50 Mbps.</div>
+                <div className="text-center md:text-left max-w-md">
+                  <div className="font-bold text-2xl mb-3 text-gray-900">Pocket-Sized WiFi Device</div>
+                  <ul className="text-left space-y-2 mb-4">
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span className="text-gray-700">Connects up to 10 devices simultaneously</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span className="text-gray-700">12+ hour battery life</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span className="text-gray-700">Speeds up to 100 Mbps</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span className="text-gray-700">Nationwide coverage, including remote areas</span>
+                    </li>
+                  </ul>
+                  <div className="text-orange-600 font-bold text-lg">
+                    Weekly Package: $100 (TSh 232,000) - Most Popular!
+                  </div>
                 </div>
               </div>
 
