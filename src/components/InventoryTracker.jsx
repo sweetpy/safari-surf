@@ -59,9 +59,24 @@ const calculateInventory = () => {
 
 // Calculate tomorrow's inventory - always higher than today
 const calculateTomorrowInventory = (todayInventory) => {
+  const today = getTodayKey();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowKey = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+  
+  // Check if tomorrow's inventory is already calculated
+  const savedTomorrowInventory = localStorage.getItem(`inventory_${tomorrowKey}`);
+  if (savedTomorrowInventory) {
+    return parseInt(savedTomorrowInventory, 10);
+  }
+  
   // Make sure tomorrow has more inventory than today
   // Add between 8-14 more devices than current inventory
-  return todayInventory + Math.floor(Math.random() * 7) + 8;
+  const tomorrowInventory = todayInventory + Math.floor(Math.random() * 7) + 8;
+  
+  // Save tomorrow's inventory
+  localStorage.setItem(`inventory_${tomorrowKey}`, tomorrowInventory.toString());
+  return tomorrowInventory;
 };
 
 // Low inventory threshold

@@ -25,30 +25,28 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Initialize with real-looking data
+    // Initialize with zero counts as requested
     const initializeCounter = () => {
-      // Generate base count (this simulates an actual customer base)
-      // Range between 4,500 and 6,000 as a base
-      const baseCount = getStoredData('baseCustomerCount', Math.floor(Math.random() * 1500) + 4500);
-      localStorage.setItem('baseCustomerCount', JSON.stringify(baseCount));
+      // Reset the base count to 0
+      localStorage.setItem('baseCustomerCount', JSON.stringify(0));
       
-      // Get or initialize top countries data
+      // Reset all country counts to 0
       const defaultCountries = [
-        { code: 'us', name: 'United States', count: Math.floor(baseCount * 0.18) },
-        { code: 'gb', name: 'United Kingdom', count: Math.floor(baseCount * 0.14) },
-        { code: 'de', name: 'Germany', count: Math.floor(baseCount * 0.12) },
-        { code: 'fr', name: 'France', count: Math.floor(baseCount * 0.09) },
-        { code: 'ca', name: 'Canada', count: Math.floor(baseCount * 0.07) },
-        { code: 'au', name: 'Australia', count: Math.floor(baseCount * 0.06) },
-        { code: 'nl', name: 'Netherlands', count: Math.floor(baseCount * 0.05) },
-        { code: 'za', name: 'South Africa', count: Math.floor(baseCount * 0.04) },
-        { code: 'se', name: 'Sweden', count: Math.floor(baseCount * 0.03) },
-        { code: 'it', name: 'Italy', count: Math.floor(baseCount * 0.03) },
-        { code: 'tz', name: 'Tanzania', count: Math.floor(baseCount * 0.02) },
-        { code: 'ke', name: 'Kenya', count: Math.floor(baseCount * 0.02) }
+        { code: 'us', name: 'United States', count: 0 },
+        { code: 'gb', name: 'United Kingdom', count: 0 },
+        { code: 'de', name: 'Germany', count: 0 },
+        { code: 'fr', name: 'France', count: 0 },
+        { code: 'ca', name: 'Canada', count: 0 },
+        { code: 'au', name: 'Australia', count: 0 },
+        { code: 'nl', name: 'Netherlands', count: 0 },
+        { code: 'za', name: 'South Africa', count: 0 },
+        { code: 'se', name: 'Sweden', count: 0 },
+        { code: 'it', name: 'Italy', count: 0 },
+        { code: 'tz', name: 'Tanzania', count: 0 },
+        { code: 'ke', name: 'Kenya', count: 0 }
       ];
       
-      const countries = getStoredData('customerCountryData', defaultCountries);
+      localStorage.setItem('customerCountryData', JSON.stringify(defaultCountries));
       
       // Check if this is a new visitor session
       const visitorId = localStorage.getItem('visitorId');
@@ -64,11 +62,11 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
         localStorage.setItem(`visits_${todayKey}`, JSON.stringify(todayVisits + 1));
         
         // Select a random country for this visitor
-        const randomIndex = Math.floor(Math.random() * countries.length);
-        const randomCountry = countries[randomIndex];
+        const randomIndex = Math.floor(Math.random() * defaultCountries.length);
+        const randomCountry = defaultCountries[randomIndex];
         
         // Update the country count
-        const updatedCountries = countries.map(country => 
+        const updatedCountries = defaultCountries.map(country => 
           country.code === randomCountry.code 
             ? { ...country, count: country.count + 1 } 
             : country
@@ -86,8 +84,8 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
         setTopFive([...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5));
       } else {
         // Return user, just load existing counts
-        setCount(countries.reduce((sum, country) => sum + country.count, 0));
-        setTopFive([...countries].sort((a, b) => b.count - a.count).slice(0, 5));
+        setCount(defaultCountries.reduce((sum, country) => sum + country.count, 0));
+        setTopFive([...defaultCountries].sort((a, b) => b.count - a.count).slice(0, 5));
       }
       
       setIsInitialized(true);
@@ -145,7 +143,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
   }, []);
 
   if (!isInitialized) {
-    return <span className="inline-block">5,400+</span>;
+    return <span className="inline-block">0</span>;
   }
 
   return (
