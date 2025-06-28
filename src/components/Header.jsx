@@ -130,7 +130,7 @@ const Header = () => {
               aria-label="Chat on WhatsApp"
               title="60 second average response time"
             >
-              <span>💬 Chat Now – 60s Avg Response</span>
+              <span>WhatsApp</span>
             </a>
 
             <div className="group relative hidden sm:block">
@@ -139,7 +139,7 @@ const Header = () => {
                 className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 aria-label="Airport pickup WiFi service"
               >
-                <span className="whitespace-nowrap">✈️ Airport Pickup (DAR • JRO • ZNZ)</span>
+                <span className="whitespace-nowrap">Rent WiFi on Arrival</span>
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
                 Get your device directly at the arrival gate
@@ -152,7 +152,7 @@ const Header = () => {
                 className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 aria-label="Home or hotel WiFi delivery"
               >
-                <span className="whitespace-nowrap">🏠 Home / Hotel Delivery</span>
+                <span className="whitespace-nowrap">Rent WiFi</span>
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
                 Delivered to any hotel or home in Tanzania
@@ -227,7 +227,7 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
-                  <span>✈️ Airport Pickup (DAR • JRO • ZNZ)</span>
+                  <span>Rent WiFi on Arrival</span>
                 </Link>
                 <a
                   href="https://wa.me/255764928408"
@@ -235,14 +235,14 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
-                  <span>💬 Chat Now – 60s Avg Response</span>
+                  <span>WhatsApp</span>
                 </a>
                 <Link
                   to="/contact"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
-                  <span>🏠 Home / Hotel Delivery</span>
+                  <span>Rent WiFi</span>
                 </Link>
               </div>
             </div>
