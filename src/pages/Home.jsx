@@ -192,17 +192,17 @@ const Home = () => {
         {/* Hero Section */}
         <section 
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden"
+          className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden pt-20"
         >
           {/* Optimized animated gradient background */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-200/20 to-pink-200/20 animate-pulse" aria-hidden="true"></div>
           
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="space-y-12"
+              className="space-y-10"
             >
               {/* Hero Badge */}
               <motion.div
@@ -218,7 +218,7 @@ const Home = () => {
 
               {/* Main Heading - Optimized for SEO */}
               <div className="space-y-8">
-                <h1 className="text-7xl md:text-9xl font-black text-gray-900 leading-none tracking-tight">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-none tracking-tight">
                   Rent WiFi
                   <motion.span 
                     className="block bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent"
@@ -230,11 +230,11 @@ const Home = () => {
                   </motion.span>
                 </h1>
                 
-                <p className="text-2xl md:text-3xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+                <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
                   Get high-speed portable WiFi anywhere in Tanzania. 
                   <span className="font-semibold text-orange-600"> Setup in 5 minutes!</span>
                   <br />
-                  <span className="text-xl text-gray-500">Starting at $100/week (TSh 232,000)</span>
+                  <span className="text-lg text-gray-500">Starting at $100/week (TSh 232,000)</span>
                 </p>
               </div>
 
@@ -242,7 +242,7 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
                   to="/contact"
-                  className="group relative bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                  className="group relative bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
                   aria-label="Rent WiFi device now"
                 >
                   <div className="flex items-center space-x-3">
@@ -257,7 +257,7 @@ const Home = () => {
                   href="https://wa.me/255764928408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white/80 backdrop-blur-sm border-2 border-gray-200 hover:border-orange-300 text-gray-700 hover:text-orange-600 px-10 py-5 rounded-full text-xl font-semibold transition-all duration-300 hover:shadow-xl"
+                  className="group bg-white/80 backdrop-blur-sm border-2 border-gray-200 hover:border-orange-300 text-gray-700 hover:text-orange-600 px-8 py-4 rounded-full text-xl font-semibold transition-all duration-300 hover:shadow-xl"
                   aria-label="Contact us via WhatsApp"
                 >
                   <div className="flex items-center space-x-3">
@@ -267,12 +267,12 @@ const Home = () => {
                 </a>
               </div>
 
-              {/* Enhanced Stats Grid with correct customer numbers */}
+              {/* Enhanced Stats Grid */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto pt-12"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
               >
                 {stats.map((stat, index) => (
                   <motion.div
@@ -280,10 +280,10 @@ const Home = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={heroInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-                    className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 hover:bg-white/80 transition-all duration-300 hover:scale-105 shadow-lg"
+                    className="bg-white/60 backdrop-blur-sm rounded-xl p-5 hover:bg-white/80 transition-all duration-300 hover:scale-105 shadow-lg"
                   >
                     <div className="text-4xl mb-2" aria-hidden="true">{stat.icon}</div>
-                    <div className="text-3xl md:text-4xl font-black text-gray-900">
+                    <div className="text-3xl md:text-3xl font-black text-gray-900">
                       {typeof stat.number === 'object' ? stat.number : stat.number}
                     </div>
                     <div className="text-gray-600 font-medium">{stat.label}</div>
@@ -297,28 +297,28 @@ const Home = () => {
         {/* Statistics Section */}
         <StatisticsSection />
 
-        {/* Pricing Plans - Updated with correct pricing */}
-        <section ref={plansRef} className="py-32 bg-white relative">
+        {/* Pricing Plans */}
+        <section ref={plansRef} className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={plansInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-center mb-20"
+              className="text-center mb-16"
             >
               <div className="inline-flex items-center space-x-2 bg-orange-100 rounded-full px-6 py-2 mb-6">
                 <Award className="h-5 w-5 text-orange-600" />
                 <span className="text-orange-600 font-semibold">Simple Transparent Pricing</span>
               </div>
-              <h2 className="text-6xl md:text-7xl font-black text-gray-900 mb-6">
+              <h2 className="text-5xl font-black text-gray-900 mb-6">
                 Choose Your Plan
               </h2>
-              <p className="text-2xl text-gray-600 max-w-3xl mx-auto font-light">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
                 Flexible rental options designed for every need. All prices include unlimited data and 24/7 support.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {plans.map((plan, index) => (
                 <motion.div
                   key={index}
@@ -327,7 +327,7 @@ const Home = () => {
                   transition={{ duration: 0.8, delay: index * 0.2 }}
                   className={`relative group ${
                     plan.popular 
-                      ? 'transform scale-105 z-10' 
+                      ? 'transform md:scale-105 z-10' 
                       : 'hover:scale-105'
                   } transition-all duration-500`}
                 >
@@ -408,18 +408,18 @@ const Home = () => {
         </section>
 
         {/* Features Section */}
-        <section ref={featuresRef} className="py-32 bg-gradient-to-br from-gray-50 to-blue-50">
+        <section ref={featuresRef} className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-center mb-20"
+              className="text-center mb-16"
             >
-              <h2 className="text-6xl md:text-7xl font-black text-gray-900 mb-6">
+              <h2 className="text-5xl font-black text-gray-900 mb-6">
                 Why Choose Us
               </h2>
-              <p className="text-2xl text-gray-600 max-w-3xl mx-auto font-light">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
                 Experience the difference with Tanzania's most trusted WiFi rental service
               </p>
             </motion.div>
@@ -433,11 +433,11 @@ const Home = () => {
                   transition={{ duration: 0.8, delay: index * 0.2 }}
                   className="group relative"
                 >
-                  <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 hover:bg-white transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-white/50">
-                    <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${feature.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <feature.icon className="h-8 w-8 text-white" />
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-8 hover:bg-white transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2 border border-white/50 h-full">
+                    <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${feature.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      <feature.icon className="h-7 w-7 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                   </div>
                 </motion.div>
@@ -446,19 +446,19 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Testimonials - Updated with consistent customer count */}
-        <section ref={testimonialsRef} className="py-32 bg-white">
+        {/* Testimonials */}
+        <section ref={testimonialsRef} className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-center mb-20"
+              className="text-center mb-16"
             >
-              <h2 className="text-6xl md:text-7xl font-black text-gray-900 mb-6">
+              <h2 className="text-5xl font-black text-gray-900 mb-6">
                 Customer Love
               </h2>
-              <p className="text-2xl text-gray-600 max-w-3xl mx-auto font-light">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
                 Join <VisitorCounter /> satisfied customers across Tanzania
               </p>
             </motion.div>
@@ -472,7 +472,7 @@ const Home = () => {
                   transition={{ duration: 0.8, delay: index * 0.2 }}
                   className="group"
                 >
-                  <div className="bg-gradient-to-br from-orange-50 to-pink-50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-orange-100">
+                  <div className="bg-gradient-to-br from-orange-50 to-pink-50 rounded-xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-orange-100">
                     {/* Rating */}
                     <div className="flex space-x-1 mb-6">
                       {[...Array(testimonial.rating)].map((_, i) => (
@@ -502,7 +502,7 @@ const Home = () => {
         </section>
 
         {/* Travel CTA Section */}
-        <section className="py-32 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 relative overflow-hidden">
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
             <motion.div
@@ -513,16 +513,16 @@ const Home = () => {
               className="space-y-8"
             >
               <div className="text-6xl" aria-hidden="true">🏔️🦁🏖️</div>
-              <h2 className="text-6xl md:text-7xl font-black mb-6">
+              <h2 className="text-5xl md:text-6xl font-black mb-6">
                 Explore Tanzania
               </h2>
-              <p className="text-2xl max-w-3xl mx-auto font-light opacity-90">
+              <p className="text-xl max-w-3xl mx-auto font-light opacity-90">
                 Stay connected while discovering Tanzania's incredible destinations
               </p>
               
               <Link
                 to="/travel"
-                className="inline-flex items-center space-x-3 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center space-x-3 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-8 py-4 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105"
                 aria-label="Discover Tanzania travel destinations"
               >
                 <span>Discover Tanzania</span>
@@ -533,7 +533,7 @@ const Home = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="py-32 bg-gray-900 text-white relative overflow-hidden">
+        <section className="py-24 bg-gray-900 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"></div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
@@ -541,29 +541,29 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="space-y-12"
+              className="space-y-10"
             >
-              <div className="space-y-8">
-                <h2 className="text-6xl md:text-7xl font-black leading-none">
+              <div className="space-y-6">
+                <h2 className="text-5xl md:text-6xl font-black leading-none">
                   Get Connected
                   <span className="block text-orange-400">Right Now</span>
                 </h2>
-                <p className="text-2xl text-gray-300 max-w-3xl mx-auto font-light">
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto font-light">
                   Don't wait. Get instant WiFi rental and stay connected everywhere in Tanzania.
-                  <span className="block mt-2 text-xl">Starting at $100/week (TSh 232,000)</span>
+                  <span className="block mt-2">Starting at $100/week (TSh 232,000)</span>
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
                   to="/contact"
-                  className="group bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-12 py-6 rounded-full text-2xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                  className="group bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
                   aria-label="Start WiFi rental now"
                 >
                   <div className="flex items-center space-x-3">
-                    <Wifi className="h-7 w-7" />
+                    <Wifi className="h-6 w-6" />
                     <span>Start Rental</span>
-                    <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </Link>
                 
@@ -571,18 +571,18 @@ const Home = () => {
                   href="https://wa.me/255764928408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-gray-900 px-12 py-6 rounded-full text-2xl font-bold transition-all duration-300 hover:shadow-xl"
+                  className="group border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-gray-900 px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 hover:shadow-xl"
                   aria-label="Contact us via WhatsApp"
                 >
                   <div className="flex items-center space-x-3">
-                    <Phone className="h-7 w-7" />
+                    <Phone className="h-6 w-6" />
                     <span>WhatsApp</span>
                   </div>
                 </a>
               </div>
 
-              <div className="pt-8">
-                <p className="text-gray-400 text-lg">
+              <div className="pt-6">
+                <p className="text-gray-400 text-base">
                   🚀 Setup in 5 minutes • 📶 99.9% uptime • 🛟 24/7 support • 😊 <VisitorCounter /> happy customers
                 </p>
               </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Wifi, Phone, Globe, ChevronDown } from 'lucide-react';
+import { Menu, X, Wifi, Phone, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -18,9 +18,21 @@ const Header = () => {
   }, []);
 
   const navigationItems = [
+    { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'Coverage', path: '/coverage' },
+    { 
+      name: 'Blog', 
+      path: '/blog',
+      dropdown: [
+        { name: 'All Articles', path: '/blog' },
+        { name: 'Airport WiFi Guide', path: '/blog/how-to-get-airport-wifi-tanzania-guide' },
+        { name: 'SIM Card Guide', path: '/blog/best-sim-card-tourists-tanzania-vs-esim' },
+        { name: 'Travel Tech', path: '/blog?category=Travel Tech' },
+        { name: 'Travel Tips', path: '/blog?category=Travel Tips' }
+      ]
+    },
     { 
       name: 'Travel Hub', 
       path: '/travel',
@@ -57,7 +69,6 @@ const Header = () => {
               <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'} group-hover:text-orange-500 transition-colors`}>
                 Safari Surf WiFi
               </h1>
-              <p className={`text-sm ${isScrolled ? 'text-gray-600' : 'text-gray-200'}`}>Rent WiFi On The Spot</p>
             </div>
           </Link>
 

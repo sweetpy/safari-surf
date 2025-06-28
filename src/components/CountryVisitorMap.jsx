@@ -59,10 +59,10 @@ const CountryVisitorMap = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-white rounded-xl shadow-lg p-6"
+      className="bg-white rounded-xl shadow-lg p-6 h-full"
     >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-bold text-gray-900 flex items-center space-x-2">
+        <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
           <Globe className="h-5 w-5 text-orange-500" />
           <span>Global Visitor Map</span>
         </h3>
@@ -71,15 +71,15 @@ const CountryVisitorMap = () => {
             <Users className="h-4 w-4 mr-1" />
             <span>{totalVisitors} visitors</span>
           </div>
-          <div className="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm font-medium flex items-center">
-            <TrendingUp className="h-4 w-4 mr-1" />
+          <div className="px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium flex items-center">
+            <TrendingUp className="h-3 w-3 mr-1" />
             <span>Live</span>
           </div>
         </div>
       </div>
       
       {/* Simple visual map representation */}
-      <div className="relative h-64 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+      <div className="relative h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
         <div 
           className="w-full h-full bg-contain bg-no-repeat bg-center opacity-20"
           style={{ backgroundImage: 'url("https://images.pexels.com/photos/269724/pexels-photo-269724.jpeg?auto=compress&cs=tinysrgb&w=1280")' }}
@@ -91,7 +91,7 @@ const CountryVisitorMap = () => {
           // Simulate positions on the map - in production these would be real coordinates
           const top = 15 + Math.random() * 70; // Random vertical position
           const left = 10 + Math.random() * 80; // Random horizontal position
-          const size = Math.max(20, Math.min(50, country.count * 5)); // Size based on count
+          const size = Math.max(16, Math.min(32, country.count * 4)); // Size based on count
           
           return (
             <motion.div
@@ -99,7 +99,7 @@ const CountryVisitorMap = () => {
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="absolute rounded-full bg-orange-500/30 flex items-center justify-center"
+              className="absolute rounded-full bg-orange-500/40 flex items-center justify-center"
               style={{ 
                 top: `${top}%`, 
                 left: `${left}%`,
