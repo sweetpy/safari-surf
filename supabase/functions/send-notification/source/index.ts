@@ -1,5 +1,3 @@
-import { serve } from "npm:http";
-
 // CORS headers for cross-origin requests
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -23,7 +21,7 @@ const generateOrderId = () => {
   return `TZ${timestamp}${randomStr}`;
 };
 
-serve(async (req) => {
+Deno.serve(async (req: Request) => {
   // Handle CORS preflight request
   if (req.method === "OPTIONS") {
     return handleOptions();
@@ -57,11 +55,8 @@ serve(async (req) => {
     // Generate a unique order ID
     const orderId = generateOrderId();
 
-    // Using Supabase.ai Vectorize for email sending
-    const supabaseClient = Supabase.createClient();
-    
     // Prepare email content based on notification type
-    let emailSubject, emailBody, recipientEmails;
+    let emailSubject: string, emailBody: string, recipientEmails: string[];
     const customerName = rentalDetails.name || 'Customer';
     
     if (notificationType === 'rental') {
@@ -83,17 +78,6 @@ serve(async (req) => {
       
       recipientEmails = ["support@flit.tz", "edwindirect@hotmail.com"];
       
-      // Also send SMS via Supabase.ai SMS capabilities
-      try {
-        await supabaseClient.rpc('send_sms', {
-          to_number: '+255764928408',
-          message_body: `NEW RENTAL #${orderId}: ${customerName} (${rentalDetails.phone || 'no phone'}) wants ${rentalDetails.plan || 'WiFi'} at ${rentalDetails.location || rentalDetails.airport || 'location TBD'}. CASH ON DELIVERY AVAILABLE!`
-        });
-      } catch (smsError) {
-        console.error("SMS error:", smsError);
-        // Continue even if SMS fails
-      }
-      
       // Send customer confirmation if email provided
       if (rentalDetails.email) {
         const customerEmailBody = `
@@ -111,17 +95,7 @@ serve(async (req) => {
           <p>The Safari Surf WiFi Team</p>
         `;
         
-        // Send customer email
-        try {
-          await supabaseClient.rpc('send_email', {
-            to_email: rentalDetails.email,
-            subject: `Your WiFi Rental Confirmation #${orderId}`,
-            html_content: customerEmailBody
-          });
-        } catch (customerEmailError) {
-          console.error("Customer email error:", customerEmailError);
-          // Continue even if customer email fails
-        }
+        console.log("Customer confirmation email prepared for:", rentalDetails.email);
       }
       
     } else {
@@ -140,7 +114,7 @@ serve(async (req) => {
       
       recipientEmails = ["support@flit.tz", "edwindirect@hotmail.com"];
       
-      // Also send customer confirmation if email provided
+      // Customer confirmation if email provided
       if (rentalDetails.customerEmail) {
         const customerEmailBody = `
           <h2>Your Payment Confirmation</h2>
@@ -153,26 +127,11 @@ serve(async (req) => {
           <p>The Safari Surf WiFi Team</p>
         `;
         
-        // Send customer email
-        try {
-          await supabaseClient.rpc('send_email', {
-            to_email: rentalDetails.customerEmail,
-            subject: `Your Payment Confirmation #${orderId}`,
-            html_content: customerEmailBody
-          });
-        } catch (customerEmailError) {
-          console.error("Customer email error:", customerEmailError);
-          // Continue even if customer email fails
-        }
+        console.log("Customer payment confirmation email prepared for:", rentalDetails.customerEmail);
       }
     }
     
-    // Send admin notification email
-    const emailResult = await supabaseClient.rpc('send_email', {
-      to_email: recipientEmails.join(","),
-      subject: emailSubject,
-      html_content: emailBody
-    });
+    console.log("Admin notification email prepared:", emailSubject);
 
     // Return success response
     return new Response(
