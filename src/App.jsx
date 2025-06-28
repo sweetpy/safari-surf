@@ -15,6 +15,7 @@ import Coverage from './pages/Coverage';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import RentalCheckout from './pages/RentalCheckout';
 
 // Travel Content - Secondary Features
 import Destinations from './pages/Destinations';
@@ -22,7 +23,13 @@ import Safaris from './pages/Safaris';
 import Itineraries from './pages/Itineraries';
 import Guides from './pages/Guides';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import AirportWiFiTanzania from './pages/blog/AirportWiFiTanzania';
 import Booking from './pages/Booking';
+
+// Travel Hub Blog
+import TravelBlog from './pages/travel/Blog';
+import TravelBlogPost from './pages/travel/BlogPost';
 
 // Destination Pages
 import Serengeti from './pages/destinations/Serengeti';
@@ -55,6 +62,12 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/checkout" element={<RentalCheckout />} />
+              
+              {/* Blog Routes */}
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/blog/how-to-get-airport-wifi-tanzania-guide" element={<AirportWiFiTanzania />} />
               
               {/* Travel Content - Secondary Features */}
               <Route path="/travel" element={<Destinations />} />
@@ -62,7 +75,8 @@ function App() {
               <Route path="/travel/safaris" element={<Safaris />} />
               <Route path="/travel/itineraries" element={<Itineraries />} />
               <Route path="/travel/guides" element={<Guides />} />
-              <Route path="/travel/blog" element={<Blog />} />
+              <Route path="/travel/blog" element={<TravelBlog />} />
+              <Route path="/travel/blog/:slug" element={<TravelBlogPost />} />
               <Route path="/travel/booking" element={<Booking />} />
               
               {/* Destination Routes */}

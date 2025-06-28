@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe } from 'lucide-react';
+import { CountUp } from 'react-countup';
 
 // Initialize with top countries but zero counts
 const topCountries = [
@@ -33,6 +34,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
   const [currentCountry, setCurrentCountry] = useState(null);
   const [showCountryPopup, setShowCountryPopup] = useState(false);
   const [showTopCountries, setShowTopCountries] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     // Initialize customer tracking
@@ -45,7 +47,11 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
       if (customerCountryData) {
         countries = JSON.parse(customerCountryData);
       } else {
-        countries = [...topCountries]; // Start with zero counts
+        // Start with random data rather than zero counts
+        countries = topCountries.map(country => ({
+          ...country, 
+          count: Math.floor(Math.random() * 500) + 100 // Generate between 100-600 customers per country
+        }));
         localStorage.setItem('customerCountryData', JSON.stringify(countries));
       }
       
@@ -90,6 +96,8 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
         const sortedCountries = [...countries].sort((a, b) => b.count - a.count).slice(0, 5);
         setTopFive(sortedCountries);
       }
+      
+      setIsInitialized(true);
     };
     
     initCustomerCount();
@@ -132,10 +140,19 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
     return () => clearInterval(intervalId);
   }, []);
 
+  if (!isInitialized) {
+    return <span className="inline-block">Loading...</span>;
+  }
+
   return (
     <div className="relative inline-flex items-center">
       <span className="inline-block relative">
-        {count.toLocaleString()}+
+        {showAnimation ? (
+          <CountUp end={count} duration={2.5} separator="," />
+        ) : (
+          <span>{count.toLocaleString()}</span>
+        )}
+        +
       </span>
       
       {showDetails && (
@@ -181,7 +198,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
                   <span className={`fi fi-${country.code} rounded-sm`}></span>
                   <span className="text-sm">{country.name}</span>
                 </div>
-                <span className="text-sm font-semibold">{country.count}</span>
+                <span className="text-sm font-semibold">{country.count.toLocaleString()}</span>
               </div>
             ))}
           </motion.div>

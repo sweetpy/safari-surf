@@ -10,6 +10,7 @@ import {
   Instagram, 
   ArrowRight
 } from 'lucide-react';
+import VisitorCounter from './VisitorCounter';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -37,19 +38,18 @@ const Footer = () => {
           </div>
         </div>
       
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Company Info */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center space-x-3">
               <Wifi className="h-8 w-8 text-orange-500" />
               <div>
                 <h3 className="text-2xl font-bold">Safari Surf WiFi</h3>
-                <p className="text-gray-400">Rent WiFi On The Spot</p>
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed max-w-md">
               Tanzania's leading portable WiFi rental service. Get instant, 
-              high-speed internet anywhere you go, with 3,000+ satisfied customers.
+              high-speed internet anywhere you go, with <VisitorCounter showAnimation={false} /> satisfied customers.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
@@ -73,7 +73,18 @@ const Footer = () => {
               <li><Link to="/coverage" className="text-gray-300 hover:text-white transition-colors">Coverage</Link></li>
               <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">Support</Link></li>
               <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/travel" className="text-gray-300 hover:text-white transition-colors">Travel Hub</Link></li>
+            </ul>
+          </div>
+
+          {/* Blog Links */}
+          <div className="space-y-4">
+            <h4 className="text-lg font-semibold">Blog</h4>
+            <ul className="space-y-2">
+              <li><Link to="/blog" className="text-gray-300 hover:text-white transition-colors">WiFi Blog</Link></li>
+              <li><Link to="/blog/how-to-get-airport-wifi-tanzania-guide" className="text-gray-300 hover:text-white transition-colors">Airport WiFi Guide</Link></li>
+              <li><Link to="/travel/blog" className="text-gray-300 hover:text-white transition-colors">Travel Tech Blog</Link></li>
+              <li><Link to="/travel/blog/how-to-stay-connected-while-hiking-kilimanjaro" className="text-gray-300 hover:text-white transition-colors">Kilimanjaro Connectivity</Link></li>
+              <li><Link to="/travel/blog/digital-nomad-guide-working-remotely-zanzibar" className="text-gray-300 hover:text-white transition-colors">Digital Nomad Guide</Link></li>
             </ul>
           </div>
 
@@ -122,7 +133,8 @@ const Footer = () => {
           <div className="flex space-x-6 text-sm mt-4 md:mt-0">
             <a href="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy</a>
             <a href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms</a>
-            <Link to="/faq" className="text-gray-400 hover:text-white transition-colors">FAQ</Link>
+            <Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link>
+            <Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link>
           </div>
         </div>
       </div>
