@@ -10,6 +10,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: './', // Important for cPanel hosting
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
