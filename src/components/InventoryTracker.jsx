@@ -10,14 +10,14 @@ const getTodayKey = () => {
 // Get a human-readable day
 const getDayName = () => {
   const date = new Date();
-  return date.toLocaleDateString('en-US', { weekday: 'long' });
+  return date.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
 };
 
 // Get tomorrow's day name
 const getTomorrowDayName = () => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.toLocaleDateString('en-US', { weekday: 'long' });
+  return tomorrow.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
 };
 
 // Calculate inventory based on various factors including time of day
@@ -41,15 +41,15 @@ const calculateInventory = () => {
   } else if (hour < 18) {
     baseInventory = Math.floor(Math.random() * 3) + 3; // 3-5 devices in afternoon
   } else {
-    baseInventory = Math.floor(Math.random() * 2) + 2; // 2-3 devices in evening
+    baseInventory = Math.floor(Math.random() * 2) + 1; // 1-2 devices in evening
   }
   
   // Day of week factor - lower inventory on busy days (weekends)
   const dayOfWeek = new Date().getDay(); // 0 = Sunday, 6 = Saturday
   if (dayOfWeek === 0 || dayOfWeek === 6) {
-    baseInventory = Math.max(2, baseInventory - 2); // Weekend adjustment
+    baseInventory = Math.max(1, baseInventory - 2); // Weekend adjustment
   } else if (dayOfWeek === 5) {
-    baseInventory = Math.max(3, baseInventory - 1); // Friday adjustment
+    baseInventory = Math.max(1, baseInventory - 1); // Friday adjustment
   }
   
   // Save today's inventory
@@ -147,7 +147,7 @@ const InventoryTracker = () => {
   return (
     <div className="relative inline-block">
       <span className={`font-medium ${isLowStock ? 'text-red-600' : 'text-yellow-600'}`}>
-        Only {inventory} devices left {dayName.toLowerCase()}
+        Only {inventory} {inventory === 1 ? 'device' : 'devices'} left {dayName}
         {recentlyDecreased && (
           <motion.span 
             initial={{ opacity: 0 }}
@@ -162,7 +162,7 @@ const InventoryTracker = () => {
       
       {isLowStock && (
         <div className="mt-1 text-xs text-gray-500">
-          {tomorrowInventory} more devices available for {tomorrowName.toLowerCase()}
+          {tomorrowInventory} more {tomorrowInventory === 1 ? 'device' : 'devices'} available for {tomorrowName}
         </div>
       )}
     </div>
