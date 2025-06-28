@@ -57,11 +57,19 @@ const calculateInventory = () => {
   return baseInventory;
 };
 
+// Calculate tomorrow's inventory - always higher than today
+const calculateTomorrowInventory = (todayInventory) => {
+  // Make sure tomorrow has more inventory than today
+  // Add between 8-14 more devices than current inventory
+  return todayInventory + Math.floor(Math.random() * 7) + 8;
+};
+
 // Low inventory threshold
 const LOW_INVENTORY_THRESHOLD = 4;
 
 const InventoryTracker = () => {
   const [inventory, setInventory] = useState(0);
+  const [tomorrowInventory, setTomorrowInventory] = useState(0);
   const [isLowStock, setIsLowStock] = useState(false);
   const [recentlyDecreased, setRecentlyDecreased] = useState(false);
   const [dayName, setDayName] = useState('');
@@ -71,11 +79,17 @@ const InventoryTracker = () => {
   useEffect(() => {
     // Initialize inventory
     const currentInventory = calculateInventory();
+    const nextDayInventory = calculateTomorrowInventory(currentInventory);
+    
     setInventory(currentInventory);
+    setTomorrowInventory(nextDayInventory);
     setIsLowStock(currentInventory <= LOW_INVENTORY_THRESHOLD);
     setDayName(getDayName());
     setTomorrowName(getTomorrowDayName());
     setIsInitialized(true);
+    
+    // Store tomorrow's inventory in localStorage
+    localStorage.setItem('tomorrowInventory', nextDayInventory.toString());
     
     // Small chance to decrease inventory randomly
     const decreaseInterval = setInterval(() => {
@@ -105,10 +119,16 @@ const InventoryTracker = () => {
       if (savedDate && savedDate !== currentDate) {
         // It's a new day, recalculate inventory
         const newInventory = calculateInventory();
+        const newTomorrowInventory = calculateTomorrowInventory(newInventory);
+        
         setInventory(newInventory);
+        setTomorrowInventory(newTomorrowInventory);
         setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
         setDayName(getDayName());
         setTomorrowName(getTomorrowDayName());
+        
+        // Store tomorrow's inventory
+        localStorage.setItem('tomorrowInventory', newTomorrowInventory.toString());
       }
       
       localStorage.setItem('lastInventoryDate', currentDate);
@@ -142,7 +162,7 @@ const InventoryTracker = () => {
       
       {isLowStock && (
         <div className="mt-1 text-xs text-gray-500">
-          More devices available for {tomorrowName.toLowerCase()}
+          {tomorrowInventory} more devices available for {tomorrowName.toLowerCase()}
         </div>
       )}
     </div>
