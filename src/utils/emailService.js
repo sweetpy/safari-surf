@@ -8,33 +8,67 @@ export const sendRentalNotification = async (rentalDetails) => {
     // Try to use the Supabase Edge Function first
     const apiUrl = import.meta.env.VITE_SUPABASE_URL 
       ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-notification`
-      : 'http://localhost:54321/functions/v1/send-notification';
-    
-    // Send request to our serverless function
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example'}`,
-      },
-      body: JSON.stringify({
-        rentalDetails,
-        notificationType: 'rental'
-      })
-    });
-    
-    const result = await response.json();
-    
-    if (!result.success) {
-      throw new Error(result.error || 'Failed to send notification');
-    }
+      : '';
 
-    return { 
-      success: true, 
-      orderId: result.orderId
-    };
+    // Try PHP fallback if running on cPanel (relative path from deployment)
+    const phpFallbackUrl = './php/send-notification.php';
+      
+    // Try serverless function first
+    try {
+      if (apiUrl) {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || ''}`,
+          },
+          body: JSON.stringify({
+            rentalDetails,
+            notificationType: 'rental'
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to send notification');
+        }
+
+        return { 
+          success: true, 
+          orderId: result.orderId
+        };
+      } else {
+        throw new Error('No Supabase URL configured');
+      }
+    } catch (serverlessError) {
+      console.warn('Serverless function error, trying PHP fallback:', serverlessError);
+      
+      // Try PHP fallback
+      const response = await fetch(phpFallbackUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          rentalDetails,
+          notificationType: 'rental'
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to send notification');
+      }
+
+      return { 
+        success: true, 
+        orderId: result.orderId
+      };
+    }
   } catch (error) {
-    console.error('Serverless function error:', error);
+    console.error('All notification methods failed:', error);
     
     // Fallback to WhatsApp
     try {
@@ -85,39 +119,81 @@ export const sendPaymentConfirmation = async (paymentDetails) => {
     // Try to use the Supabase Edge Function first
     const apiUrl = import.meta.env.VITE_SUPABASE_URL 
       ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-notification`
-      : 'http://localhost:54321/functions/v1/send-notification';
+      : '';
     
-    // Send request to our serverless function
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example'}`,
-      },
-      body: JSON.stringify({
-        rentalDetails: {
-          customerName: paymentDetails.customerName,
-          customerEmail: paymentDetails.customerEmail,
-          amount: paymentDetails.amount,
-          currency: paymentDetails.currency,
-          plan: paymentDetails.plan,
-          paymentMethod: paymentDetails.paymentMethod,
-          transactionId: paymentDetails.transactionId,
-        },
-        notificationType: 'payment'
-      })
-    });
+    // Try PHP fallback if running on cPanel (relative path from deployment)
+    const phpFallbackUrl = './php/send-notification.php';
     
-    const result = await response.json();
-    
-    if (!result.success) {
-      throw new Error(result.error || 'Failed to send payment confirmation');
-    }
+    // Try serverless function first
+    try {
+      if (apiUrl) {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || ''}`,
+          },
+          body: JSON.stringify({
+            rentalDetails: {
+              customerName: paymentDetails.customerName,
+              customerEmail: paymentDetails.customerEmail,
+              amount: paymentDetails.amount,
+              currency: paymentDetails.currency,
+              plan: paymentDetails.plan,
+              paymentMethod: paymentDetails.paymentMethod,
+              transactionId: paymentDetails.transactionId,
+            },
+            notificationType: 'payment'
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to send payment confirmation');
+        }
 
-    return { 
-      success: true, 
-      orderId: result.orderId,
-    };
+        return { 
+          success: true, 
+          orderId: result.orderId,
+        };
+      } else {
+        throw new Error('No Supabase URL configured');
+      }
+    } catch (serverlessError) {
+      console.warn('Serverless function error, trying PHP fallback:', serverlessError);
+      
+      // Try PHP fallback
+      const response = await fetch(phpFallbackUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          rentalDetails: {
+            customerName: paymentDetails.customerName,
+            customerEmail: paymentDetails.customerEmail,
+            amount: paymentDetails.amount,
+            currency: paymentDetails.currency,
+            plan: paymentDetails.plan,
+            paymentMethod: paymentDetails.paymentMethod,
+            transactionId: paymentDetails.transactionId,
+          },
+          notificationType: 'payment'
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to send payment confirmation');
+      }
+
+      return { 
+        success: true, 
+        orderId: result.orderId
+      };
+    }
   } catch (error) {
     console.error('Payment confirmation error:', error);
     
