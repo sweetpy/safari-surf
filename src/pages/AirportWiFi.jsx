@@ -20,7 +20,8 @@ import {
   Smartphone,
   BookOpen,
   Globe,
-  Briefcase
+  Briefcase,
+  Star
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { sendRentalNotification } from '../utils/emailService';
