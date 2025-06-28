@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Users, MapPin, Wifi, Award, Globe, TrendingUp } from 'lucide-react';
 import VisitorCounter from './VisitorCounter';
-import CountryVisitorMap from './CountryVisitorMap';
 
 const StatisticsSection = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });

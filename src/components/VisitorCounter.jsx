@@ -135,7 +135,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
           setTopFive(sortedCountries);
         }
       }
-    }, 5000); // Increase more frequently to show the counting effect
+    }, 5000); // Increment approximately every 5 seconds
     
     return () => clearInterval(intervalId);
   }, []);

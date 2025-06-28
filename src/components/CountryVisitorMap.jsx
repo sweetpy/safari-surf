@@ -9,9 +9,9 @@ const CountryVisitorMap = () => {
   useEffect(() => {
     // Get visitor country data from localStorage
     const loadCountryData = () => {
-      const visitorCountryData = localStorage.getItem('visitorCountryData');
-      if (visitorCountryData) {
-        const parsedData = JSON.parse(visitorCountryData);
+      const customerCountryData = localStorage.getItem('customerCountryData');
+      if (customerCountryData) {
+        const parsedData = JSON.parse(customerCountryData);
         // Sort by count (highest first)
         const sortedData = [...parsedData].sort((a, b) => b.count - a.count);
         setCountryData(sortedData);

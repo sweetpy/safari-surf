@@ -77,8 +77,12 @@ All plans include unlimited data, free delivery to major hotels, and 24/7 suppor
 export async function getCustomerCount() {
   // Check if we're in a browser environment
   if (typeof window !== 'undefined') {
-    const storedCount = localStorage.getItem('customerCount');
-    return storedCount ? parseInt(storedCount, 10) : 0;
+    const customerCountryData = localStorage.getItem('customerCountryData');
+    if (customerCountryData) {
+      const countries = JSON.parse(customerCountryData);
+      return countries.reduce((sum, country) => sum + country.count, 0);
+    }
+    return 0;
   }
   return 0; // Default fallback
 }
