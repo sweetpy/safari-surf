@@ -135,8 +135,8 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Safari Surf WiFi - Rent Portable WiFi Instantly in Tanzania | #1 WiFi Rental Service</title>
-        <meta name="description" content="Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week (TSh 232,000). Get connected anywhere in Tanzania in 5 minutes!" />
+        <title>Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery | Safari Surf WiFi</title>
+        <meta name="description" content="Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage. Get connected instantly in Tanzania!" />
         <meta name="keywords" content="WiFi rental Tanzania, portable WiFi Tanzania, internet rental Dar es Salaam, mobile WiFi Arusha, WiFi device rental Zanzibar, Tanzania internet, safari WiFi, travel WiFi Tanzania" />
         <link rel="canonical" href="https://safarisurfwifi.com" />
         
@@ -145,13 +145,13 @@ const Home = () => {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Safari Surf WiFi - Tanzania's #1 WiFi Rental Service",
-          "description": "Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week. Join our growing customer base for reliable connectivity.",
+          "name": "Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery",
+          "description": "Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage.",
           "url": "https://safarisurfwifi.com",
           "mainEntity": {
             "@type": "LocalBusiness",
             "name": "Safari Surf WiFi",
-            "priceRange": "$25-$150",
+            "priceRange": "$4.85-$150",
             "telephone": "+255764928408",
             "address": {
               "@type": "PostalAddress",
@@ -218,22 +218,14 @@ const Home = () => {
               {/* Main Heading - Optimized for SEO */}
               <div className="space-y-8">
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-none tracking-tight">
-                  Rent WiFi
-                  <motion.span 
-                    className="block bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent"
-                    initial={{ backgroundPosition: "0% 50%" }}
-                    animate={{ backgroundPosition: "100% 50%" }}
-                    transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-                  >
-                    Instantly
-                  </motion.span>
+                  Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
-                  Get high-speed portable WiFi anywhere in Tanzania. 
-                  <span className="font-semibold text-orange-600"> Setup in 5 minutes!</span>
-                  <br />
-                  <span className="text-lg text-gray-500">Starting at $100/week (TSh 232,000)</span>
+                  Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania.
+                </p>
+                <p className="text-lg text-gray-600 font-medium">
+                  From $4.85/day or TSh 6,600 – Unlimited Usage
                 </p>
               </div>
 
@@ -246,7 +238,7 @@ const Home = () => {
                 >
                   <div className="flex items-center space-x-3">
                     <Wifi className="h-6 w-6" />
-                    <span>Rent WiFi Now</span>
+                    <span>📦 Reserve WiFi Now – Limited Devices Available</span>
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </div>
                   <div className="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity animate-pulse"></div>
@@ -261,9 +253,32 @@ const Home = () => {
                 >
                   <div className="flex items-center space-x-3">
                     <Phone className="h-6 w-6" />
-                    <span>WhatsApp</span>
+                    <span>💬 Chat Now – Get Help in 60 Seconds</span>
                   </div>
                 </a>
+              </div>
+              
+              {/* Trust elements */}
+              <div className="flex flex-col space-y-4 items-center">
+                <p className="text-lg font-medium text-gray-700">⭐️ 4.9/5 rating from 1,677 travelers</p>
+                <p className="text-lg font-medium text-gray-700">Backed by Airtel, Vodacom, and Halotel</p>
+                <div className="mt-3 text-yellow-600 font-semibold">
+                  Only 7 devices left today
+                </div>
+              </div>
+
+              {/* Device info */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                <div className="w-32 h-32 bg-white p-2 rounded-lg shadow-lg">
+                  <img 
+                    src="https://images.pexels.com/photos/16030958/pexels-photo-16030958.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                    alt="Portable WiFi Device" 
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
+                <div className="text-center md:text-left">
+                  <div className="font-bold text-xl mb-2">Pocket-sized. Connects up to 10 devices. Speeds up to 50 Mbps.</div>
+                </div>
               </div>
 
               {/* Enhanced Stats Grid */}
@@ -549,7 +564,7 @@ const Home = () => {
                 </h2>
                 <p className="text-xl text-gray-300 max-w-3xl mx-auto font-light">
                   Don't wait. Get instant WiFi rental and stay connected everywhere in Tanzania.
-                  <span className="block mt-2">Starting at $100/week (TSh 232,000)</span>
+                  <span className="block mt-2">From $4.85/day or TSh 6,600 – Unlimited Usage</span>
                 </p>
               </div>
               
@@ -561,7 +576,7 @@ const Home = () => {
                 >
                   <div className="flex items-center space-x-3">
                     <Wifi className="h-6 w-6" />
-                    <span>Start Rental</span>
+                    <span>📦 Reserve WiFi Now – Limited Devices Available</span>
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </Link>
@@ -575,7 +590,7 @@ const Home = () => {
                 >
                   <div className="flex items-center space-x-3">
                     <Phone className="h-6 w-6" />
-                    <span>WhatsApp</span>
+                    <span>💬 Chat Now – Get Help in 60 Seconds</span>
                   </div>
                 </a>
               </div>
@@ -583,6 +598,15 @@ const Home = () => {
               <div className="pt-6">
                 <p className="text-gray-400 text-base">
                   🚀 Setup in 5 minutes • 📶 99.9% uptime • 🛟 24/7 support • 😊 <VisitorCounter /> happy customers
+                </p>
+                <p className="text-yellow-400 font-semibold mt-3">
+                  Only 7 devices left today
+                </p>
+                <p className="text-gray-400 text-base mt-2">
+                  ⭐️ 4.9/5 rating from 1,677 travelers
+                </p>
+                <p className="text-gray-400 text-base">
+                  Backed by Airtel, Vodacom, and Halotel
                 </p>
               </div>
             </motion.div>
