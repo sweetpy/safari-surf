@@ -13,11 +13,11 @@ const getDayName = () => {
   return date.toLocaleDateString('en-US', { weekday: 'long' });
 };
 
-// Get a future date for shipping estimate
-const getShippingDate = (daysFromNow = 2) => {
-  const date = new Date();
-  date.setDate(date.getDate() + daysFromNow);
-  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+// Get tomorrow's day name
+const getTomorrowDayName = () => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow.toLocaleDateString('en-US', { weekday: 'long' });
 };
 
 // Calculate inventory based on various factors including time of day
@@ -29,19 +29,19 @@ const calculateInventory = () => {
     return parseInt(savedInventory, 10);
   }
   
-  // Base inventory (between 5-12 devices)
+  // Base inventory (between 3-9 devices)
   const hour = new Date().getHours();
   let baseInventory;
   
   // Inventory decreases throughout the day
   if (hour < 9) {
-    baseInventory = Math.floor(Math.random() * 5) + 8; // 8-12 devices in early morning
+    baseInventory = Math.floor(Math.random() * 3) + 7; // 7-9 devices in early morning
   } else if (hour < 14) {
-    baseInventory = Math.floor(Math.random() * 4) + 6; // 6-9 devices in late morning/noon
+    baseInventory = Math.floor(Math.random() * 3) + 5; // 5-7 devices in late morning/noon
   } else if (hour < 18) {
-    baseInventory = Math.floor(Math.random() * 4) + 4; // 4-7 devices in afternoon
+    baseInventory = Math.floor(Math.random() * 3) + 3; // 3-5 devices in afternoon
   } else {
-    baseInventory = Math.floor(Math.random() * 3) + 3; // 3-5 devices in evening
+    baseInventory = Math.floor(Math.random() * 2) + 2; // 2-3 devices in evening
   }
   
   // Day of week factor - lower inventory on busy days (weekends)
@@ -65,7 +65,7 @@ const InventoryTracker = () => {
   const [isLowStock, setIsLowStock] = useState(false);
   const [recentlyDecreased, setRecentlyDecreased] = useState(false);
   const [dayName, setDayName] = useState('');
-  const [shippingDate, setShippingDate] = useState('');
+  const [tomorrowName, setTomorrowName] = useState('');
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const InventoryTracker = () => {
     setInventory(currentInventory);
     setIsLowStock(currentInventory <= LOW_INVENTORY_THRESHOLD);
     setDayName(getDayName());
-    setShippingDate(getShippingDate());
+    setTomorrowName(getTomorrowDayName());
     setIsInitialized(true);
     
     // Small chance to decrease inventory randomly
@@ -108,7 +108,7 @@ const InventoryTracker = () => {
         setInventory(newInventory);
         setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
         setDayName(getDayName());
-        setShippingDate(getShippingDate());
+        setTomorrowName(getTomorrowDayName());
       }
       
       localStorage.setItem('lastInventoryDate', currentDate);
@@ -142,7 +142,7 @@ const InventoryTracker = () => {
       
       {isLowStock && (
         <div className="mt-1 text-xs text-gray-500">
-          Next shipment arrives {shippingDate}
+          More devices available for {tomorrowName.toLowerCase()}
         </div>
       )}
     </div>
