@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import VisitorCounter from '../components/VisitorCounter';
 import StatisticsSection from '../components/StatisticsSection';
+import InventoryTracker from '../components/InventoryTracker';
 
 const Home = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -263,7 +264,7 @@ const Home = () => {
                 <p className="text-lg font-medium text-gray-700">⭐️ 4.9/5 rating from 1,677 travelers</p>
                 <p className="text-lg font-medium text-gray-700">Backed by Airtel, Vodacom, and Halotel</p>
                 <div className="mt-3 text-yellow-600 font-semibold">
-                  Only 7 devices left today
+                  <InventoryTracker />
                 </div>
               </div>
 
@@ -600,7 +601,7 @@ const Home = () => {
                   🚀 Setup in 5 minutes • 📶 99.9% uptime • 🛟 24/7 support • 😊 <VisitorCounter /> happy customers
                 </p>
                 <p className="text-yellow-400 font-semibold mt-3">
-                  Only 7 devices left today
+                  <InventoryTracker />
                 </p>
                 <p className="text-gray-400 text-base mt-2">
                   ⭐️ 4.9/5 rating from 1,677 travelers

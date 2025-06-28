@@ -1,0 +1,152 @@
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+
+// Get today's date in YYYY-MM-DD format
+const getTodayKey = () => {
+  const date = new Date();
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+};
+
+// Get a human-readable day
+const getDayName = () => {
+  const date = new Date();
+  return date.toLocaleDateString('en-US', { weekday: 'long' });
+};
+
+// Get a future date for shipping estimate
+const getShippingDate = (daysFromNow = 2) => {
+  const date = new Date();
+  date.setDate(date.getDate() + daysFromNow);
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+};
+
+// Calculate inventory based on various factors including time of day
+const calculateInventory = () => {
+  const today = getTodayKey();
+  const savedInventory = localStorage.getItem(`inventory_${today}`);
+  
+  if (savedInventory) {
+    return parseInt(savedInventory, 10);
+  }
+  
+  // Base inventory (between 5-12 devices)
+  const hour = new Date().getHours();
+  let baseInventory;
+  
+  // Inventory decreases throughout the day
+  if (hour < 9) {
+    baseInventory = Math.floor(Math.random() * 5) + 8; // 8-12 devices in early morning
+  } else if (hour < 14) {
+    baseInventory = Math.floor(Math.random() * 4) + 6; // 6-9 devices in late morning/noon
+  } else if (hour < 18) {
+    baseInventory = Math.floor(Math.random() * 4) + 4; // 4-7 devices in afternoon
+  } else {
+    baseInventory = Math.floor(Math.random() * 3) + 3; // 3-5 devices in evening
+  }
+  
+  // Day of week factor - lower inventory on busy days (weekends)
+  const dayOfWeek = new Date().getDay(); // 0 = Sunday, 6 = Saturday
+  if (dayOfWeek === 0 || dayOfWeek === 6) {
+    baseInventory = Math.max(2, baseInventory - 2); // Weekend adjustment
+  } else if (dayOfWeek === 5) {
+    baseInventory = Math.max(3, baseInventory - 1); // Friday adjustment
+  }
+  
+  // Save today's inventory
+  localStorage.setItem(`inventory_${today}`, baseInventory.toString());
+  return baseInventory;
+};
+
+// Low inventory threshold
+const LOW_INVENTORY_THRESHOLD = 4;
+
+const InventoryTracker = () => {
+  const [inventory, setInventory] = useState(0);
+  const [isLowStock, setIsLowStock] = useState(false);
+  const [recentlyDecreased, setRecentlyDecreased] = useState(false);
+  const [dayName, setDayName] = useState('');
+  const [shippingDate, setShippingDate] = useState('');
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    // Initialize inventory
+    const currentInventory = calculateInventory();
+    setInventory(currentInventory);
+    setIsLowStock(currentInventory <= LOW_INVENTORY_THRESHOLD);
+    setDayName(getDayName());
+    setShippingDate(getShippingDate());
+    setIsInitialized(true);
+    
+    // Small chance to decrease inventory randomly
+    const decreaseInterval = setInterval(() => {
+      // 5% chance of inventory decrease when user is active on the site
+      if (Math.random() < 0.05 && document.visibilityState === 'visible') {
+        setInventory(prev => {
+          const newInventory = Math.max(1, prev - 1);
+          localStorage.setItem(`inventory_${getTodayKey()}`, newInventory.toString());
+          
+          // Show notification about recent decrease
+          setRecentlyDecreased(true);
+          setTimeout(() => setRecentlyDecreased(false), 10000); // Hide after 10 seconds
+          
+          // Check if we've reached low stock
+          setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
+          
+          return newInventory;
+        });
+      }
+    }, 30000); // Check every 30 seconds
+    
+    // Reset inventory at midnight
+    const checkDate = setInterval(() => {
+      const currentDate = getTodayKey();
+      const savedDate = localStorage.getItem('lastInventoryDate');
+      
+      if (savedDate && savedDate !== currentDate) {
+        // It's a new day, recalculate inventory
+        const newInventory = calculateInventory();
+        setInventory(newInventory);
+        setIsLowStock(newInventory <= LOW_INVENTORY_THRESHOLD);
+        setDayName(getDayName());
+        setShippingDate(getShippingDate());
+      }
+      
+      localStorage.setItem('lastInventoryDate', currentDate);
+    }, 60000); // Check every minute
+    
+    return () => {
+      clearInterval(decreaseInterval);
+      clearInterval(checkDate);
+    };
+  }, []);
+
+  if (!isInitialized) {
+    return null;
+  }
+
+  return (
+    <div className="relative inline-block">
+      <span className={`font-medium ${isLowStock ? 'text-red-600' : 'text-yellow-600'}`}>
+        Only {inventory} devices left {dayName.toLowerCase()}
+        {recentlyDecreased && (
+          <motion.span 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="ml-2 text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full"
+          >
+            1 just rented!
+          </motion.span>
+        )}
+      </span>
+      
+      {isLowStock && (
+        <div className="mt-1 text-xs text-gray-500">
+          Next shipment arrives {shippingDate}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default InventoryTracker;
