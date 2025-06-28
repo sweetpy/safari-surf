@@ -5,78 +5,84 @@
  */
 export const sendRentalNotification = async (rentalDetails) => {
   try {
-    // Try to use the Supabase Edge Function first
-    const apiUrl = import.meta.env.VITE_SUPABASE_URL 
-      ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-notification`
-      : '';
+    // Generate a unique order ID for tracking
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const orderId = `TZ${timestamp}${randomStr}`;
 
-    // Try PHP fallback if running on cPanel (relative path from deployment)
-    const phpFallbackUrl = './php/send-notification.php';
+    // Try to send email using our PHP script (cPanel compatible)
+    const phpMailerUrl = './php/mail-sender.php';
       
-    // Try serverless function first
     try {
-      if (apiUrl) {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || ''}`,
-          },
-          body: JSON.stringify({
-            rentalDetails,
-            notificationType: 'rental'
-          })
-        });
-        
-        const result = await response.json();
-        
-        if (!result.success) {
-          throw new Error(result.error || 'Failed to send notification');
-        }
-
-        return { 
-          success: true, 
-          orderId: result.orderId
-        };
-      } else {
-        throw new Error('No Supabase URL configured');
-      }
-    } catch (serverlessError) {
-      console.warn('Serverless function error, trying PHP fallback:', serverlessError);
-      
-      // Try PHP fallback
-      const response = await fetch(phpFallbackUrl, {
+      const response = await fetch(phpMailerUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          rentalDetails,
-          notificationType: 'rental'
+          type: 'rental',
+          details: rentalDetails
         })
       });
       
       const result = await response.json();
       
       if (!result.success) {
-        throw new Error(result.error || 'Failed to send notification');
+        console.warn("PHP mailer returned error:", result.error || 'Unknown error');
+        throw new Error(result.error || 'Failed to send email notification');
       }
 
+      console.log("Email notification sent successfully via PHP");
+      
       return { 
         success: true, 
-        orderId: result.orderId
+        orderId: result.orderId || orderId
       };
+    } catch (error) {
+      console.warn("PHP mailer error:", error);
+      
+      // If PHP mailer fails, try Supabase Edge Function if available
+      const apiUrl = import.meta.env.VITE_SUPABASE_URL 
+        ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-notification`
+        : '';
+
+      if (apiUrl) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || ''}`,
+            },
+            body: JSON.stringify({
+              rentalDetails,
+              notificationType: 'rental'
+            })
+          });
+          
+          const result = await response.json();
+          
+          if (!result.success) {
+            throw new Error(result.error || 'Failed to send notification');
+          }
+
+          return { 
+            success: true, 
+            orderId: result.orderId || orderId
+          };
+        } catch (serverlessError) {
+          console.warn("Serverless function failed too:", serverlessError);
+          throw error; // Re-throw the original PHP error
+        }
+      } else {
+        throw error; // Re-throw the original PHP error
+      }
     }
   } catch (error) {
     console.error('All notification methods failed:', error);
     
     // Fallback to WhatsApp
     try {
-      // Generate a unique order ID for tracking
-      const timestamp = Date.now().toString(36).toUpperCase();
-      const randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
-      const orderId = `TZ${timestamp}${randomStr}`;
-      
       // Format WhatsApp message as fallback
       const whatsappMessage = `Hello! I'd like to rent a WiFi device.
       
@@ -88,15 +94,13 @@ Location: ${rentalDetails.location || rentalDetails.airport || 'Not specified'}
 Start Date: ${rentalDetails.startDate || rentalDetails.arrivalDate || 'Not specified'}
 Additional Info: ${rentalDetails.message || 'No additional information'}
 
-ORDER ID: ${orderId}
 CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
       
       return { 
         success: false, 
         error: error.message,
         fallback: 'whatsapp',
-        whatsappMessage,
-        orderId
+        whatsappMessage
       };
     } catch (fallbackError) {
       console.error('All notification attempts failed:', fallbackError);
@@ -116,83 +120,81 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
  */
 export const sendPaymentConfirmation = async (paymentDetails) => {
   try {
-    // Try to use the Supabase Edge Function first
-    const apiUrl = import.meta.env.VITE_SUPABASE_URL 
-      ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-notification`
-      : '';
+    // Try to send email using our PHP script (cPanel compatible)
+    const phpMailerUrl = './php/mail-sender.php';
     
-    // Try PHP fallback if running on cPanel (relative path from deployment)
-    const phpFallbackUrl = './php/send-notification.php';
-    
-    // Try serverless function first
     try {
-      if (apiUrl) {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || ''}`,
-          },
-          body: JSON.stringify({
-            rentalDetails: {
-              customerName: paymentDetails.customerName,
-              customerEmail: paymentDetails.customerEmail,
-              amount: paymentDetails.amount,
-              currency: paymentDetails.currency,
-              plan: paymentDetails.plan,
-              paymentMethod: paymentDetails.paymentMethod,
-              transactionId: paymentDetails.transactionId,
-            },
-            notificationType: 'payment'
-          })
-        });
-        
-        const result = await response.json();
-        
-        if (!result.success) {
-          throw new Error(result.error || 'Failed to send payment confirmation');
-        }
-
-        return { 
-          success: true, 
-          orderId: result.orderId,
-        };
-      } else {
-        throw new Error('No Supabase URL configured');
-      }
-    } catch (serverlessError) {
-      console.warn('Serverless function error, trying PHP fallback:', serverlessError);
-      
-      // Try PHP fallback
-      const response = await fetch(phpFallbackUrl, {
+      const response = await fetch(phpMailerUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          rentalDetails: {
-            customerName: paymentDetails.customerName,
-            customerEmail: paymentDetails.customerEmail,
-            amount: paymentDetails.amount,
-            currency: paymentDetails.currency,
-            plan: paymentDetails.plan,
-            paymentMethod: paymentDetails.paymentMethod,
-            transactionId: paymentDetails.transactionId,
-          },
-          notificationType: 'payment'
+          type: 'payment',
+          details: paymentDetails
         })
       });
       
       const result = await response.json();
       
       if (!result.success) {
+        console.warn("PHP mailer returned error:", result.error || 'Unknown error');
         throw new Error(result.error || 'Failed to send payment confirmation');
       }
 
+      console.log("Payment confirmation sent successfully via PHP");
+      
       return { 
         success: true, 
         orderId: result.orderId
       };
+    } catch (error) {
+      console.warn("PHP mailer error:", error);
+      
+      // If PHP mailer fails, try Supabase Edge Function if available
+      const apiUrl = import.meta.env.VITE_SUPABASE_URL 
+        ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-notification`
+        : '';
+
+      if (apiUrl) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY || ''}`,
+            },
+            body: JSON.stringify({
+              rentalDetails: {
+                customerName: paymentDetails.customerName,
+                customerEmail: paymentDetails.customerEmail,
+                amount: paymentDetails.amount,
+                currency: paymentDetails.currency,
+                plan: paymentDetails.plan,
+                paymentMethod: paymentDetails.paymentMethod,
+                transactionId: paymentDetails.transactionId,
+              },
+              notificationType: 'payment'
+            })
+          });
+          
+          const result = await response.json();
+          
+          if (!result.success) {
+            throw new Error(result.error || 'Failed to send payment confirmation');
+          }
+
+          return { 
+            success: true, 
+            orderId: result.orderId
+          };
+        } catch (serverlessError) {
+          console.warn("Serverless function failed too:", serverlessError);
+          throw error; // Re-throw the original PHP error
+        }
+      } else {
+        throw error; // Re-throw the original PHP error
+      }
     }
   } catch (error) {
     console.error('Payment confirmation error:', error);
