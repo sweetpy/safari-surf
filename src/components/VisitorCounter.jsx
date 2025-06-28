@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const VisitorCounter = () => {
-  const [count, setCount] = useState(3000);
-  const [displayCount, setDisplayCount] = useState('3,000');
+  const [count, setCount] = useState(0);
+  const [displayCount, setDisplayCount] = useState('0');
   
   useEffect(() => {
     // Get stored count from localStorage or use default
     const storedCount = localStorage.getItem('visitorCount');
-    const initialCount = storedCount ? parseInt(storedCount, 10) : 3000;
+    const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
     
     // Increment count for this visit
     const newCount = initialCount + 1;

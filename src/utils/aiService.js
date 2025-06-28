@@ -40,8 +40,15 @@ export const getAIResponse = async (userMessage, conversationHistory) => {
     let aiResponse = '';
     
     // Basic intent detection
-    if (userMessage.toLowerCase().includes('price') || userMessage.toLowerCase().includes('cost')) {
-      aiResponse = "We offer simple pricing plans: Daily ($25/TSh 58,000), Weekly ($100/TSh 232,000), and Monthly ($150/TSh 348,000). All include unlimited data. Our weekly plan is most popular for tourists!";
+    if (userMessage.toLowerCase().includes('price') || userMessage.toLowerCase().includes('cost') || userMessage.toLowerCase().includes('how much') || 
+        userMessage.toLowerCase().includes('rate') || userMessage.toLowerCase().includes('fee') || userMessage.toLowerCase().includes('pricing')) {
+      aiResponse = `Our WiFi rental prices are very simple:
+    
+• Daily: $25 (TSh 58,000)
+• Weekly: $100 (TSh 232,000) - Most popular!
+• Monthly: $150 (TSh 348,000)
+
+All plans include unlimited data, free delivery to major hotels, and 24/7 support. Would you like to rent a device today?`;
     }
     else if (userMessage.toLowerCase().includes('tour') || userMessage.toLowerCase().includes('safari') || userMessage.toLowerCase().includes('zanzibar')) {
       aiResponse = "Our portable WiFi is perfect for tourists! It works throughout Tanzania including Serengeti, Zanzibar, and Kilimanjaro. You'll have reliable internet to share photos, use maps, and stay connected everywhere during your adventure.";
@@ -67,14 +74,14 @@ export const getAIResponse = async (userMessage, conversationHistory) => {
 };
 
 /**
- * Gets the current visitor count from localStorage or defaults to 3000+
+ * Gets the current visitor count from localStorage or defaults to 0
  * @returns {Promise<number>} The current visitor count
  */
 async function getVisitorCount() {
   // Check if we're in a browser environment
   if (typeof window !== 'undefined') {
     const storedCount = localStorage.getItem('visitorCount');
-    return storedCount ? parseInt(storedCount, 10) : 3000;
+    return storedCount ? parseInt(storedCount, 10) : 0;
   }
-  return 3000; // Default fallback
+  return 0; // Default fallback
 }
