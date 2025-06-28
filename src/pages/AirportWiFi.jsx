@@ -21,7 +21,9 @@ import {
   BookOpen,
   Globe,
   Briefcase,
-  Star
+  Star,
+  Facebook,
+  Twitter
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { sendRentalNotification } from '../utils/emailService';
