@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Wifi, Phone, ChevronDown, Plane, HelpCircle } from 'lucide-react';
+import { Menu, X, Wifi, Phone, ChevronDown, Plane, HelpCircle, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -40,7 +40,7 @@ const Header = () => {
       dropdown: [
         { name: 'About Us', path: '/about' },
         { name: 'FAQ & Support', path: '/faq' },
-        { name: 'Airport WiFi', path: '/airport-wifi' },
+        { name: 'Rent WiFi on Arrival', path: '/airport-wifi' },
         { name: 'Contact Us', path: '/contact' }
       ]
     }
@@ -137,15 +137,15 @@ const Header = () => {
               className="hidden sm:flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
             >
               <Plane className="h-4 w-4" />
-              <span>Airport WiFi</span>
+              <span>📍 Airport Pickup (DAR, JRO, ZNZ)</span>
             </Link>
 
             <Link
               to="/contact"
               className="hidden sm:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
             >
-              <Wifi className="h-4 w-4" />
-              <span>Rent WiFi</span>
+              <Home className="h-4 w-4" />
+              <span>🏠 Home/Hotel Delivery</span>
             </Link>
 
             {/* Mobile menu button */}
@@ -217,7 +217,7 @@ const Header = () => {
                   className="flex items-center justify-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
                 >
                   <Plane className="h-4 w-4" />
-                  <span>Rent WiFi on Arrival</span>
+                  <span>📍 Airport Pickup (DAR, JRO, ZNZ)</span>
                 </Link>
                 <a
                   href="https://wa.me/255764928408"
@@ -233,8 +233,8 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
                 >
-                  <Wifi className="h-4 w-4" />
-                  <span>Rent WiFi Now</span>
+                  <Home className="h-4 w-4" />
+                  <span>🏠 Home/Hotel Delivery</span>
                 </Link>
               </div>
             </div>

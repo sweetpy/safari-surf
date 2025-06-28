@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -34,6 +34,7 @@ import VisitorCounter from '../components/VisitorCounter';
 const AirportWiFi = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const formRef = useRef(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -50,9 +51,10 @@ const AirportWiFi = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showStickyButton, setShowStickyButton] = useState(false);
 
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [formContentRef, formContentInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [faqRef, faqInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   // Check for any message in location state
@@ -68,6 +70,25 @@ const AirportWiFi = () => {
       ...prev,
       arrivalDate: tomorrow.toISOString().split('T')[0]
     }));
+
+    // Setup scroll listener for sticky button
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const pageHeight = document.body.scrollHeight;
+      
+      // Show sticky button if we're past the hero section but not at the bottom of the page
+      if (scrollPosition > windowHeight * 0.8 && scrollPosition < pageHeight - windowHeight - 100) {
+        setShowStickyButton(true);
+      } else {
+        setShowStickyButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [location]);
 
   const handleInputChange = (e) => {
@@ -182,7 +203,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
   ];
 
   const plans = [
-    { value: 'daily', label: 'Daily Plan - $25 (TSh 58,000)', description: '24 hours of unlimited data' },
+    { value: 'daily', label: 'Daily Plan - $4.85/day (TSh 6,600)', description: '24 hours of unlimited data' },
     { value: 'weekly', label: 'Weekly Plan - $100 (TSh 232,000)', description: '7 days of unlimited data', popular: true },
     { value: 'monthly', label: 'Monthly Plan - $150 (TSh 348,000)', description: '30 days of unlimited data' }
   ];
@@ -242,17 +263,16 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
   };
 
   const scrollToForm = () => {
-    const bookingForm = document.getElementById('booking-form');
-    if (bookingForm) {
-      bookingForm.scrollIntoView({ behavior: 'smooth' });
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>Rent WiFi by Request | Meet & Greet at Tanzania Airports | Safari Surf WiFi</title>
-        <meta name="description" content="Rent WiFi devices on arrival at Tanzania airports. Our staff meets you at arrivals with a ready-to-use device. JNIA Dar es Salaam, Kilimanjaro & Zanzibar airports covered." />
+        <title>Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery | Safari Surf WiFi</title>
+        <meta name="description" content="Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. Get connected instantly at all major Tanzania airports. Meet & greet service available." />
         <meta name="keywords" content="airport WiFi Tanzania, JNIA WiFi rental, Dar es Salaam airport internet, Kilimanjaro airport WiFi, Zanzibar airport WiFi, travel WiFi Tanzania" />
         <link rel="canonical" href="https://safarisurfwifi.com/airport-wifi" />
       </Helmet>
@@ -281,27 +301,47 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               className="text-center max-w-4xl mx-auto"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                Rent <span className="font-extrabold text-white">WiFi</span> by Request
+                Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery
               </h1>
-              <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-10">
-                Get instant internet from the moment you land
+              <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-6">
+                Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania.
+              </p>
+              
+              <p className="text-lg mb-10">
+                From $4.85/day or TSh 6,600 – Unlimited Usage
               </p>
 
-              <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
                 <button
                   onClick={scrollToForm}
                   className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full text-lg font-bold shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
                 >
-                  <span>📦 Reserve Now</span>
+                  <span>📦 Reserve WiFi Now – Limited Devices Available</span>
                 </button>
                 
                 <button
                   onClick={handleWhatsAppSupport}
                   className="bg-blue-700 text-white hover:bg-blue-800 px-8 py-3 rounded-full text-lg font-semibold transition-colors flex items-center justify-center space-x-2"
                 >
-                  <Phone className="h-5 w-5 mr-2" />
-                  <span>WhatsApp Support</span>
+                  <span>💬 Chat Now – Get Help in 60 Seconds</span>
                 </button>
+              </div>
+              
+              {/* Device info */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8 bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                <div className="w-32 h-32 bg-white p-2 rounded-lg shadow-lg">
+                  <img 
+                    src="https://images.pexels.com/photos/16030958/pexels-photo-16030958.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                    alt="Portable WiFi Device" 
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
+                <div className="text-left">
+                  <div className="font-bold text-xl mb-2">Pocket-sized. Connects up to 10 devices. Speeds up to 50 Mbps.</div>
+                  <p className="text-blue-100">⭐️ 4.9/5 rating from 1,677 travelers</p>
+                  <p className="text-blue-100">Backed by Airtel, Vodacom, and Halotel</p>
+                  <p className="text-yellow-300 font-semibold mt-3">Only 7 devices left today</p>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -343,8 +383,9 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               {/* Rental Form */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
-                animate={formInView ? { opacity: 1, x: 0 } : {}}
+                animate={formContentInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8 }}
+                ref={formContentRef}
               >
                 <h2 className="text-4xl font-bold text-gray-900 mb-6">
                   Rent WiFi by Request
@@ -654,7 +695,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                       ) : (
                         <>
                           <Plane className="h-5 w-5" />
-                          <span>Book WiFi on Arrival</span>
+                          <span>📦 Reserve WiFi Now – Limited Devices Available</span>
                         </>
                       )}
                     </button>
@@ -669,7 +710,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               {/* Information Sidebar */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
-                animate={formInView ? { opacity: 1, x: 0 } : {}}
+                animate={formContentInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8 }}
                 className="space-y-8"
               >
@@ -933,19 +974,31 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 font-semibold transition-colors shadow-md"
                 >
                   <Plane className="h-5 w-5" />
-                  <span>Rent WiFi on Arrival</span>
+                  <span>📦 Reserve WiFi Now</span>
                 </button>
                 <button
                   onClick={handleWhatsAppSupport}
                   className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl border-2 border-white/30 hover:bg-white/10 font-semibold transition-colors"
                 >
                   <Phone className="h-5 w-5" />
-                  <span>WhatsApp Support</span>
+                  <span>💬 Chat Now</span>
                 </button>
               </div>
             </motion.div>
           </div>
         </section>
+
+        {/* Sticky button for mobile */}
+        {showStickyButton && (
+          <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-40">
+            <button
+              onClick={scrollToForm}
+              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-full font-bold shadow-lg flex items-center justify-center space-x-2"
+            >
+              <span>📦 Reserve WiFi Now – Limited Devices</span>
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
