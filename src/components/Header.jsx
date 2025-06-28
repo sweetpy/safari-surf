@@ -49,14 +49,14 @@ const Header = () => {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg h-16' : 'bg-transparent h-20'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex justify-between items-center h-full">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
@@ -126,27 +126,41 @@ const Header = () => {
               href="https://wa.me/255764928408"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors font-medium"
+              className="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
+              aria-label="Chat on WhatsApp"
+              title="60 second average response time"
             >
               <Phone className="h-4 w-4" />
-              <span>WhatsApp</span>
+              <span>💬 Chat Now – 60s Avg Response</span>
             </a>
 
-            <Link
-              to="/airport-wifi"
-              className="hidden sm:flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
-            >
-              <Plane className="h-4 w-4" />
-              <span>📍 Airport Pickup (DAR, JRO, ZNZ)</span>
-            </Link>
+            <div className="group relative hidden sm:block">
+              <Link
+                to="/airport-wifi"
+                className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
+                aria-label="Airport pickup WiFi service"
+              >
+                <Plane className="h-4 w-4" />
+                <span className="whitespace-nowrap">✈️ Airport Pickup (DAR • JRO • ZNZ)</span>
+              </Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                Get your device directly at the arrival gate
+              </div>
+            </div>
 
-            <Link
-              to="/contact"
-              className="hidden sm:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
-            >
-              <Home className="h-4 w-4" />
-              <span>🏠 Home/Hotel Delivery</span>
-            </Link>
+            <div className="group relative hidden sm:block">
+              <Link
+                to="/contact"
+                className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
+                aria-label="Home or hotel WiFi delivery"
+              >
+                <Home className="h-4 w-4" />
+                <span className="whitespace-nowrap">🏠 Home / Hotel Delivery</span>
+              </Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                Delivered to any hotel or home in Tanzania
+              </div>
+            </div>
 
             {/* Mobile menu button */}
             <button
@@ -214,27 +228,27 @@ const Header = () => {
                 <Link
                   to="/airport-wifi"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
+                  className="flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
                   <Plane className="h-4 w-4" />
-                  <span>📍 Airport Pickup (DAR, JRO, ZNZ)</span>
+                  <span>✈️ Airport Pickup (DAR • JRO • ZNZ)</span>
                 </Link>
                 <a
                   href="https://wa.me/255764928408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
+                  className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
                   <Phone className="h-4 w-4" />
-                  <span>Contact via WhatsApp</span>
+                  <span>💬 Chat Now – 60s Avg Response</span>
                 </a>
                 <Link
                   to="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
+                  className="flex items-center justify-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-4 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg"
                 >
                   <Home className="h-4 w-4" />
-                  <span>🏠 Home/Hotel Delivery</span>
+                  <span>🏠 Home / Hotel Delivery</span>
                 </Link>
               </div>
             </div>
