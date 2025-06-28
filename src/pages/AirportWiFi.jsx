@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { 
   Wifi,
   Calendar,
@@ -242,7 +242,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
   return (
     <>
       <Helmet>
-        <title>Rent WiFi on Arrival | Meet & Greet at Tanzania Airports | Safari Surf WiFi</title>
+        <title>Rent WiFi by Request | Meet & Greet at Tanzania Airports | Safari Surf WiFi</title>
         <meta name="description" content="Rent WiFi devices on arrival at Tanzania airports. Our staff meets you at arrivals with a ready-to-use device. JNIA Dar es Salaam, Kilimanjaro & Zanzibar airports covered." />
         <meta name="keywords" content="airport WiFi Tanzania, JNIA WiFi rental, Dar es Salaam airport internet, Kilimanjaro airport WiFi, Zanzibar airport WiFi, travel WiFi Tanzania" />
         <link rel="canonical" href="https://safarisurfwifi.com/airport-wifi" />
@@ -254,9 +254,9 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
           ref={heroRef}
           className="relative pt-32 pb-20 bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-500 text-white overflow-hidden"
         >
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/60 to-transparent" />
           <div 
-            className="absolute inset-0 opacity-20"
+            className="absolute inset-0 opacity-30"
             style={{
               backgroundImage: 'url("https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop")',
               backgroundSize: 'cover',
@@ -269,42 +269,53 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               initial={{ opacity: 0, y: 50 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-center"
+              className="text-center max-w-4xl mx-auto"
             >
-              <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
-                <Plane className="h-5 w-5 text-blue-100" />
-                <span className="text-blue-100">Airport Meet & Greet Service</span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                Rent WiFi on Arrival
+              <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                Rent <span className="font-extrabold text-white">WiFi</span> on Arrival
               </h1>
-              <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed">
-                Start your Tanzania journey fully connected. Our team meets you at the airport
-                with a ready-to-use WiFi device as soon as you arrive.
+              <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-10">
+                Get instant internet from the moment you land
               </p>
+
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+                <Link
+                  to="#booking-form"
+                  className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full text-lg font-bold shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+                >
+                  <span>📦 Reserve Now</span>
+                </Link>
+                
+                <Link
+                  to="#airports"
+                  className="bg-blue-700 text-white hover:bg-blue-800 px-8 py-3 rounded-full text-lg font-semibold transition-colors flex items-center justify-center space-x-2"
+                >
+                  <span>📍 View Pickup Locations</span>
+                </Link>
+              </div>
             </motion.div>
           </div>
           
           {/* Quick Facts Bar */}
-          <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+          <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-white">5 Minutes</div>
-                  <div className="text-blue-100 text-sm">Device Setup Time</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl py-3 px-2 transform hover:scale-105 transition-transform">
+                  <div className="text-2xl font-bold text-white">5 Min</div>
+                  <div className="text-blue-100 text-sm">Setup Time</div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-white">All Major Airports</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl py-3 px-2 transform hover:scale-105 transition-transform">
+                  <div className="text-2xl font-bold text-white">All Airports</div>
                   <div className="text-blue-100 text-sm">DAR, JRO, ZNZ</div>
                 </div>
-                <div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl py-3 px-2 transform hover:scale-105 transition-transform">
                   <div className="flex items-center justify-center space-x-2">
                     <Zap className="h-5 w-5 text-yellow-300" />
                     <span className="text-2xl font-bold text-white">Unlimited Data</span>
                   </div>
                   <div className="text-blue-100 text-sm">Never worry about usage</div>
                 </div>
-                <div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl py-3 px-2 transform hover:scale-105 transition-transform">
                   <div className="text-2xl font-bold text-white">
                     <VisitorCounter showAnimation={false} />+
                   </div>
@@ -316,7 +327,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
         </section>
 
         {/* Airport Coverage Section */}
-        <section ref={airportsRef} className="py-12 bg-white border-b">
+        <section id="airports" ref={airportsRef} className="py-16 bg-white border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -324,9 +335,12 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl font-bold text-gray-900">
-                Airport Meet & Greet Service Available at:
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Airport Meet & Greet Locations
               </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Our team will meet you directly at these international airports with your pre-configured WiFi device
+              </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -360,8 +374,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                       {[...Array(5)].map((_, i) => (
                         <Star 
                           key={i} 
-                          className="h-4 w-4 text-yellow-400" 
-                          fill={i < airport.coverageRating ? "currentColor" : "none"}
+                          className={`h-4 w-4 ${i < airport.coverageRating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
                         />
                       ))}
                     </div>
@@ -392,7 +405,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
         </section>
 
         {/* Main Form Section */}
-        <section ref={formRef} className="py-20 bg-gray-50">
+        <section id="booking-form" ref={formRef} className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               {/* Rental Form */}
@@ -785,7 +798,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
 
                 {/* Why Choose Airport WiFi */}
                 <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Rent WiFi on Arrival?</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Rent WiFi by Request?</h3>
                   
                   <ul className="space-y-4">
                     <li className="flex items-start space-x-3">
@@ -793,8 +806,8 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                         <CheckCircle className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-900">Instant Connectivity</h4>
-                        <p className="text-gray-600 text-sm">No need to search for SIM cards or struggle with airport WiFi</p>
+                        <h4 className="font-semibold text-gray-900">Land Connected</h4>
+                        <p className="text-gray-600 text-sm">WiFi ready to use the moment you clear customs</p>
                       </div>
                     </li>
                     
@@ -846,37 +859,12 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   </div>
                 </div>
 
-                {/* Airport Coverage */}
-                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8 border border-gray-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Airports We Cover</h3>
-                  
-                  <div className="space-y-4">
-                    {airports.map((airport) => (
-                      <div key={airport.value} className="flex items-start space-x-3">
-                        <div className="bg-blue-100 p-2 rounded-lg">
-                          <Plane className="h-5 w-5 text-blue-600" />
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-gray-900">{airport.label}</h4>
-                          <p className="text-gray-600 text-sm">{airport.city}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="mt-6 p-4 bg-white rounded-lg border border-blue-100">
-                    <p className="text-gray-700 text-sm">
-                      We monitor all international arrivals and adjust for flight delays. Our staff will be waiting even if your flight is delayed.
-                    </p>
-                  </div>
-                </div>
-                
                 {/* Quick Contact */}
                 <a
                   href="https://wa.me/255764928408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block bg-green-500 text-white rounded-2xl p-6 text-center hover:bg-green-600 transition-colors"
+                  className="block bg-green-500 text-white rounded-2xl p-6 text-center hover:bg-green-600 transition-colors shadow-lg"
                 >
                   <Phone className="h-8 w-8 mx-auto mb-3" />
                   <h3 className="text-xl font-bold mb-2">Need Help?</h3>
@@ -928,7 +916,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                 href="https://wa.me/255764928408"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
+                className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-md"
               >
                 <Phone className="h-5 w-5" />
                 <span>Contact Us</span>
@@ -1012,7 +1000,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                 Book your WiFi device now and we'll meet you as soon as you land. No more connectivity stress after arrival.
               </p>
               <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="#top" className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 font-semibold transition-colors">
+                <a href="#booking-form" className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 font-semibold transition-colors shadow-md">
                   <Plane className="h-5 w-5" />
                   <span>Rent WiFi on Arrival</span>
                 </a>
