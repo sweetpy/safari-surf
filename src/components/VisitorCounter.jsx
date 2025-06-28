@@ -17,9 +17,6 @@ const topCountries = [
   { code: 'se', name: 'Sweden', count: 0 }
 ];
 
-// Base number of customers to ensure consistency
-const BASE_CUSTOMER_COUNT = 3247;
-
 // Generates a unique customer ID
 const generateCustomerId = () => {
   return 'c_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -32,7 +29,7 @@ const getCustomerCountry = () => {
 };
 
 const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
-  const [count, setCount] = useState(BASE_CUSTOMER_COUNT);
+  const [count, setCount] = useState(0);
   const [topFive, setTopFive] = useState([]);
   const [currentCountry, setCurrentCountry] = useState(null);
   const [showCountryPopup, setShowCountryPopup] = useState(false);
@@ -50,10 +47,10 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
       if (customerCountryData) {
         countries = JSON.parse(customerCountryData);
       } else {
-        // Start with random data rather than zero counts
+        // Initialize with zero counts
         countries = topCountries.map(country => ({
           ...country, 
-          count: Math.floor(Math.random() * 500) + 100 // Generate between 100-600 customers per country
+          count: 0
         }));
         localStorage.setItem('customerCountryData', JSON.stringify(countries));
       }
@@ -83,46 +80,16 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
         // Update localStorage
         localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
         
-        // Calculate total count to ensure it's at least BASE_CUSTOMER_COUNT
+        // Calculate total count
         let totalCount = updatedCountries.reduce((sum, country) => sum + country.count, 0);
-        if (totalCount < BASE_CUSTOMER_COUNT) {
-          // Distribute additional customers to match BASE_CUSTOMER_COUNT
-          const remaining = BASE_CUSTOMER_COUNT - totalCount;
-          const updatedWithBase = updatedCountries.map((country, index) => {
-            // Add extra counts proportionally
-            const extra = Math.floor(remaining * (country.count / totalCount));
-            return { ...country, count: country.count + extra };
-          });
-          
-          totalCount = updatedWithBase.reduce((sum, country) => sum + country.count, 0);
-          
-          // If there's still a difference due to rounding, add to the first country
-          if (totalCount < BASE_CUSTOMER_COUNT && updatedWithBase.length > 0) {
-            updatedWithBase[0].count += (BASE_CUSTOMER_COUNT - totalCount);
-          }
-          
-          localStorage.setItem('customerCountryData', JSON.stringify(updatedWithBase));
-          setCount(BASE_CUSTOMER_COUNT);
-          
-          // Update top five countries
-          const sortedCountries = [...updatedWithBase].sort((a, b) => b.count - a.count).slice(0, 5);
-          setTopFive(sortedCountries);
-        } else {
-          setCount(totalCount);
-          
-          // Update top five countries
-          const sortedCountries = [...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5);
-          setTopFive(sortedCountries);
-        }
+        setCount(totalCount);
+        
+        // Update top five countries
+        const sortedCountries = [...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5);
+        setTopFive(sortedCountries);
       } else {
         // Just load existing data for returning customers
         let totalCount = countries.reduce((sum, country) => sum + country.count, 0);
-        
-        // Ensure count is at least the base amount
-        if (totalCount < BASE_CUSTOMER_COUNT) {
-          totalCount = BASE_CUSTOMER_COUNT;
-        }
-        
         setCount(totalCount);
         
         // Update top five countries
@@ -137,7 +104,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
     
     // Simulate occasional new customers
     const intervalId = setInterval(() => {
-      const shouldIncrease = Math.random() > 0.8; // 20% chance of increasing
+      const shouldIncrease = Math.random() > 0.5; // 50% chance of increasing
       
       if (shouldIncrease) {
         // Get country data
@@ -168,20 +135,20 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
           setTopFive(sortedCountries);
         }
       }
-    }, 30000);
+    }, 5000); // Increase more frequently to show the counting effect
     
     return () => clearInterval(intervalId);
   }, []);
 
   if (!isInitialized) {
-    return <span className="inline-block">{BASE_CUSTOMER_COUNT.toLocaleString()}+</span>;
+    return <span className="inline-block">0</span>;
   }
 
   return (
     <div className="relative inline-flex items-center">
       <span className="inline-block relative">
         {showAnimation ? (
-          <CountUp end={count} duration={2.5} separator="," />
+          <CountUp end={count} duration={2} separator="," />
         ) : (
           <span>{count.toLocaleString()}</span>
         )}

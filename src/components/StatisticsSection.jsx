@@ -37,16 +37,11 @@ const StatisticsSection = () => {
   ];
   
   const topCountries = [
-    { code: 'us', name: 'United States', percentage: '21%' },
-    { code: 'gb', name: 'United Kingdom', percentage: '17%' },
-    { code: 'de', name: 'Germany', percentage: '15%' },
-    { code: 'ca', name: 'Canada', percentage: '12%' },
-    { code: 'au', name: 'Australia', percentage: '9%' },
-    { code: 'fr', name: 'France', percentage: '7%' },
-    { code: 'se', name: 'Sweden', percentage: '6%' },
-    { code: 'nl', name: 'Netherlands', percentage: '5%' },
-    { code: 'za', name: 'South Africa', percentage: '4%' },
-    { code: 'in', name: 'India', percentage: '4%' }
+    { code: 'us', name: 'United States', percentage: '0%' },
+    { code: 'gb', name: 'United Kingdom', percentage: '0%' },
+    { code: 'de', name: 'Germany', percentage: '0%' },
+    { code: 'ca', name: 'Canada', percentage: '0%' },
+    { code: 'au', name: 'Australia', percentage: '0%' }
   ];
   
   return (

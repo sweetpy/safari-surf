@@ -33,9 +33,6 @@ export const getAIResponse = async (userMessage, conversationHistory) => {
       - Keep responses brief but informative
     `;
     
-    // Get current customer count for accurate numbers in responses
-    const customerCount = await getCustomerCount();
-    
     // Simulated AI response based on user message content
     let aiResponse = '';
     
@@ -63,7 +60,7 @@ All plans include unlimited data, free delivery to major hotels, and 24/7 suppor
       aiResponse = "Our WiFi devices provide excellent coverage throughout Tanzania, including all major cities, national parks, and beaches. We use multiple network providers to ensure you stay connected even in remote areas.";
     }
     else {
-      aiResponse = `Thanks for your message! Our portable WiFi devices provide unlimited internet anywhere in Tanzania, starting at $100/week (TSh 232,000). Perfect for tourists and business travelers. We're proud to have served many happy customers. How can I help you rent a device today?`;
+      aiResponse = `Thanks for your message! Our portable WiFi devices provide unlimited internet anywhere in Tanzania, starting at $100/week (TSh 232,000). Perfect for tourists and business travelers. How can I help you rent a device today?`;
     }
     
     return aiResponse;

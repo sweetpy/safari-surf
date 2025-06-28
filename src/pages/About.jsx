@@ -349,7 +349,7 @@ const About = () => {
                     'Enterprise-grade security for all connections',
                     '24/7 customer support via WhatsApp and phone',
                     'Transparent pricing with no hidden fees',
-                    `Trusted by ${<VisitorCounter showAnimation={false} />}+ satisfied customers`,
+                    `Trusted by ${<VisitorCounter showAnimation={false} />} satisfied customers`,
                     '100% Tanzanian-owned and operated'
                   ].map((reason, index) => (
                     <li key={index} className="flex items-start space-x-3">
