@@ -242,7 +242,7 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
                   to="/contact"
-                  className="group relative bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                  className="group relative bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-8 py-4 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
                   aria-label="Rent WiFi device now"
                 >
                   <div className="flex items-center space-x-3">
@@ -250,14 +250,14 @@ const Home = () => {
                     <span>Rent WiFi Now</span>
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </div>
-                  <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity animate-pulse"></div>
+                  <div className="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity animate-pulse"></div>
                 </Link>
                 
                 <a
                   href="https://wa.me/255764928408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white/80 backdrop-blur-sm border-2 border-gray-200 hover:border-orange-300 text-gray-700 hover:text-orange-600 px-8 py-4 rounded-full text-xl font-semibold transition-all duration-300 hover:shadow-xl"
+                  className="group bg-white/80 backdrop-blur-sm border-2 border-gray-200 hover:border-orange-300 text-gray-700 hover:text-orange-600 px-8 py-4 rounded-xl text-xl font-semibold transition-all duration-300 hover:shadow-xl"
                   aria-label="Contact us via WhatsApp"
                 >
                   <div className="flex items-center space-x-3">
@@ -340,7 +340,7 @@ const Home = () => {
                     </div>
                   )}
                   
-                  <div className={`relative overflow-hidden rounded-3xl ${
+                  <div className={`relative overflow-hidden rounded-2xl ${
                     plan.popular 
                       ? 'bg-gradient-to-br from-orange-50 to-pink-50 border-2 border-orange-200 shadow-2xl' 
                       : 'bg-white border border-gray-200 shadow-xl hover:shadow-2xl'
@@ -389,7 +389,7 @@ const Home = () => {
                       {/* CTA Button */}
                       <Link
                         to="/contact"
-                        className={`w-full py-4 px-6 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 ${
+                        className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 ${
                           plan.popular
                             ? 'bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl'
                             : 'bg-gray-900 hover:bg-gray-800 text-white shadow-lg hover:shadow-xl'
@@ -522,7 +522,7 @@ const Home = () => {
               
               <Link
                 to="/travel"
-                className="inline-flex items-center space-x-3 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-8 py-4 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center space-x-3 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-8 py-4 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105"
                 aria-label="Discover Tanzania travel destinations"
               >
                 <span>Discover Tanzania</span>
@@ -557,7 +557,7 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
                   to="/contact"
-                  className="group bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                  className="group bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-10 py-5 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
                   aria-label="Start WiFi rental now"
                 >
                   <div className="flex items-center space-x-3">
@@ -571,7 +571,7 @@ const Home = () => {
                   href="https://wa.me/255764928408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-gray-900 px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 hover:shadow-xl"
+                  className="group border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-gray-900 px-10 py-5 rounded-xl text-xl font-bold transition-all duration-300 hover:shadow-xl"
                   aria-label="Contact us via WhatsApp"
                 >
                   <div className="flex items-center space-x-3">

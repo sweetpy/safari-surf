@@ -16,13 +16,13 @@ const topCountries = [
   { code: 'se', name: 'Sweden', count: 0 }
 ];
 
-// Generates a unique visitor ID
-const generateVisitorId = () => {
-  return 'v_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+// Generates a unique customer ID
+const generateCustomerId = () => {
+  return 'c_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 };
 
-// Simulates getting the visitor's country
-const getVisitorCountry = () => {
+// Simulates getting the customer's country
+const getCustomerCountry = () => {
   const randomIndex = Math.floor(Math.random() * topCountries.length);
   return topCountries[randomIndex];
 };
@@ -35,44 +35,44 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
   const [showTopCountries, setShowTopCountries] = useState(false);
 
   useEffect(() => {
-    // Initialize visitor tracking
-    const initVisitorCount = () => {
-      // Check if this visitor has been counted before
-      const visitorId = localStorage.getItem('visitorId');
-      let visitorCountryData = localStorage.getItem('visitorCountryData');
+    // Initialize customer tracking
+    const initCustomerCount = () => {
+      // Check if this customer has been counted before
+      const customerId = localStorage.getItem('customerId');
+      let customerCountryData = localStorage.getItem('customerCountryData');
       let countries = [];
       
-      if (visitorCountryData) {
-        countries = JSON.parse(visitorCountryData);
+      if (customerCountryData) {
+        countries = JSON.parse(customerCountryData);
       } else {
         countries = [...topCountries]; // Start with zero counts
-        localStorage.setItem('visitorCountryData', JSON.stringify(countries));
+        localStorage.setItem('customerCountryData', JSON.stringify(countries));
       }
       
-      // If this is a new visitor
-      if (!visitorId) {
-        // Generate and store a unique ID for this visitor
-        const newVisitorId = generateVisitorId();
-        localStorage.setItem('visitorId', newVisitorId);
+      // If this is a new customer
+      if (!customerId) {
+        // Generate and store a unique ID for this customer
+        const newCustomerId = generateCustomerId();
+        localStorage.setItem('customerId', newCustomerId);
         
-        // Simulate getting visitor's country
-        const visitorCountry = getVisitorCountry();
+        // Simulate getting customer's country
+        const customerCountry = getCustomerCountry();
         
         // Update country count
         const updatedCountries = countries.map(country => {
-          if (country.code === visitorCountry.code) {
+          if (country.code === customerCountry.code) {
             return { ...country, count: country.count + 1 };
           }
           return country;
         });
         
         // Show country popup briefly
-        setCurrentCountry(visitorCountry);
+        setCurrentCountry(customerCountry);
         setShowCountryPopup(true);
         setTimeout(() => setShowCountryPopup(false), 5000);
         
         // Update localStorage
-        localStorage.setItem('visitorCountryData', JSON.stringify(updatedCountries));
+        localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
         
         // Update state
         const totalCount = updatedCountries.reduce((sum, country) => sum + country.count, 0);
@@ -82,7 +82,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
         const sortedCountries = [...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5);
         setTopFive(sortedCountries);
       } else {
-        // Just load existing data for returning visitors
+        // Just load existing data for returning customers
         const totalCount = countries.reduce((sum, country) => sum + country.count, 0);
         setCount(totalCount);
         
@@ -92,31 +92,31 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
       }
     };
     
-    initVisitorCount();
+    initCustomerCount();
     
-    // Simulate occasional new visitors
+    // Simulate occasional new customers
     const intervalId = setInterval(() => {
       const shouldIncrease = Math.random() > 0.8; // 20% chance of increasing
       
       if (shouldIncrease) {
         // Get country data
-        const visitorCountryData = localStorage.getItem('visitorCountryData');
-        if (visitorCountryData) {
-          const countries = JSON.parse(visitorCountryData);
+        const customerCountryData = localStorage.getItem('customerCountryData');
+        if (customerCountryData) {
+          const countries = JSON.parse(customerCountryData);
           
-          // Simulate new visitor
-          const visitorCountry = getVisitorCountry();
+          // Simulate new customer
+          const customerCountry = getCustomerCountry();
           
           // Update country count
           const updatedCountries = countries.map(country => {
-            if (country.code === visitorCountry.code) {
+            if (country.code === customerCountry.code) {
               return { ...country, count: country.count + 1 };
             }
             return country;
           });
           
           // Update localStorage
-          localStorage.setItem('visitorCountryData', JSON.stringify(updatedCountries));
+          localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
           
           // Update state
           const totalCount = updatedCountries.reduce((sum, country) => sum + country.count, 0);
@@ -142,13 +142,13 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
         <button 
           onClick={() => setShowTopCountries(!showTopCountries)}
           className="ml-2 p-1 bg-orange-100 rounded-full text-orange-600 hover:bg-orange-200 transition-colors"
-          aria-label="Show visitor details"
+          aria-label="Show customer details"
         >
           <Globe className="h-4 w-4" />
         </button>
       )}
       
-      {/* Country popup animation for new visitors */}
+      {/* Country popup animation for new customers */}
       <AnimatePresence>
         {showCountryPopup && currentCountry && (
           <motion.div 
@@ -159,7 +159,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
           >
             <div className="flex items-center space-x-2 text-sm">
               <span className={`fi fi-${currentCountry.code} rounded-sm`}></span>
-              <span>New visitor from {currentCountry.name}!</span>
+              <span>New customer from {currentCountry.name}!</span>
             </div>
           </motion.div>
         )}
@@ -174,7 +174,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
             exit={{ opacity: 0, scale: 0.9, y: 10 }}
             className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg p-4 z-20 min-w-[220px]"
           >
-            <h3 className="font-semibold text-gray-900 mb-3">Top Visitor Countries</h3>
+            <h3 className="font-semibold text-gray-900 mb-3">Top Customer Countries</h3>
             {topFive.map((country, index) => (
               <div key={country.code} className="flex items-center justify-between py-1">
                 <div className="flex items-center space-x-2">

@@ -11,7 +11,7 @@ const StatisticsSection = () => {
   const stats = [
     {
       icon: Users,
-      label: 'Satisfied Customers',
+      label: 'Happy Customers',
       value: <VisitorCounter showDetails={false} />,
       color: 'from-blue-500 to-purple-500'
     },
@@ -35,107 +35,75 @@ const StatisticsSection = () => {
     }
   ];
   
-  const metrics = [
-    {
-      icon: TrendingUp,
-      label: 'Growth Rate',
-      value: '127%',
-      subtext: 'Year over year'
-    },
-    {
-      icon: Gauge,
-      label: 'Network Uptime',
-      value: '99.9%',
-      subtext: 'Consistently reliable'
-    },
-    {
-      icon: Shield,
-      label: 'Secure Connections',
-      value: '100%',
-      subtext: 'Enterprise encryption'
-    },
-    {
-      icon: Sparkles,
-      label: 'Satisfaction Rate',
-      value: '98%',
-      subtext: 'From customer reviews'
-    }
-  ];
-  
   return (
-    <section ref={ref} className="py-20 bg-gray-50">
+    <section ref={ref} className="py-10 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Performance Dashboard
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            Customer Insights
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Real-time metrics showing why we're Tanzania's most trusted WiFi provider
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Join customers from around the globe who trust our WiFi solutions
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-lg p-6 text-center"
+              className="bg-white rounded-xl shadow-sm p-4 text-center flex flex-col items-center"
             >
-              <div className={`h-14 w-14 mx-auto mb-4 rounded-full bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
-                <stat.icon className="h-7 w-7 text-white" />
+              <div className={`h-10 w-10 mb-3 rounded-full bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
+                <stat.icon className="h-5 w-5 text-white" />
               </div>
-              <div className="text-2xl font-bold text-gray-900 mb-2">
+              <div className="text-xl font-bold text-gray-900 mb-1">
                 {stat.value}
               </div>
-              <div className="text-gray-600">{stat.label}</div>
+              <div className="text-sm text-gray-600">{stat.label}</div>
             </motion.div>
           ))}
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <CountryVisitorMap />
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="bg-white rounded-xl shadow-sm p-6"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold text-gray-900">Global Customer Base</h3>
+            <span className="text-sm text-gray-500">Live Data</span>
+          </div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
-            {metrics.map((metric, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[
+              { code: 'us', name: 'United States' },
+              { code: 'gb', name: 'United Kingdom' },
+              { code: 'de', name: 'Germany' },
+              { code: 'ca', name: 'Canada' },
+              { code: 'au', name: 'Australia' }
+            ].map((country, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+                key={country.code}
+                initial={{ opacity: 0, y: 10 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-lg"
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                className="flex items-center space-x-2 bg-gray-50 p-3 rounded-lg"
               >
-                <div className="flex items-center space-x-4">
-                  <div className="h-12 w-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <metric.icon className="h-6 w-6 text-orange-600" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900">{metric.value}</div>
-                    <div className="text-sm text-gray-600">{metric.label}</div>
-                    <div className="text-xs text-gray-500">{metric.subtext}</div>
-                  </div>
-                </div>
+                <span className={`fi fi-${country.code} rounded-sm`}></span>
+                <div className="text-sm">{country.name}</div>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

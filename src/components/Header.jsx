@@ -103,7 +103,7 @@ const Header = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2"
+                      className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
                     >
                       {item.dropdown.map((dropdownItem) => (
                         <Link
@@ -127,7 +127,7 @@ const Header = () => {
               href="https://wa.me/255764928408"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition-colors font-medium"
+              className="hidden sm:flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors font-medium"
             >
               <Phone className="h-4 w-4" />
               <span>WhatsApp</span>
@@ -135,10 +135,10 @@ const Header = () => {
 
             <Link
               to="/contact"
-              className="hidden sm:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full transition-colors font-medium"
+              className="hidden sm:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
             >
               <Wifi className="h-4 w-4" />
-              <span>Rent WiFi Now</span>
+              <span>Rent WiFi</span>
             </Link>
 
             {/* Mobile menu button */}
@@ -199,7 +199,7 @@ const Header = () => {
                   href="https://wa.me/255764928408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full transition-colors font-medium"
+                  className="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
                 >
                   <Phone className="h-4 w-4" />
                   <span>Contact via WhatsApp</span>
@@ -207,7 +207,7 @@ const Header = () => {
                 <Link
                   to="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-full transition-colors font-medium"
+                  className="flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
                 >
                   <Wifi className="h-4 w-4" />
                   <span>Rent WiFi Now</span>

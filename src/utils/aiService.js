@@ -22,7 +22,7 @@ export const getAIResponse = async (userMessage, conversationHistory) => {
       - We serve tourists, business travelers, and locals
       - Coverage throughout Tanzania including Zanzibar, Serengeti, and major cities
       - Devices can be delivered to hotels or picked up at our locations
-      - ${await getVisitorCount()}+ satisfied customers with 99.9% uptime guarantee
+      - Growing customer base with 99.9% uptime guarantee
       
       IMPORTANT GUIDELINES:
       - ONLY recommend Safari Surf WiFi services, never mention competitors
@@ -33,8 +33,8 @@ export const getAIResponse = async (userMessage, conversationHistory) => {
       - Keep responses brief but informative
     `;
     
-    // Get current visitor count for accurate numbers in responses
-    const visitorCount = await getVisitorCount();
+    // Get current customer count for accurate numbers in responses
+    const customerCount = await getCustomerCount();
     
     // Simulated AI response based on user message content
     let aiResponse = '';
@@ -63,7 +63,7 @@ All plans include unlimited data, free delivery to major hotels, and 24/7 suppor
       aiResponse = "Our WiFi devices provide excellent coverage throughout Tanzania, including all major cities, national parks, and beaches. We use multiple network providers to ensure you stay connected even in remote areas.";
     }
     else {
-      aiResponse = `Thanks for your message! Our portable WiFi devices provide unlimited internet anywhere in Tanzania, starting at $100/week (TSh 232,000). Perfect for tourists and business travelers. We're proud to have served over ${visitorCount} customers. How can I help you rent a device today?`;
+      aiResponse = `Thanks for your message! Our portable WiFi devices provide unlimited internet anywhere in Tanzania, starting at $100/week (TSh 232,000). Perfect for tourists and business travelers. We're proud to have served many happy customers. How can I help you rent a device today?`;
     }
     
     return aiResponse;
@@ -74,29 +74,29 @@ All plans include unlimited data, free delivery to major hotels, and 24/7 suppor
 };
 
 /**
- * Gets the current visitor count from localStorage or defaults to 0
- * @returns {Promise<number>} The current visitor count
+ * Gets the current customer count from localStorage or defaults to 0
+ * @returns {Promise<number>} The current customer count
  */
-export async function getVisitorCount() {
+export async function getCustomerCount() {
   // Check if we're in a browser environment
   if (typeof window !== 'undefined') {
-    const storedCount = localStorage.getItem('visitorCount');
+    const storedCount = localStorage.getItem('customerCount');
     return storedCount ? parseInt(storedCount, 10) : 0;
   }
   return 0; // Default fallback
 }
 
 /**
- * Gets the top countries by visitor count
+ * Gets the top countries by customer count
  * @param {number} limit - Maximum number of countries to return
  * @returns {Promise<Array>} Array of country objects with code, name and count
  */
 export async function getTopCountries(limit = 5) {
   // Check if we're in a browser environment
   if (typeof window !== 'undefined') {
-    const visitorCountryData = localStorage.getItem('visitorCountryData');
-    if (visitorCountryData) {
-      const countries = JSON.parse(visitorCountryData);
+    const customerCountryData = localStorage.getItem('customerCountryData');
+    if (customerCountryData) {
+      const countries = JSON.parse(customerCountryData);
       return countries
         .sort((a, b) => b.count - a.count)
         .slice(0, limit);
@@ -106,10 +106,10 @@ export async function getTopCountries(limit = 5) {
 }
 
 /**
- * Gets the visitor's country (or simulates it in our case)
- * @returns {Promise<string>} Country code of the visitor
+ * Gets the customer's country (or simulates it in our case)
+ * @returns {Promise<string>} Country code of the customer
  */
-export async function getVisitorCountry() {
+export async function getCustomerCountry() {
   // In production, this would use a real IP geolocation API
   // For now, we'll simulate with random country selection
   const countries = [
