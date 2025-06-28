@@ -23,17 +23,6 @@ const Header = () => {
     { name: 'Pricing', path: '/pricing' },
     { name: 'Coverage', path: '/coverage' },
     { 
-      name: 'Blog', 
-      path: '/blog',
-      dropdown: [
-        { name: 'All Articles', path: '/blog' },
-        { name: 'Airport WiFi Guide', path: '/blog/how-to-get-airport-wifi-tanzania-guide' },
-        { name: 'SIM Card Guide', path: '/blog/best-sim-card-tourists-tanzania-vs-esim' },
-        { name: 'Travel Tech', path: '/blog?category=Travel Tech' },
-        { name: 'Travel Tips', path: '/blog?category=Travel Tips' }
-      ]
-    },
-    { 
       name: 'Travel Hub', 
       path: '/travel',
       dropdown: [
@@ -41,7 +30,9 @@ const Header = () => {
         { name: 'Safari Tours', path: '/travel/safaris' },
         { name: 'Travel Guides', path: '/travel/guides' },
         { name: 'Itineraries', path: '/travel/itineraries' },
-        { name: 'Travel Blog', path: '/travel/blog' }
+        { name: 'WiFi Blog', path: '/blog' },
+        { name: 'Travel Tech Blog', path: '/travel/blog' },
+        { name: 'Airport WiFi Guide', path: '/blog/how-to-get-airport-wifi-tanzania-guide' }
       ]
     },
     { name: 'About', path: '/about' },
