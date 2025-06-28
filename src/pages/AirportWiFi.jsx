@@ -52,7 +52,6 @@ const AirportWiFi = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [airportsRef, airportsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [faqRef, faqInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -272,7 +271,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               className="text-center max-w-4xl mx-auto"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                Rent <span className="font-extrabold text-white">WiFi</span> on Arrival
+                Rent <span className="font-extrabold text-white">WiFi</span> by Request
               </h1>
               <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-10">
                 Get instant internet from the moment you land
@@ -286,12 +285,15 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   <span>📦 Reserve Now</span>
                 </Link>
                 
-                <Link
-                  to="#airports"
+                <a
+                  href="https://wa.me/255764928408"
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   className="bg-blue-700 text-white hover:bg-blue-800 px-8 py-3 rounded-full text-lg font-semibold transition-colors flex items-center justify-center space-x-2"
                 >
-                  <span>📍 View Pickup Locations</span>
-                </Link>
+                  <Phone className="h-5 w-5 mr-2" />
+                  <span>WhatsApp Support</span>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -322,84 +324,6 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   <div className="text-blue-100 text-sm">Travelers Served</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Airport Coverage Section */}
-        <section id="airports" ref={airportsRef} className="py-16 bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={airportsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Airport Meet & Greet Locations
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Our team will meet you directly at these international airports with your pre-configured WiFi device
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {airports.map((airport, index) => (
-                <motion.div
-                  key={airport.value}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={airportsInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:border-blue-100 hover:shadow-md transition-all"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center space-x-2">
-                      <Plane className="h-6 w-6 text-blue-500" />
-                      <span className="text-xl font-bold text-gray-900">{airport.code}</span>
-                    </div>
-                    <div className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
-                      {airport.popularity} Demand
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{airport.label}</h3>
-                  <p className="text-gray-600 text-sm mb-4">Located in {airport.city}</p>
-                  
-                  <div className="flex justify-between">
-                    <div className="flex items-center space-x-1">
-                      <Wifi className="h-4 w-4 text-green-600" />
-                      <span className="text-sm text-gray-700">Perfect Coverage</span>
-                    </div>
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`h-4 w-4 ${i < airport.coverageRating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600">Meet & Greet Available:</span>
-                      <span className="font-semibold text-green-600">24/7</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-8 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={airportsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg border border-blue-100"
-              >
-                <CheckCircle className="h-4 w-4 mr-2 text-green-500" />
-                <span className="text-sm font-medium">All plans include unlimited data at all airports</span>
-              </motion.div>
             </div>
           </div>
         </section>
