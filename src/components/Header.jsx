@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Wifi, Phone, ChevronDown } from 'lucide-react';
+import { Menu, X, Wifi, Phone, ChevronDown, Plane } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -129,7 +129,7 @@ const Header = () => {
               className="hidden sm:flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
             >
               <Plane className="h-4 w-4" />
-              <span>Airport WiFi</span>
+              <span>Rent WiFi on Arrival</span>
             </Link>
 
             <Link
@@ -200,7 +200,7 @@ const Header = () => {
                   className="flex items-center justify-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
                 >
                   <Plane className="h-4 w-4" />
-                  <span>Airport WiFi</span>
+                  <span>Rent WiFi on Arrival</span>
                 </Link>
                 <a
                   href="https://wa.me/255764928408"

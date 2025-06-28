@@ -115,7 +115,7 @@ const AirportWiFi = () => {
         ...formData,
         location: formData.airport,
         message: flightInfo,
-        service: 'Airport WiFi'
+        service: 'Rent WiFi on Arrival'
       };
       
       // Start sending notification immediately in the background
@@ -126,7 +126,7 @@ const AirportWiFi = () => {
       setIsSubmitted(true);
       
       // Update the toast to show success
-      toast.success('Your airport WiFi request has been received! We\'ll contact you before your flight arrives.', {
+      toast.success('Your WiFi rental request has been received! We\'ll contact you before your flight arrives.', {
         id: toastId
       });
       
@@ -153,7 +153,7 @@ const AirportWiFi = () => {
       });
       
       // Create WhatsApp message as fallback
-      const whatsappMessage = `Hello! I'd like to rent an Airport WiFi device.
+      const whatsappMessage = `Hello! I'd like to rent a WiFi device for my airport arrival.
       
 Name: ${formData.name}
 Email: ${formData.email}
@@ -237,8 +237,8 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
   return (
     <>
       <Helmet>
-        <title>Airport WiFi Rental | Meet & Greet at Tanzania Airports | Safari Surf WiFi</title>
-        <meta name="description" content="Instant WiFi rental at Tanzania airports. Our staff meets you at arrivals with a ready-to-use device. JNIA Dar es Salaam, Kilimanjaro & Zanzibar airports covered." />
+        <title>Rent WiFi on Arrival | Meet & Greet at Tanzania Airports | Safari Surf WiFi</title>
+        <meta name="description" content="Rent WiFi devices on arrival at Tanzania airports. Our staff meets you at arrivals with a ready-to-use device. JNIA Dar es Salaam, Kilimanjaro & Zanzibar airports covered." />
         <meta name="keywords" content="airport WiFi Tanzania, JNIA WiFi rental, Dar es Salaam airport internet, Kilimanjaro airport WiFi, Zanzibar airport WiFi, travel WiFi Tanzania" />
         <link rel="canonical" href="https://safarisurfwifi.com/airport-wifi" />
       </Helmet>
@@ -271,7 +271,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                 <span className="text-blue-100">Airport Meet & Greet Service</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                Airport WiFi Rental
+                Rent WiFi on Arrival
               </h1>
               <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed">
                 Start your Tanzania journey fully connected. Our team meets you at the airport
@@ -318,10 +318,10 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                 transition={{ duration: 0.8 }}
               >
                 <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                  Airport WiFi Request
+                  Rent WiFi by Request
                 </h2>
                 <p className="text-lg text-gray-600 mb-8">
-                  Complete this form to book your airport WiFi device. We'll meet you at the airport with your ready-to-use device.
+                  Complete this form to book your WiFi device for airport pickup. We'll meet you at the airport with your ready-to-use device.
                 </p>
 
                 {isSubmitted ? (
@@ -333,7 +333,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                     <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
                     <h3 className="text-2xl font-bold text-green-800 mb-2">Request Received!</h3>
                     <p className="text-green-700">
-                      Thank you for your airport WiFi request. We've confirmed your booking and will meet you at the arrival gate. We'll send you a confirmation message.
+                      Thank you for your WiFi rental request. We've confirmed your booking and will meet you at the arrival gate. We'll send you a confirmation message.
                     </p>
                     <div className="mt-6">
                       <p className="text-sm text-gray-600">Redirecting to checkout...</p>
@@ -620,7 +620,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                       ) : (
                         <>
                           <Plane className="h-5 w-5" />
-                          <span>Book Airport WiFi</span>
+                          <span>Book WiFi on Arrival</span>
                         </>
                       )}
                     </button>
@@ -641,7 +641,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               >
                 {/* How It Works */}
                 <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">How Airport WiFi Works</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">How Rent WiFi by Request Works</h3>
                   
                   <div className="space-y-6">
                     <div className="flex items-start space-x-4">
@@ -696,7 +696,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
 
                 {/* Why Choose Airport WiFi */}
                 <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Choose Airport WiFi?</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Rent WiFi on Arrival?</h3>
                   
                   <ul className="space-y-4">
                     <li className="flex items-start space-x-3">
@@ -752,7 +752,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   
                   <div className="mt-6 text-center">
                     <p className="text-sm text-gray-500">
-                      Join <VisitorCounter showAnimation={false} />+ satisfied travelers who use our airport WiFi service
+                      Join <VisitorCounter showAnimation={false} />+ satisfied travelers who use our arrival WiFi service
                     </p>
                   </div>
                 </div>
@@ -811,10 +811,10 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
               className="text-center mb-16"
             >
               <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Airport WiFi FAQs
+                WiFi on Arrival FAQs
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Everything you need to know about our airport meet & greet WiFi service
+                Everything you need to know about our meet & greet WiFi rental service
               </p>
             </motion.div>
 
@@ -834,7 +834,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
             </div>
             
             <div className="mt-12 text-center">
-              <p className="text-gray-500 mb-6">Still have questions about our airport WiFi service?</p>
+              <p className="text-gray-500 mb-6">Still have questions about our WiFi on arrival service?</p>
               <a
                 href="https://wa.me/255764928408"
                 target="_blank"
@@ -854,7 +854,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-6">What Travelers Say</h2>
               <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-                Join <VisitorCounter /> happy customers who used our airport WiFi service
+                Join <VisitorCounter /> happy customers who used our WiFi on arrival service
               </p>
             </div>
             
@@ -920,12 +920,12 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                 Begin Your Connected Tanzania Journey
               </h2>
               <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-300">
-                Book your airport WiFi device now and we'll meet you as soon as you land. No more connectivity stress after arrival.
+                Book your WiFi device now and we'll meet you as soon as you land. No more connectivity stress after arrival.
               </p>
               <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
                 <a href="#top" className="inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 font-semibold transition-colors">
                   <Plane className="h-5 w-5" />
-                  <span>Book Airport WiFi Now</span>
+                  <span>Rent WiFi on Arrival</span>
                 </a>
                 <a
                   href="https://wa.me/255764928408"
