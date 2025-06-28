@@ -23,7 +23,9 @@ import {
   Briefcase,
   Star,
   Facebook,
-  Twitter
+  Twitter,
+  Zap,
+  Building
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { sendRentalNotification } from '../utils/emailService';
@@ -50,6 +52,7 @@ const AirportWiFi = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [airportsRef, airportsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [faqRef, faqInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -175,9 +178,9 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
   };
 
   const airports = [
-    { value: 'JNIA', label: 'Julius Nyerere International Airport (DAR)', city: 'Dar es Salaam' },
-    { value: 'JRO', label: 'Kilimanjaro International Airport (JRO)', city: 'Arusha/Moshi' },
-    { value: 'ZNZ', label: 'Abeid Amani Karume International Airport (ZNZ)', city: 'Zanzibar' }
+    { value: 'JNIA', label: 'Julius Nyerere International Airport (DAR)', city: 'Dar es Salaam', code: 'DAR', coverageRating: 5, popularity: 'High' },
+    { value: 'JRO', label: 'Kilimanjaro International Airport (JRO)', city: 'Arusha/Moshi', code: 'JRO', coverageRating: 5, popularity: 'Medium' },
+    { value: 'ZNZ', label: 'Abeid Amani Karume International Airport (ZNZ)', city: 'Zanzibar', code: 'ZNZ', coverageRating: 5, popularity: 'High' }
   ];
 
   const plans = [
@@ -295,8 +298,11 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   <div className="text-blue-100 text-sm">DAR, JRO, ZNZ</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-white">Unlimited Data</div>
-                  <div className="text-blue-100 text-sm">From $25/day</div>
+                  <div className="flex items-center justify-center space-x-2">
+                    <Zap className="h-5 w-5 text-yellow-300" />
+                    <span className="text-2xl font-bold text-white">Unlimited Data</span>
+                  </div>
+                  <div className="text-blue-100 text-sm">Never worry about usage</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-white">
@@ -305,6 +311,82 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                   <div className="text-blue-100 text-sm">Travelers Served</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Airport Coverage Section */}
+        <section ref={airportsRef} className="py-12 bg-white border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={airportsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl font-bold text-gray-900">
+                Airport Meet & Greet Service Available at:
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {airports.map((airport, index) => (
+                <motion.div
+                  key={airport.value}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={airportsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:border-blue-100 hover:shadow-md transition-all"
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Plane className="h-6 w-6 text-blue-500" />
+                      <span className="text-xl font-bold text-gray-900">{airport.code}</span>
+                    </div>
+                    <div className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
+                      {airport.popularity} Demand
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{airport.label}</h3>
+                  <p className="text-gray-600 text-sm mb-4">Located in {airport.city}</p>
+                  
+                  <div className="flex justify-between">
+                    <div className="flex items-center space-x-1">
+                      <Wifi className="h-4 w-4 text-green-600" />
+                      <span className="text-sm text-gray-700">Perfect Coverage</span>
+                    </div>
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          className="h-4 w-4 text-yellow-400" 
+                          fill={i < airport.coverageRating ? "currentColor" : "none"}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">Meet & Greet Available:</span>
+                      <span className="font-semibold text-green-600">24/7</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={airportsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg border border-blue-100"
+              >
+                <CheckCircle className="h-4 w-4 mr-2 text-green-500" />
+                <span className="text-sm font-medium">All plans include unlimited data at all airports</span>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -492,6 +574,11 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
                         <Wifi className="h-5 w-5 text-blue-500" />
                         <span>WiFi Plan</span>
                       </h3>
+                      
+                      <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-6 flex items-center space-x-3">
+                        <Zap className="h-6 w-6 text-blue-600 flex-shrink-0" />
+                        <p className="text-blue-800 font-medium">All plans include unlimited data with no throttling or caps</p>
+                      </div>
                       
                       <div className="space-y-3">
                         {plans.map((plan) => (
