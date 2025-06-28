@@ -19,6 +19,7 @@ import {
   Award,
   Download
 } from 'lucide-react';
+import VisitorCounter from '../components/VisitorCounter';
 
 const Home = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -29,7 +30,8 @@ const Home = () => {
   const plans = [
     {
       name: 'Daily',
-      price: '15,000',
+      priceUSD: '25',
+      priceTZS: '58,000',
       period: 'per day',
       speed: '50 Mbps',
       features: ['Unlimited data', 'Instant setup', 'Device included', '24/7 support'],
@@ -39,7 +41,8 @@ const Home = () => {
     },
     {
       name: 'Weekly',
-      price: '75,000',
+      priceUSD: '100',
+      priceTZS: '232,000',
       period: 'per week',
       speed: '100 Mbps',
       features: ['Unlimited data', 'Priority support', 'Multiple devices', 'Free delivery', 'Backup device'],
@@ -49,10 +52,11 @@ const Home = () => {
     },
     {
       name: 'Monthly',
-      price: '250,000',
+      priceUSD: '150',
+      priceTZS: '348,000',
       period: 'per month',
       speed: '200 Mbps',
-      features: ['Unlimited data', '24/7 VIP support', 'Premium device', 'Backup included', 'Priority setup'],
+      features: ['Unlimited data', '24/7 VIP support', 'Premium device', 'Backup included', 'Priority setup', 'Refundable deposit: $50'],
       popular: false,
       gradient: 'from-purple-500 to-indigo-500',
       icon: '👑'
@@ -114,7 +118,7 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: '3,000+', label: 'Happy Customers', icon: '😊' },
+    { number: <VisitorCounter />, label: 'Happy Customers', icon: '😊' },
     { number: '15+', label: 'Cities Covered', icon: '🏙️' },
     { number: '99.9%', label: 'Uptime Guarantee', icon: '⚡' },
     { number: '24/7', label: 'Expert Support', icon: '🛟' }
@@ -130,23 +134,45 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Safari Surf WiFi - Rent Portable WiFi Instantly | Tanzania's #1 WiFi Rental Service</title>
-        <meta name="description" content="Rent portable WiFi devices instantly in Tanzania. High-speed internet rental for tourists, business travelers, and digital nomads. Get connected anywhere, anytime with 99.9% uptime." />
-        <meta name="keywords" content="WiFi rental Tanzania, portable WiFi, internet rental, mobile WiFi, Tanzania internet" />
+        <title>Safari Surf WiFi - Rent Portable WiFi Instantly in Tanzania | #1 WiFi Rental Service</title>
+        <meta name="description" content="Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week (TSh 232,000). 3,000+ happy customers. Get connected anywhere in Tanzania in 5 minutes!" />
+        <meta name="keywords" content="WiFi rental Tanzania, portable WiFi Tanzania, internet rental Dar es Salaam, mobile WiFi Arusha, WiFi device rental Zanzibar, Tanzania internet, safari WiFi, travel WiFi Tanzania" />
         <link rel="canonical" href="https://safarisurfwifi.com" />
+        
+        {/* Enhanced Local SEO */}
+        <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Safari Surf WiFi - Tanzania's #1 WiFi Rental Service",
+          "description": "Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week. 3,000+ happy customers.",
+          "url": "https://safarisurfwifi.com",
+          "mainEntity": {
+            "@type": "LocalBusiness",
+            "name": "Safari Surf WiFi",
+            "priceRange": "$25-$150",
+            "telephone": "+255764928408",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "TZ",
+              "addressRegion": "Dar es Salaam"
+            }
+          }
+        })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen overflow-hidden">
-        {/* Floating Background Elements */}
-        <div className="fixed inset-0 pointer-events-none z-0">
+        {/* Optimized Floating Background Elements */}
+        <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
           {floatingElements.map((element, index) => (
             <motion.div
               key={index}
               className="absolute text-6xl opacity-5"
-              initial={{ y: "100vh", x: Math.random() * window.innerWidth }}
+              initial={{ y: "100vh", x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200) }}
               animate={{ 
                 y: "-100vh",
-                x: Math.random() * window.innerWidth,
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
                 rotate: 360
               }}
               transition={{
@@ -166,8 +192,8 @@ const Home = () => {
           ref={heroRef}
           className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden"
         >
-          {/* Animated gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-200/20 to-pink-200/20 animate-pulse"></div>
+          {/* Optimized animated gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-200/20 to-pink-200/20 animate-pulse" aria-hidden="true"></div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
@@ -188,7 +214,7 @@ const Home = () => {
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               </motion.div>
 
-              {/* Main Heading */}
+              {/* Main Heading - Optimized for SEO */}
               <div className="space-y-8">
                 <h1 className="text-7xl md:text-9xl font-black text-gray-900 leading-none tracking-tight">
                   Rent WiFi
@@ -205,6 +231,8 @@ const Home = () => {
                 <p className="text-2xl md:text-3xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
                   Get high-speed portable WiFi anywhere in Tanzania. 
                   <span className="font-semibold text-orange-600"> Setup in 5 minutes!</span>
+                  <br />
+                  <span className="text-xl text-gray-500">Starting at $100/week (TSh 232,000)</span>
                 </p>
               </div>
 
@@ -213,6 +241,7 @@ const Home = () => {
                 <Link
                   to="/contact"
                   className="group relative bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                  aria-label="Rent WiFi device now"
                 >
                   <div className="flex items-center space-x-3">
                     <Wifi className="h-6 w-6" />
@@ -227,6 +256,7 @@ const Home = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white/80 backdrop-blur-sm border-2 border-gray-200 hover:border-orange-300 text-gray-700 hover:text-orange-600 px-10 py-5 rounded-full text-xl font-semibold transition-all duration-300 hover:shadow-xl"
+                  aria-label="Contact us via WhatsApp"
                 >
                   <div className="flex items-center space-x-3">
                     <Phone className="h-6 w-6" />
@@ -235,7 +265,7 @@ const Home = () => {
                 </a>
               </div>
 
-              {/* Stats Grid */}
+              {/* Enhanced Stats Grid with correct customer numbers */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
@@ -250,8 +280,10 @@ const Home = () => {
                     transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                     className="bg-white/60 backdrop-blur-sm rounded-3xl p-6 hover:bg-white/80 transition-all duration-300 hover:scale-105 shadow-lg"
                   >
-                    <div className="text-4xl mb-2">{stat.icon}</div>
-                    <div className="text-3xl md:text-4xl font-black text-gray-900">{stat.number}</div>
+                    <div className="text-4xl mb-2" aria-hidden="true">{stat.icon}</div>
+                    <div className="text-3xl md:text-4xl font-black text-gray-900">
+                      {typeof stat.number === 'object' ? stat.number : stat.number}
+                    </div>
                     <div className="text-gray-600 font-medium">{stat.label}</div>
                   </motion.div>
                 ))}
@@ -260,7 +292,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Pricing Plans */}
+        {/* Pricing Plans - Updated with correct pricing */}
         <section ref={plansRef} className="py-32 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -277,7 +309,7 @@ const Home = () => {
                 Choose Your Plan
               </h2>
               <p className="text-2xl text-gray-600 max-w-3xl mx-auto font-light">
-                Flexible rental options designed for every need
+                Flexible rental options designed for every need. All prices include unlimited data and 24/7 support.
               </p>
             </motion.div>
 
@@ -312,23 +344,26 @@ const Home = () => {
                     {/* Plan header with gradient */}
                     <div className={`relative h-40 bg-gradient-to-r ${plan.gradient} flex items-center justify-center`}>
                       <div className="text-center text-white">
-                        <div className="text-6xl mb-2">{plan.icon}</div>
+                        <div className="text-6xl mb-2" aria-hidden="true">{plan.icon}</div>
                         <h3 className="text-2xl font-bold">{plan.name}</h3>
                       </div>
                       {/* Animated background pattern */}
-                      <div className="absolute inset-0 opacity-20">
+                      <div className="absolute inset-0 opacity-20" aria-hidden="true">
                         <div className="absolute inset-0 bg-white/10 transform rotate-12 scale-150"></div>
                       </div>
                     </div>
                     
                     <div className="p-8 space-y-6">
-                      {/* Pricing */}
+                      {/* Pricing with both USD and TZS */}
                       <div className="text-center space-y-2">
                         <div className="flex items-baseline justify-center space-x-2">
-                          <span className="text-sm text-gray-500">TSh</span>
-                          <span className="text-5xl font-black text-gray-900">{plan.price}</span>
+                          <span className="text-sm text-gray-500">$</span>
+                          <span className="text-5xl font-black text-gray-900">{plan.priceUSD}</span>
                         </div>
                         <div className="text-gray-600 font-medium">{plan.period}</div>
+                        <div className="text-sm text-gray-500">
+                          TSh {plan.priceTZS}
+                        </div>
                         <div className={`inline-block px-4 py-1 rounded-full text-sm font-bold bg-gradient-to-r ${plan.gradient} text-white`}>
                           {plan.speed}
                         </div>
@@ -354,6 +389,7 @@ const Home = () => {
                             ? 'bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl'
                             : 'bg-gray-900 hover:bg-gray-800 text-white shadow-lg hover:shadow-xl'
                         }`}
+                        aria-label={`Get started with ${plan.name} plan`}
                       >
                         <span>Get Started</span>
                         <ArrowRight className="h-5 w-5" />
@@ -405,7 +441,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Testimonials */}
+        {/* Testimonials - Updated with consistent 3,000+ customers */}
         <section ref={testimonialsRef} className="py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -418,7 +454,7 @@ const Home = () => {
                 Customer Love
               </h2>
               <p className="text-2xl text-gray-600 max-w-3xl mx-auto font-light">
-                Join thousands of satisfied customers across Tanzania
+                Join <VisitorCounter /> satisfied customers across Tanzania
               </p>
             </motion.div>
 
@@ -446,7 +482,7 @@ const Home = () => {
                     
                     {/* Author */}
                     <div className="flex items-center space-x-4">
-                      <div className="text-4xl">{testimonial.avatar}</div>
+                      <div className="text-4xl" aria-hidden="true">{testimonial.avatar}</div>
                       <div>
                         <div className="font-bold text-gray-900">{testimonial.name}</div>
                         <div className="text-gray-600">{testimonial.role}</div>
@@ -471,7 +507,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <div className="text-6xl">🏔️🦁🏖️</div>
+              <div className="text-6xl" aria-hidden="true">🏔️🦁🏖️</div>
               <h2 className="text-6xl md:text-7xl font-black mb-6">
                 Explore Tanzania
               </h2>
@@ -482,6 +518,7 @@ const Home = () => {
               <Link
                 to="/travel"
                 className="inline-flex items-center space-x-3 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-2 border-white/30 hover:border-white/50 px-10 py-5 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105"
+                aria-label="Discover Tanzania travel destinations"
               >
                 <span>Discover Tanzania</span>
                 <ArrowRight className="h-6 w-6" />
@@ -508,6 +545,7 @@ const Home = () => {
                 </h2>
                 <p className="text-2xl text-gray-300 max-w-3xl mx-auto font-light">
                   Don't wait. Get instant WiFi rental and stay connected everywhere in Tanzania.
+                  <span className="block mt-2 text-xl">Starting at $100/week (TSh 232,000)</span>
                 </p>
               </div>
               
@@ -515,6 +553,7 @@ const Home = () => {
                 <Link
                   to="/contact"
                   className="group bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-12 py-6 rounded-full text-2xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                  aria-label="Start WiFi rental now"
                 >
                   <div className="flex items-center space-x-3">
                     <Wifi className="h-7 w-7" />
@@ -528,6 +567,7 @@ const Home = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-gray-900 px-12 py-6 rounded-full text-2xl font-bold transition-all duration-300 hover:shadow-xl"
+                  aria-label="Contact us via WhatsApp"
                 >
                   <div className="flex items-center space-x-3">
                     <Phone className="h-7 w-7" />
@@ -538,7 +578,7 @@ const Home = () => {
 
               <div className="pt-8">
                 <p className="text-gray-400 text-lg">
-                  🚀 Setup in 5 minutes • 📶 99.9% uptime • 🛟 24/7 support
+                  🚀 Setup in 5 minutes • 📶 99.9% uptime • 🛟 24/7 support • 😊 <VisitorCounter /> happy customers
                 </p>
               </div>
             </motion.div>
