@@ -22,10 +22,7 @@ import {
   Globe,
   Briefcase,
   Star,
-  Facebook,
-  Twitter,
   Zap,
-  Building
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { sendRentalNotification } from '../utils/emailService';
@@ -143,26 +140,38 @@ const AirportWiFi = () => {
         service: 'Rent WiFi on Arrival'
       };
       
-      // Start sending notification immediately in the background
-      const notificationPromise = sendRentalNotification(notificationData);
+      // Send notification using serverless function
+      const result = await sendRentalNotification(notificationData);
       
-      // Show success state immediately while notification is still processing
+      if (!result.success && result.fallback === 'whatsapp') {
+        // The serverless function failed, but we have a WhatsApp fallback
+        toast.error('There was a connection issue. Redirecting to WhatsApp...', {
+          id: toastId
+        });
+        
+        // Open WhatsApp with the pre-formatted message
+        window.open(`https://wa.me/255764928408?text=${encodeURIComponent(result.whatsappMessage)}`, '_blank');
+        
+        // Update UI state
+        setIsSubmitting(false);
+        return;
+      }
+      
+      // If we get here, the notification was successful
       setIsSubmitting(false);
       setIsSubmitted(true);
       
       // Update the toast to show success
-      toast.success('Your WiFi rental request has been received! We\'ll contact you before your flight arrives.', {
+      toast.success('Your WiFi rental request has been received! We\'ll meet you at the airport.', {
         id: toastId
       });
-      
-      // Wait for notification to complete
-      await notificationPromise;
       
       // Navigate to checkout page after a short delay
       setTimeout(() => {
         navigate('/checkout', {
           state: {
-            rental: notificationData
+            rental: notificationData,
+            orderId: result.orderId
           }
         });
       }, 2000);
@@ -178,7 +187,7 @@ const AirportWiFi = () => {
       
       // Create WhatsApp message as fallback
       const whatsappMessage = `Hello! I'd like to rent a WiFi device for my airport arrival.
-      
+    
 Name: ${formData.name}
 Email: ${formData.email}
 Phone: ${formData.phone}

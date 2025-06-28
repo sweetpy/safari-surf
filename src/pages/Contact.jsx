@@ -61,10 +61,24 @@ const Contact = () => {
     const toastId = toast.loading('Processing your rental request...');
     
     try {
-      // Start sending notification immediately in the background
-      const notificationPromise = sendRentalNotification(formData);
+      // Send notification using our serverless function
+      const result = await sendRentalNotification(formData);
       
-      // Show success state immediately while notification is still processing
+      if (!result.success && result.fallback === 'whatsapp') {
+        // The serverless function failed, but we have a WhatsApp fallback
+        toast.error('There was a connection issue. Redirecting to WhatsApp...', {
+          id: toastId
+        });
+        
+        // Open WhatsApp with the pre-formatted message
+        window.open(`https://wa.me/255764928408?text=${encodeURIComponent(result.whatsappMessage)}`, '_blank');
+        
+        // Update UI state
+        setIsSubmitting(false);
+        return;
+      }
+      
+      // If we get here, the notification was successful
       setIsSubmitting(false);
       setIsSubmitted(true);
       
@@ -73,15 +87,12 @@ const Contact = () => {
         id: toastId
       });
       
-      // Wait for notification to complete
-      const result = await notificationPromise;
-      console.log("Notification result:", result);
-      
       // Navigate to checkout page after a short delay
       setTimeout(() => {
         navigate('/checkout', {
           state: {
-            rental: formData
+            rental: formData,
+            orderId: result.orderId
           }
         });
       }, 1500);

@@ -52,18 +52,29 @@ const StripeCheckoutForm = ({
       // Simulate payment processing
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // Since we're doing "payment on delivery", we'll just send notification emails
-      await sendPaymentConfirmation({
+      // Use serverless function for email notifications
+      const confirmationData = {
         customerName,
         customerEmail,
         amount,
         currency,
         plan: description,
         paymentMethod: 'Payment on Delivery',
-        transactionId: `ORDER-${Date.now().toString(36).toUpperCase()}`,
-        duration: description.includes('Weekly') ? '7 days' : 
-                  description.includes('Monthly') ? '30 days' : '24 hours'
-      });
+        transactionId: `ORDER-${Date.now().toString(36).toUpperCase()}`
+      };
+      
+      const result = await sendPaymentConfirmation(confirmationData);
+      
+      if (!result.success && result.fallback === 'whatsapp') {
+        // Confirmation email failed, but we can still show success UI and suggest WhatsApp
+        toast.info('Payment confirmed, but we couldn\'t send an email confirmation. Please contact us via WhatsApp if needed.');
+        
+        // Provide WhatsApp fallback option
+        const shouldContact = window.confirm('Would you like to confirm your payment details via WhatsApp?');
+        if (shouldContact) {
+          window.open(`https://wa.me/255764928408?text=${encodeURIComponent(result.whatsappMessage)}`, '_blank');
+        }
+      }
       
       // Handle success
       setSucceeded(true);
@@ -109,7 +120,7 @@ const StripeCheckoutForm = ({
             <div className="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center">
               <CheckCircle className="h-8 w-8 text-green-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900">Booking Confirmed!</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Booking Confirmed!</h3>
             <p className="text-gray-600">Your WiFi device will be delivered to your location. We've sent a confirmation to your email.</p>
             <button 
               onClick={() => window.location.href = '/'}
