@@ -28,7 +28,15 @@
     "react-share": "^4.4.1",
     "react-countup": "^6.5.0",
     "aos": "^2.3.4",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "@stripe/stripe-js": "^2.3.0",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "openai": "^4.24.1",
+    "emailjs-com": "^3.2.0",
+    "react-confetti": "^6.1.0",
+    "lottie-react": "^2.4.0",
+    "countup.js": "^2.8.0",
+    "flag-icons": "^6.15.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

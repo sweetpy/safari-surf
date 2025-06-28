@@ -20,6 +20,7 @@ import {
   Download
 } from 'lucide-react';
 import VisitorCounter from '../components/VisitorCounter';
+import StatisticsSection from '../components/StatisticsSection';
 
 const Home = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -118,7 +119,7 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: <VisitorCounter />, label: 'Happy Customers', icon: '😊' },
+    { number: <VisitorCounter showDetails={true} />, label: 'Happy Customers', icon: '😊' },
     { number: '15+', label: 'Cities Covered', icon: '🏙️' },
     { number: '99.9%', label: 'Uptime Guarantee', icon: '⚡' },
     { number: '24/7', label: 'Expert Support', icon: '🛟' }
@@ -135,9 +136,10 @@ const Home = () => {
     <>
       <Helmet>
         <title>Safari Surf WiFi - Rent Portable WiFi Instantly in Tanzania | #1 WiFi Rental Service</title>
-        <meta name="description" content="Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week (TSh 232,000). 3,000+ happy customers. Get connected anywhere in Tanzania in 5 minutes!" />
+        <meta name="description" content="Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week (TSh 232,000). Get connected anywhere in Tanzania in 5 minutes!" />
         <meta name="keywords" content="WiFi rental Tanzania, portable WiFi Tanzania, internet rental Dar es Salaam, mobile WiFi Arusha, WiFi device rental Zanzibar, Tanzania internet, safari WiFi, travel WiFi Tanzania" />
         <link rel="canonical" href="https://safarisurfwifi.com" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.15.0/css/flag-icons.min.css" />
         
         {/* Enhanced Local SEO */}
         <script type="application/ld+json">
@@ -145,7 +147,7 @@ const Home = () => {
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Safari Surf WiFi - Tanzania's #1 WiFi Rental Service",
-          "description": "Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week. 3,000+ happy customers.",
+          "description": "Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week. Join our growing customer base for reliable connectivity.",
           "url": "https://safarisurfwifi.com",
           "mainEntity": {
             "@type": "LocalBusiness",
@@ -291,6 +293,9 @@ const Home = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* Statistics Section */}
+        <StatisticsSection />
 
         {/* Pricing Plans - Updated with correct pricing */}
         <section ref={plansRef} className="py-32 bg-white relative">
@@ -441,7 +446,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Testimonials - Updated with consistent 3,000+ customers */}
+        {/* Testimonials - Updated with consistent customer count */}
         <section ref={testimonialsRef} className="py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div

@@ -77,11 +77,49 @@ All plans include unlimited data, free delivery to major hotels, and 24/7 suppor
  * Gets the current visitor count from localStorage or defaults to 0
  * @returns {Promise<number>} The current visitor count
  */
-async function getVisitorCount() {
+export async function getVisitorCount() {
   // Check if we're in a browser environment
   if (typeof window !== 'undefined') {
     const storedCount = localStorage.getItem('visitorCount');
     return storedCount ? parseInt(storedCount, 10) : 0;
   }
   return 0; // Default fallback
+}
+
+/**
+ * Gets the top countries by visitor count
+ * @param {number} limit - Maximum number of countries to return
+ * @returns {Promise<Array>} Array of country objects with code, name and count
+ */
+export async function getTopCountries(limit = 5) {
+  // Check if we're in a browser environment
+  if (typeof window !== 'undefined') {
+    const visitorCountryData = localStorage.getItem('visitorCountryData');
+    if (visitorCountryData) {
+      const countries = JSON.parse(visitorCountryData);
+      return countries
+        .sort((a, b) => b.count - a.count)
+        .slice(0, limit);
+    }
+  }
+  return []; // Default fallback
+}
+
+/**
+ * Gets the visitor's country (or simulates it in our case)
+ * @returns {Promise<string>} Country code of the visitor
+ */
+export async function getVisitorCountry() {
+  // In production, this would use a real IP geolocation API
+  // For now, we'll simulate with random country selection
+  const countries = [
+    { code: 'us', name: 'United States' },
+    { code: 'gb', name: 'United Kingdom' },
+    { code: 'de', name: 'Germany' },
+    { code: 'ca', name: 'Canada' },
+    { code: 'au', name: 'Australia' }
+  ];
+  
+  const randomIndex = Math.floor(Math.random() * countries.length);
+  return countries[randomIndex];
 }
