@@ -354,7 +354,7 @@ const About = () => {
                   ].map((reason, index) => (
                     <li key={index} className="flex items-start space-x-3">
                       <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{reason}</span>
+                      <span className="text-gray-700">{typeof reason === 'string' ? reason : reason}</span>
                     </li>
                   ))}
                 </ul>

@@ -139,7 +139,6 @@ const Home = () => {
         <meta name="description" content="Rent portable WiFi devices instantly in Tanzania. High-speed internet rental starting at $100/week (TSh 232,000). Get connected anywhere in Tanzania in 5 minutes!" />
         <meta name="keywords" content="WiFi rental Tanzania, portable WiFi Tanzania, internet rental Dar es Salaam, mobile WiFi Arusha, WiFi device rental Zanzibar, Tanzania internet, safari WiFi, travel WiFi Tanzania" />
         <link rel="canonical" href="https://safarisurfwifi.com" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.15.0/css/flag-icons.min.css" />
         
         {/* Enhanced Local SEO */}
         <script type="application/ld+json">

@@ -17,6 +17,9 @@ const topCountries = [
   { code: 'se', name: 'Sweden', count: 0 }
 ];
 
+// Base number of customers to ensure consistency
+const BASE_CUSTOMER_COUNT = 3247;
+
 // Generates a unique customer ID
 const generateCustomerId = () => {
   return 'c_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -29,7 +32,7 @@ const getCustomerCountry = () => {
 };
 
 const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(BASE_CUSTOMER_COUNT);
   const [topFive, setTopFive] = useState([]);
   const [currentCountry, setCurrentCountry] = useState(null);
   const [showCountryPopup, setShowCountryPopup] = useState(false);
@@ -80,16 +83,46 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
         // Update localStorage
         localStorage.setItem('customerCountryData', JSON.stringify(updatedCountries));
         
-        // Update state
-        const totalCount = updatedCountries.reduce((sum, country) => sum + country.count, 0);
-        setCount(totalCount);
-        
-        // Update top five countries
-        const sortedCountries = [...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5);
-        setTopFive(sortedCountries);
+        // Calculate total count to ensure it's at least BASE_CUSTOMER_COUNT
+        let totalCount = updatedCountries.reduce((sum, country) => sum + country.count, 0);
+        if (totalCount < BASE_CUSTOMER_COUNT) {
+          // Distribute additional customers to match BASE_CUSTOMER_COUNT
+          const remaining = BASE_CUSTOMER_COUNT - totalCount;
+          const updatedWithBase = updatedCountries.map((country, index) => {
+            // Add extra counts proportionally
+            const extra = Math.floor(remaining * (country.count / totalCount));
+            return { ...country, count: country.count + extra };
+          });
+          
+          totalCount = updatedWithBase.reduce((sum, country) => sum + country.count, 0);
+          
+          // If there's still a difference due to rounding, add to the first country
+          if (totalCount < BASE_CUSTOMER_COUNT && updatedWithBase.length > 0) {
+            updatedWithBase[0].count += (BASE_CUSTOMER_COUNT - totalCount);
+          }
+          
+          localStorage.setItem('customerCountryData', JSON.stringify(updatedWithBase));
+          setCount(BASE_CUSTOMER_COUNT);
+          
+          // Update top five countries
+          const sortedCountries = [...updatedWithBase].sort((a, b) => b.count - a.count).slice(0, 5);
+          setTopFive(sortedCountries);
+        } else {
+          setCount(totalCount);
+          
+          // Update top five countries
+          const sortedCountries = [...updatedCountries].sort((a, b) => b.count - a.count).slice(0, 5);
+          setTopFive(sortedCountries);
+        }
       } else {
         // Just load existing data for returning customers
-        const totalCount = countries.reduce((sum, country) => sum + country.count, 0);
+        let totalCount = countries.reduce((sum, country) => sum + country.count, 0);
+        
+        // Ensure count is at least the base amount
+        if (totalCount < BASE_CUSTOMER_COUNT) {
+          totalCount = BASE_CUSTOMER_COUNT;
+        }
+        
         setCount(totalCount);
         
         // Update top five countries
@@ -141,7 +174,7 @@ const VisitorCounter = ({ showDetails = false, showAnimation = true }) => {
   }, []);
 
   if (!isInitialized) {
-    return <span className="inline-block">Loading...</span>;
+    return <span className="inline-block">{BASE_CUSTOMER_COUNT.toLocaleString()}+</span>;
   }
 
   return (
