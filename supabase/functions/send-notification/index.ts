@@ -57,7 +57,7 @@ Deno.serve(async (req: Request) => {
 
     // Prepare email content based on notification type
     let emailSubject: string, emailBody: string, recipientEmails: string[];
-    const customerName = rentalDetails.name || 'Customer';
+    const customerName = rentalDetails.name || rentalDetails.customerName || 'Customer';
     
     if (notificationType === 'rental') {
       // Rental notification to admins
@@ -98,7 +98,7 @@ Deno.serve(async (req: Request) => {
         console.log("Customer confirmation email prepared for:", rentalDetails.email);
       }
       
-    } else {
+    } else if (notificationType === 'payment') {
       // Payment confirmation
       emailSubject = `Payment Confirmation #${orderId}`;
       emailBody = `
@@ -131,8 +131,14 @@ Deno.serve(async (req: Request) => {
       }
     }
     
-    console.log("Admin notification email prepared:", emailSubject);
+    // In a production environment, this would actually send emails
+    // For this example, we'll just log the action
+    console.log(`[${notificationType}] Notification prepared with subject: ${emailSubject}`);
+    console.log(`Recipients: ${recipientEmails?.join(', ')}`);
 
+    // Send SMS notification (simulated)
+    console.log(`SMS notification prepared for: +255764928408`);
+    
     // Return success response
     return new Response(
       JSON.stringify({ 
@@ -149,7 +155,7 @@ Deno.serve(async (req: Request) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error.message 
+        error: error.message || "An unknown error occurred" 
       }),
       { 
         status: 500, 
