@@ -8,7 +8,8 @@ import {
   Facebook, 
   Twitter, 
   Instagram, 
-  ArrowRight
+  ArrowRight,
+  Plane
 } from 'lucide-react';
 import VisitorCounter from './VisitorCounter';
 
@@ -71,6 +72,10 @@ const Footer = () => {
               <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">WiFi Rental</Link></li>
               <li><Link to="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</Link></li>
               <li><Link to="/coverage" className="text-gray-300 hover:text-white transition-colors">Coverage</Link></li>
+              <li><Link to="/airport-wifi" className="text-gray-300 hover:text-white transition-colors flex items-center space-x-1">
+                <Plane className="h-4 w-4" />
+                <span>Airport WiFi</span>
+              </Link></li>
               <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">Support</Link></li>
               <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
             </ul>

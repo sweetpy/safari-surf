@@ -125,6 +125,14 @@ const Header = () => {
             </a>
 
             <Link
+              to="/airport-wifi"
+              className="hidden sm:flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
+            >
+              <Plane className="h-4 w-4" />
+              <span>Airport WiFi</span>
+            </Link>
+
+            <Link
               to="/contact"
               className="hidden sm:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors font-medium shadow-md"
             >
@@ -185,7 +193,15 @@ const Header = () => {
                 </div>
               ))}
               
-              <div className="border-t pt-4 space-y-2">
+              <div className="border-t pt-4 space-y-3">
+                <Link
+                  to="/airport-wifi"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center justify-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg transition-colors font-medium"
+                >
+                  <Plane className="h-4 w-4" />
+                  <span>Airport WiFi</span>
+                </Link>
                 <a
                   href="https://wa.me/255764928408"
                   target="_blank"

@@ -16,6 +16,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import RentalCheckout from './pages/RentalCheckout';
+import AirportWiFi from './pages/AirportWiFi';
 
 // Travel Content - Secondary Features
 import Destinations from './pages/Destinations';
@@ -63,6 +64,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/checkout" element={<RentalCheckout />} />
+              <Route path="/airport-wifi" element={<AirportWiFi />} />
               
               {/* Blog Routes */}
               <Route path="/blog" element={<Blog />} />
