@@ -24,7 +24,7 @@ import Safaris from './pages/Safaris';
 import Itineraries from './pages/Itineraries';
 import Guides from './pages/Guides';
 import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
+import BlogPost from './pages/blog/Post';
 import KilimanjaroInternetGuide from './pages/blog/KilimanjaroInternetGuide';
 import HowToPickup from './pages/faq/HowToPickup';
 import Booking from './pages/Booking';
