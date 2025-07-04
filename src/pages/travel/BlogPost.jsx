@@ -21,6 +21,7 @@ import {
   Map
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import VisitorCounter from '../../components/VisitorCounter';
 
 // Mock blog posts data
@@ -382,28 +383,12 @@ const TravelBlogPost = () => {
     .filter(p => p.category === post.category || (p.tags && post.tags && p.tags.some(tag => post.tags.includes(tag))))
     .slice(0, 3);
   
-  const handleShare = (platform) => {
-    const url = window.location.href;
-    const text = `Check out this article: ${post.title}`;
-    
-    let shareUrl;
-    switch (platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-        break;
-      case 'copy':
-        navigator.clipboard.writeText(url)
-          .then(() => toast.success('Link copied to clipboard'))
-          .catch(() => toast.error('Failed to copy link'));
-        return;
-      default:
-        return;
-    }
-    
-    window.open(shareUrl, '_blank');
+  const shareUrl = `${window.location.origin}/travel/blog/${post.slug}`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(shareUrl)
+      .then(() => toast.success('Link copied to clipboard'))
+      .catch(() => toast.error('Failed to copy link'));
   };
 
   return (
@@ -576,22 +561,35 @@ const TravelBlogPost = () => {
                     <span>Share This Article</span>
                   </h3>
                   <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleShare('facebook')}
-                      className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition-colors"
-                      aria-label="Share on Facebook"
+                    <FacebookShareButton
+                      url={`${shareUrl}?utm_source=facebook&utm_medium=social&utm_campaign=blog_share`}
+                      quote={post.title}
+                      className="w-full"
                     >
-                      <Facebook className="h-5 w-5 mx-auto" />
-                    </button>
-                    <button
-                      onClick={() => handleShare('twitter')}
-                      className="w-full bg-sky-500 text-white p-2 rounded-lg hover:bg-sky-600 transition-colors"
-                      aria-label="Share on Twitter"
+                      <div className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <Facebook className="h-5 w-5 mx-auto" />
+                      </div>
+                    </FacebookShareButton>
+                    <TwitterShareButton
+                      url={`${shareUrl}?utm_source=twitter&utm_medium=social&utm_campaign=blog_share`}
+                      title={post.title}
+                      className="w-full"
                     >
-                      <Twitter className="h-5 w-5 mx-auto" />
-                    </button>
+                      <div className="bg-sky-500 text-white p-2 rounded-lg hover:bg-sky-600 transition-colors">
+                        <Twitter className="h-5 w-5 mx-auto" />
+                      </div>
+                    </TwitterShareButton>
+                    <WhatsappShareButton
+                      url={`${shareUrl}?utm_source=whatsapp&utm_medium=social&utm_campaign=blog_share`}
+                      title={post.title}
+                      className="w-full"
+                    >
+                      <div className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors">
+                        <MessageCircle className="h-5 w-5 mx-auto" />
+                      </div>
+                    </WhatsappShareButton>
                     <button
-                      onClick={() => handleShare('copy')}
+                      onClick={handleCopy}
                       className="w-full bg-gray-600 text-white p-2 rounded-lg hover:bg-gray-700 transition-colors"
                       aria-label="Copy link"
                     >

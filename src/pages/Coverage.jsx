@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { MapPin, CheckCircle, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import CoverageMap from '../components/CoverageMap';
 
 const Coverage = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -277,39 +278,15 @@ const Coverage = () => {
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-lg p-8 text-center"
-          >
-            <div 
-              className="h-96 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-xl flex items-center justify-center mb-8"
-              style={{
-                backgroundImage: 'url("https://images.pexels.com/photos/2376997/pexels-photo-2376997.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            >
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8">
-                <MapPin className="h-16 w-16 text-orange-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Interactive Map Coming Soon
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  We're building an interactive map to help you check coverage in your exact location.
-                </p>
-                <Link
-                  to="/contact"
-                  className="bg-orange-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-700 transition-colors inline-flex items-center space-x-2"
-                >
-                  <span>Check Your Area</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-2xl shadow-lg p-8"
+        >
+          <CoverageMap />
+        </motion.div>
         </div>
       </section>
 

@@ -17,6 +17,7 @@ import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import RentalCheckout from './pages/RentalCheckout';
 import AirportWiFi from './pages/AirportWiFi';
+import WifiLanding from './pages/WifiLanding';
 
 // Travel Content - Secondary Features
 import Destinations from './pages/Destinations';
@@ -68,6 +69,7 @@ function App() {
               <Route path="/checkout" element={<RentalCheckout />} />
               <Route path="/airport-wifi" element={<AirportWiFi />} />
               <Route path="/wifi-rental-tanzania/airport" element={<AirportWiFi />} />
+              <Route path="/wifi/:slug" element={<WifiLanding />} />
               
               {/* Blog Routes */}
               <Route path="/blog" element={<Blog />} />
