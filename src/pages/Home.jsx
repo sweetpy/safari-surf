@@ -272,10 +272,11 @@ const Home = () => {
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-orange-100">
                 <div className="relative">
                   <div className="w-40 h-40 overflow-hidden rounded-xl shadow-lg">
-                    <img 
-                      src="https://images.pexels.com/photos/3534924/pexels-photo-3534924.jpeg?auto=compress&cs=tinysrgb&w=600" 
-                      alt="Pocket-sized WiFi Device" 
+                    <img
+                      src="https://images.pexels.com/photos/3534924/pexels-photo-3534924.jpeg?auto=compress&cs=tinysrgb&w=600&fm=webp"
+                      alt="Pocket-sized WiFi Device"
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div className="absolute -top-4 -right-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full transform rotate-12 shadow-lg">

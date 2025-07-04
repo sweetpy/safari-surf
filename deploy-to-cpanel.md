@@ -170,3 +170,12 @@ If you encounter issues during deployment, contact:
 
 - Technical Support: support@flit.tz
 - WhatsApp Support: +255 764 928 408
+
+## Performance Tips
+
+To improve Core Web Vitals after deployment:
+
+- **Enable caching** on your hosting plan or via a CDN like Cloudflare. Static assets should be cached for at least a week.
+- **Serve images in modern formats** such as WebP. The codebase already references WebP versions of hero and blog images.
+- **Defer non-critical JavaScript** (the main bundle is loaded with the `defer` attribute).
+- **Preload key CSS** to reduce render blocking.

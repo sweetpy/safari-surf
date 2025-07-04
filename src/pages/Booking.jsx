@@ -121,7 +121,7 @@ Message: ${formData.message}`;
           <div 
             className="absolute inset-0 opacity-10"
             style={{
-              backgroundImage: 'url("https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop")',
+              backgroundImage: 'url("https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop&fm=webp")',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}

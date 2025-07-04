@@ -176,7 +176,7 @@ const blogPosts = [
     date: '2025-02-10',
     readTime: '7 min read',
     category: 'Travel Tech',
-    image: 'https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+    image: 'https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
     featured: true,
     tags: ['Kilimanjaro', 'Hiking', 'Connectivity', 'Travel Tech']
   },
@@ -351,7 +351,7 @@ const blogPosts = [
     date: '2025-02-01',
     readTime: '10 min read',
     category: 'Digital Nomad',
-    image: 'https://images.pexels.com/photos/3155830/pexels-photo-3155830.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+    image: 'https://images.pexels.com/photos/3155830/pexels-photo-3155830.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
     featured: false,
     tags: ['Digital Nomad', 'Zanzibar', 'Remote Work', 'Travel Tech']
   },
@@ -670,6 +670,7 @@ const TravelBlogPost = () => {
                         src={related.image}
                         alt={related.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     </div>

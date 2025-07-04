@@ -42,25 +42,25 @@ const About = () => {
     {
       name: 'Dr. Amara Mwalimu',
       role: 'Chief Executive Officer',
-      image: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop&fm=webp',
       bio: 'With over 15 years in telecommunications, Dr. Mwalimu leads our vision to connect all of Tanzania.'
     },
     {
       name: 'James Kiprotich',
       role: 'Chief Technology Officer',
-      image: 'https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop&fm=webp',
       bio: 'Network infrastructure expert ensuring our systems deliver world-class performance.'
     },
     {
       name: 'Sarah Juma',
       role: 'Head of Customer Success',
-      image: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop&fm=webp',
       bio: 'Passionate about customer satisfaction and building lasting relationships with our community.'
     },
     {
       name: 'Michael Nyerere',
       role: 'Operations Director',
-      image: 'https://images.pexels.com/photos/3777942/pexels-photo-3777942.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3777942/pexels-photo-3777942.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop&fm=webp',
       bio: 'Ensuring seamless operations and expansion across Tanzania\'s diverse regions.'
     }
   ];
@@ -91,7 +91,7 @@ const About = () => {
           <div 
             className="absolute inset-0 opacity-10"
             style={{
-              backgroundImage: 'url("https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop")',
+              backgroundImage: 'url("https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop&fm=webp")',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
@@ -184,9 +184,10 @@ const About = () => {
                 className="relative"
               >
                 <img
-                  src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                  src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp"
                   alt="Tanzania landscape representing our coverage"
                   className="rounded-2xl shadow-2xl"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-orange-600/30 to-transparent rounded-2xl" />
                 <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl">
@@ -368,7 +369,7 @@ const About = () => {
                 className="relative"
               >
                 <img
-                  src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                  src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp"
                   alt="Safari Surf WiFi service coverage across Tanzania"
                   className="rounded-2xl shadow-2xl"
                   loading="lazy"

@@ -34,7 +34,7 @@ const TravelBlog = () => {
       date: '2025-02-10',
       readTime: '7 min read',
       category: 'Travel Tech',
-      image: 'https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
       featured: true,
       slug: 'how-to-stay-connected-while-hiking-kilimanjaro'
     },
@@ -46,7 +46,7 @@ const TravelBlog = () => {
       date: '2025-02-01',
       readTime: '10 min read',
       category: 'Digital Nomad',
-      image: 'https://images.pexels.com/photos/3155830/pexels-photo-3155830.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3155830/pexels-photo-3155830.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
       featured: false,
       slug: 'digital-nomad-guide-working-remotely-zanzibar'
     },
@@ -58,7 +58,7 @@ const TravelBlog = () => {
       date: '2025-01-20',
       readTime: '6 min read',
       category: 'Travel Tech',
-      image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
       featured: false,
       slug: 'best-apps-for-planning-tanzania-safari'
     },
@@ -70,7 +70,7 @@ const TravelBlog = () => {
       date: '2025-01-15',
       readTime: '8 min read',
       category: 'Travel Tech',
-      image: 'https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
       featured: false,
       slug: 'internet-connectivity-in-serengeti'
     },
@@ -82,7 +82,7 @@ const TravelBlog = () => {
       date: '2025-01-05',
       readTime: '9 min read',
       category: 'Content Creation',
-      image: 'https://images.pexels.com/photos/3329292/pexels-photo-3329292.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3329292/pexels-photo-3329292.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
       featured: false,
       slug: 'create-stunning-tanzania-travel-content'
     },
@@ -94,7 +94,7 @@ const TravelBlog = () => {
       date: '2024-12-20',
       readTime: '6 min read',
       category: 'Family Travel',
-      image: 'https://images.pexels.com/photos/5081918/pexels-photo-5081918.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/5081918/pexels-photo-5081918.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop&fm=webp',
       featured: true,
       slug: 'why-family-needs-wifi-during-tanzania-travel'
     }
@@ -228,6 +228,7 @@ const TravelBlog = () => {
                           src={post.image}
                           alt={post.title}
                           className="w-full h-64 lg:h-72 object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <div className="absolute top-4 left-4 bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -323,6 +324,7 @@ const TravelBlog = () => {
                           src={post.image}
                           alt={post.title}
                           className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
+                          loading="lazy"
                         />
                         <div className="absolute top-4 left-4">
                           <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-semibold text-indigo-600">
