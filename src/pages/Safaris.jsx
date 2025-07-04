@@ -15,7 +15,7 @@ const Safaris = () => {
       title: "Serengeti Classic Safari",
       duration: "5 Days / 4 Nights",
       price: "$1,299",
-      image: "https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp",
       highlights: ["Big Five Game Viewing", "Serengeti National Park", "Ngorongoro Crater", "Cultural Village Visit"],
       rating: 4.9,
       reviews: 245,
@@ -26,7 +26,7 @@ const Safaris = () => {
       title: "Kilimanjaro & Safari Combo",
       duration: "12 Days / 11 Nights",
       price: "$2,899",
-      image: "https://images.pexels.com/photos/259967/pexels-photo-259967.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/259967/pexels-photo-259967.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp",
       highlights: ["Mount Kilimanjaro Trek", "Serengeti Safari", "Tarangire National Park", "Certified Guides"],
       rating: 4.8,
       reviews: 189,
@@ -37,7 +37,7 @@ const Safaris = () => {
       title: "Northern Circuit Adventure",
       duration: "8 Days / 7 Nights",
       price: "$1,899",
-      image: "https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp",
       highlights: ["Tarangire National Park", "Lake Manyara", "Ngorongoro Crater", "Serengeti Plains"],
       rating: 4.9,
       reviews: 312,
@@ -48,7 +48,7 @@ const Safaris = () => {
       title: "Budget Safari Experience",
       duration: "3 Days / 2 Nights",
       price: "$699",
-      image: "https://images.pexels.com/photos/1054655/pexels-photo-1054655.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/1054655/pexels-photo-1054655.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp",
       highlights: ["Ngorongoro Crater", "Tarangire National Park", "Camping Experience", "Local Guides"],
       rating: 4.7,
       reviews: 156,
@@ -59,7 +59,7 @@ const Safaris = () => {
       title: "Luxury Serengeti Safari",
       duration: "6 Days / 5 Nights",
       price: "$3,499",
-      image: "https://images.pexels.com/photos/802112/pexels-photo-802112.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/802112/pexels-photo-802112.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp",
       highlights: ["Luxury Lodges", "Private Game Drives", "Hot Air Balloon", "Gourmet Dining"],
       rating: 5.0,
       reviews: 89,
@@ -70,7 +70,7 @@ const Safaris = () => {
       title: "Migration Safari Special",
       duration: "7 Days / 6 Nights",
       price: "$2,299",
-      image: "https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp",
       highlights: ["Great Migration", "River Crossings", "Masai Mara Extension", "Professional Photography"],
       rating: 4.9,
       reviews: 278,
@@ -121,7 +121,7 @@ const Safaris = () => {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: 'url("https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop")',
+            backgroundImage: 'url("https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop&fm=webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -327,7 +327,7 @@ const Safaris = () => {
               className="relative"
             >
               <img
-                src="https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                src="https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp"
                 alt="Safari experience"
                 className="rounded-2xl shadow-2xl"
               />

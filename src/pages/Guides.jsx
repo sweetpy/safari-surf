@@ -126,7 +126,7 @@ const Guides = () => {
           <div 
             className="absolute inset-0 opacity-10"
             style={{
-              backgroundImage: 'url("https://images.pexels.com/photos/1170621/pexels-photo-1170621.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop")',
+              backgroundImage: 'url("https://images.pexels.com/photos/1170621/pexels-photo-1170621.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop&fm=webp")',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
@@ -358,7 +358,7 @@ const Guides = () => {
                 className="relative"
               >
                 <img
-                  src="https://images.pexels.com/photos/1170621/pexels-photo-1170621.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop"
+                  src="https://images.pexels.com/photos/1170621/pexels-photo-1170621.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&fm=webp"
                   alt="Tanzania travel planning"
                   className="rounded-2xl shadow-2xl"
                 />

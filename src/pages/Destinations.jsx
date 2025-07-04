@@ -24,7 +24,7 @@ const Destinations = () => {
     {
       name: 'Zanzibar',
       slug: 'zanzibar',
-      image: 'https://images.pexels.com/photos/3155830/pexels-photo-3155830.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/3155830/pexels-photo-3155830.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Pristine white sand beaches, historic Stone Town, and aromatic spice plantations',
       highlights: ['Stone Town UNESCO Site', 'Spice Tours', 'Pristine Beaches', 'Diving & Snorkeling'],
       duration: '3-7 days',
@@ -37,7 +37,7 @@ const Destinations = () => {
     {
       name: 'Serengeti National Park',
       slug: 'serengeti',
-      image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Witness the Great Migration and encounter the Big Five in endless savannah',
       highlights: ['Great Migration', 'Big Five Safari', 'Hot Air Balloons', 'Luxury Lodges'],
       duration: '3-5 days',
@@ -50,7 +50,7 @@ const Destinations = () => {
     {
       name: 'Mount Kilimanjaro',
       slug: 'kilimanjaro',
-      image: 'https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Conquer Africa\'s highest peak and witness breathtaking sunrise views',
       highlights: ['Summit Uhuru Peak', 'Multiple Routes', 'Diverse Ecosystems', 'Certification'],
       duration: '5-9 days',
@@ -63,7 +63,7 @@ const Destinations = () => {
     {
       name: 'Ngorongoro Crater',
       slug: 'ngorongoro',
-      image: 'https://images.pexels.com/photos/1068738/pexels-photo-1068738.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/1068738/pexels-photo-1068738.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Africa\'s Eden - a natural amphitheater teeming with wildlife',
       highlights: ['Crater Floor Safari', 'Flamingo Lakes', 'Maasai Villages', 'Black Rhinos'],
       duration: '1-2 days',
@@ -76,7 +76,7 @@ const Destinations = () => {
     {
       name: 'Tarangire National Park',
       slug: 'tarangire',
-      image: 'https://images.pexels.com/photos/2662816/pexels-photo-2662816.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/2662816/pexels-photo-2662816.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Land of giants with massive baobab trees and large elephant herds',
       highlights: ['Elephant Herds', 'Baobab Trees', 'Bird Watching', 'Tree Climbing Lions'],
       duration: '1-2 days',
@@ -89,7 +89,7 @@ const Destinations = () => {
     {
       name: 'Arusha',
       slug: 'arusha',
-      image: 'https://images.pexels.com/photos/2662816/pexels-photo-2662816.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/2662816/pexels-photo-2662816.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Gateway to the northern safari circuit and cultural experiences',
       highlights: ['Cultural Heritage Centre', 'Local Markets', 'Coffee Tours', 'Maasai Markets'],
       duration: '1-3 days',
@@ -123,7 +123,7 @@ const Destinations = () => {
           <div 
             className="absolute inset-0 opacity-10"
             style={{
-              backgroundImage: 'url("https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop")',
+              backgroundImage: 'url("https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop&fm=webp")',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
@@ -180,6 +180,7 @@ const Destinations = () => {
                           src={destination.image}
                           alt={destination.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <div className="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -262,6 +263,7 @@ const Destinations = () => {
                           src={destination.image}
                           alt={destination.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                         <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm rounded-full p-2">

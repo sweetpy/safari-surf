@@ -17,7 +17,7 @@ const Itineraries = () => {
       duration: '7 days',
       durationDays: 7,
       price: 'From $2,500',
-      image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Experience the best of Tanzania\'s northern circuit including Serengeti, Ngorongoro Crater, and Tarangire.',
       highlights: ['Serengeti National Park', 'Ngorongoro Crater', 'Tarangire National Park', 'Lake Manyara'],
       bestFor: ['First-time visitors', 'Wildlife enthusiasts'],
@@ -33,7 +33,7 @@ const Itineraries = () => {
       duration: '8 days',
       durationDays: 8,
       price: 'From $1,800',
-      image: 'https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Conquer Africa\'s highest peak via the scenic Machame route with professional guides.',
       highlights: ['Machame Route', 'Uhuru Peak', 'Barranco Wall', 'Shira Plateau'],
       bestFor: ['Adventure seekers', 'Mountain climbers'],
@@ -49,7 +49,7 @@ const Itineraries = () => {
       duration: '5 days',
       durationDays: 5,
       price: 'From $1,200',
-      image: 'https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Relax on pristine beaches, explore Stone Town, and experience Zanzibar\'s rich culture.',
       highlights: ['Stone Town', 'Nungwi Beach', 'Spice Tour', 'Dhow Cruise'],
       bestFor: ['Beach lovers', 'Culture enthusiasts'],
@@ -65,7 +65,7 @@ const Itineraries = () => {
       duration: '14 days',
       durationDays: 14,
       price: 'From $4,500',
-      image: 'https://images.pexels.com/photos/1170621/pexels-photo-1170621.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/1170621/pexels-photo-1170621.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'The ultimate Tanzania experience combining safari, Kilimanjaro, and Zanzibar beaches.',
       highlights: ['Full Northern Circuit', 'Kilimanjaro Trek', 'Zanzibar Extension', 'Cultural Visits'],
       bestFor: ['Adventure seekers', 'Comprehensive experience'],
@@ -81,7 +81,7 @@ const Itineraries = () => {
       duration: '10 days',
       durationDays: 10,
       price: 'From $3,200',
-      image: 'https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/1670732/pexels-photo-1670732.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Explore Tanzania\'s pristine southern parks with fewer crowds and incredible wildlife.',
       highlights: ['Ruaha National Park', 'Selous Game Reserve', 'Mikumi National Park', 'Walking Safaris'],
       bestFor: ['Off-the-beaten-path', 'Photography enthusiasts'],
@@ -97,7 +97,7 @@ const Itineraries = () => {
       duration: '6 days',
       durationDays: 6,
       price: 'From $5,500',
-      image: 'https://images.pexels.com/photos/1172207/pexels-photo-1172207.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+      image: 'https://images.pexels.com/photos/1172207/pexels-photo-1172207.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp',
       description: 'Indulge in luxury accommodations while experiencing the best wildlife viewing in Africa.',
       highlights: ['Luxury Lodges', 'Private Game Drives', 'Hot Air Balloon', 'Champagne Bush Dinner'],
       bestFor: ['Luxury travelers', 'Honeymoons'],
@@ -163,7 +163,7 @@ const Itineraries = () => {
         <div 
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: 'url("https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop")',
+            backgroundImage: 'url("https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop&fm=webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -247,6 +247,7 @@ const Itineraries = () => {
                     src={itinerary.image}
                     alt={itinerary.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                    loading="lazy"
                   />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
                     <div className="flex items-center space-x-1 text-sm font-semibold text-orange-600">
