@@ -121,7 +121,7 @@ const TravelBlog = () => {
         <title>Travel Technology Blog - Tips for Staying Connected in Tanzania | Safari Surf WiFi</title>
         <meta name="description" content="Expert travel technology tips, digital nomad guides, and connectivity solutions for Tanzania. Learn about staying connected on safari, at beaches, and in remote areas." />
         <meta name="keywords" content="Tanzania travel blog, Tanzania WiFi solutions, travel tech tips, digital nomad Tanzania, safari connectivity" />
-        <link rel="canonical" href="https://safarisurfwifi.com/travel/blog" />
+        <link rel="canonical" href="https://safari.flit.tz/travel/blog" />
       </Helmet>
 
       <div className="min-h-screen">

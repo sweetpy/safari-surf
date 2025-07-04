@@ -6,4 +6,4 @@ Disallow: /admin
 Disallow: /api/
 Disallow: /*.json$
 
-Sitemap: https://safarisurfwifi.com/sitemap.xml
+Sitemap: https://safari.flit.tz/sitemap.xml
