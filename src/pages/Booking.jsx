@@ -17,6 +17,7 @@ import {
   Award
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import StripeCheckoutForm from '../components/StripeCheckoutForm';
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -33,6 +34,7 @@ const Booking = () => {
   });
 
   const [step, setStep] = useState(1);
+  const [showCheckout, setShowCheckout] = useState(false);
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const destinations = [
@@ -72,26 +74,8 @@ const Booking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Create WhatsApp message
-    const message = `Hi! I'd like to book a Tanzania trip:
-    
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Travelers: ${formData.travelers} people
-Destination: ${formData.destination}
-Travel Dates: ${formData.travelDates}
-Duration: ${formData.duration}
-Budget: ${formData.budget}
-Interests: ${formData.interests.join(', ')}
-
-Message: ${formData.message}`;
-
-    const whatsappUrl = `https://wa.me/255764928408?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    toast.success('Redirecting to WhatsApp to complete your booking!');
+    setShowCheckout(true);
+    toast.success('Almost done! Complete payment below.');
   };
 
   const nextStep = () => {
@@ -145,6 +129,20 @@ Message: ${formData.message}`;
           </div>
         </section>
 
+        {showCheckout && (
+          <section className="py-16 bg-gray-50">
+            <StripeCheckoutForm
+              amount={100}
+              description="Trip Deposit"
+              customerEmail={formData.email}
+              customerName={formData.name}
+              onSuccess={() => setShowCheckout(false)}
+            />
+          </section>
+        )}
+
+        {!showCheckout && (
+        <>
         {/* Trust Indicators */}
         <section className="py-12 bg-white border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -453,8 +451,8 @@ Message: ${formData.message}`;
                       type="submit"
                       className="ml-auto bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-semibold transition-colors flex items-center space-x-2"
                     >
-                      <Phone className="h-4 w-4" />
-                      <span>Complete Booking via WhatsApp</span>
+                      <ArrowRight className="h-4 w-4" />
+                      <span>Proceed to Payment</span>
                     </button>
                   )}
                 </div>
@@ -462,6 +460,7 @@ Message: ${formData.message}`;
             </motion.div>
           </div>
         </section>
+        </>
 
         {/* Support Section */}
         <section className="py-16 bg-white">
