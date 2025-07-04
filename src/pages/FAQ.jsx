@@ -73,6 +73,20 @@ const FAQ = () => {
         answer: 'Yes! We offer special rates for students with valid ID and family packages for multiple connections. Contact us to learn about current discount programs available in your area.'
       }
     ],
+    'Orders & Delivery': [
+      {
+        question: 'How does the device delivery process work?',
+        answer: 'After confirming your order we deliver to your hotel, home or chosen airport. You can pay on delivery or online.'
+      },
+      {
+        question: 'What is your refund policy?',
+        answer: 'Cancellations at least 24 hours before delivery receive a full refund. Contact support for assistance.'
+      },
+      {
+        question: 'Are there any data limits?',
+        answer: 'All plans include unlimited data. Extremely heavy usage may be throttled to ensure fair access for everyone.'
+      }
+    ],
     'Coverage & Availability': [
       {
         question: 'Where is Safari Surf WiFi available?',
@@ -111,6 +125,19 @@ const FAQ = () => {
     ]
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: Object.values(faqCategories).flat().map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  };
+
   const allFAQs = Object.entries(faqCategories).flatMap(([category, faqs]) => 
     faqs.map(faq => ({ ...faq, category }))
   );
@@ -131,10 +158,7 @@ const FAQ = () => {
         title="Safari Surf WiFi FAQ - Get Answers to Common Questions"
         description="Find answers about installation, plans and troubleshooting for Safari Surf WiFi services in Tanzania."
         url="https://safari.flit.tz/faq"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage"
-        }}
+        schema={faqSchema}
       />
       {/* Hero Section */}
       <section 

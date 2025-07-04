@@ -122,6 +122,7 @@ const StripeCheckoutForm = ({
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Booking Confirmed!</h3>
             <p className="text-gray-600">Your WiFi device will be delivered to your location. We've sent a confirmation to your email.</p>
+            <p className="text-sm text-gray-500 mt-2">Share a photo of your adventure by replying to the confirmation email!</p>
             <button 
               onClick={() => window.location.href = '/'}
               className="mt-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold flex items-center justify-center space-x-2 hover:from-orange-600 hover:to-pink-600 transition-all duration-300 shadow-md hover:shadow-lg mx-auto"

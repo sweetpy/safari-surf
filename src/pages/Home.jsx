@@ -23,6 +23,7 @@ import {
 import VisitorCounter from '../components/VisitorCounter';
 import StatisticsSection from '../components/StatisticsSection';
 import InventoryTracker from '../components/InventoryTracker';
+import GoogleReviews from '../components/GoogleReviews';
 
 const Home = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -539,6 +540,8 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        <GoogleReviews />
 
         {/* Travel CTA Section */}
         <section className="py-24 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 relative overflow-hidden">

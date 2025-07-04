@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Users, Target, Award, Heart, Zap, Shield, Wifi, MapPin, TrendingUp, CheckCircle } from 'lucide-react';
 import VisitorCounter from '../components/VisitorCounter';
+import BlurImage from '../components/BlurImage';
 
 const About = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -185,11 +186,11 @@ const About = () => {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <img
+                <BlurImage
                   src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp"
+                  placeholder="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=10&h=10&fit=crop&blur=40"
                   alt="Tanzania landscape representing our coverage"
                   className="rounded-2xl shadow-2xl"
-                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-orange-600/30 to-transparent rounded-2xl" />
                 <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl">
@@ -370,11 +371,11 @@ const About = () => {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <img
+                <BlurImage
                   src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&fm=webp"
+                  placeholder="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=10&h=10&fit=crop&blur=40"
                   alt="Safari Surf WiFi service coverage across Tanzania"
                   className="rounded-2xl shadow-2xl"
-                  loading="lazy"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-orange-500 text-white p-4 rounded-2xl shadow-lg">
                   <div className="flex items-center space-x-2">
