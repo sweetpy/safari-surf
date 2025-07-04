@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Calendar, User, ArrowRight, Wifi, Smartphone, Globe } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Blog = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -100,6 +101,12 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Safari Surf WiFi Blog - Connectivity Tips & News"
+        description="Read the latest articles on staying connected in Tanzania with portable WiFi and tech advice."
+        url="https://safari.flit.tz/blog"
+        type="article"
+      />
       {/* Hero Section */}
       <section 
         ref={heroRef}

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { MapPin, CheckCircle, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Coverage = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -86,6 +87,11 @@ const Coverage = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Safari Surf WiFi Coverage Map - Available Cities"
+        description="Check if Safari Surf WiFi is available in your Tanzanian destination."
+        url="https://safari.flit.tz/coverage"
+      />
       {/* Hero Section */}
       <section 
         ref={heroRef}

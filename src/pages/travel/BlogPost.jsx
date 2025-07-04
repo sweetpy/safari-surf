@@ -418,6 +418,15 @@ const TravelBlogPost = () => {
         <meta property="og:image" content={post.image} />
         <meta property="og:url" content={`https://safari.flit.tz/travel/blog/${post.slug}`} />
         <meta property="og:type" content="article" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": post.title,
+          "description": post.excerpt,
+          "image": post.image,
+          "author": {"@type": "Organization", "name": "Safari Surf WiFi"},
+          "mainEntityOfPage": `https://safari.flit.tz/travel/blog/${post.slug}`
+        })}</script>
       </Helmet>
 
       <div className="min-h-screen">

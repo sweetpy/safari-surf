@@ -77,8 +77,10 @@ const About = () => {
       <Helmet>
         <title>About Safari Surf WiFi - Tanzania's Leading WiFi Rental Service | Our Story</title>
         <meta name="description" content="Learn about Safari Surf WiFi, Tanzania's premier portable WiFi rental service. Join our growing customer base, 15+ cities, 99.9% uptime. Connecting Tanzania since 2020." />
-        <meta name="keywords" content="about Safari Surf WiFi, Tanzania WiFi company, portable internet rental history, WiFi rental team Tanzania, our story" />
         <link rel="canonical" href="https://safari.flit.tz/about" />
+        <meta property="og:title" content="About Safari Surf WiFi - Tanzania's Leading WiFi Rental Service" />
+        <meta property="og:description" content="Learn about Safari Surf WiFi, Tanzania's premier portable WiFi rental service." />
+        <meta property="og:url" content="https://safari.flit.tz/about" />
       </Helmet>
 
       <div className="min-h-screen">

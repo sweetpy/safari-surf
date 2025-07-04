@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { MapPin, Clock, Users, Star, ArrowRight, Calendar, Camera, Mountain, Palmtree, Binary as Binoculars, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Itineraries = () => {
   const [selectedDuration, setSelectedDuration] = useState('all');
@@ -154,6 +155,11 @@ const Itineraries = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Tanzania Safari Itineraries - Plan Your Adventure"
+        description="Sample itineraries for incredible safari and beach holidays across Tanzania."
+        url="https://safari.flit.tz/travel/itineraries"
+      />
       {/* Hero Section */}
       <section 
         ref={heroRef}

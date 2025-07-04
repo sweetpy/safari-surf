@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { CheckCircle, X, Star, ArrowRight, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
@@ -135,6 +136,17 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Safari Surf WiFi Pricing - Affordable Internet Plans"
+        description="Compare our daily, weekly and monthly portable WiFi rental prices."
+        url="https://safari.flit.tz/pricing"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": "Portable WiFi Rental",
+          "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "4.85" }
+        }}
+      />
       {/* Hero Section */}
       <section 
         ref={heroRef}
