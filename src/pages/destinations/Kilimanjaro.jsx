@@ -110,7 +110,7 @@ const Kilimanjaro = () => {
         <title>Mount Kilimanjaro Climbing - Tanzania's Highest Peak | Expert Guides & Routes</title>
         <meta name="description" content="Climb Mount Kilimanjaro, Africa's highest peak at 5,895m. Choose from Machame, Lemosho, or Marangu routes. Expert guides, high success rates, all-inclusive packages." />
         <meta name="keywords" content="Mount Kilimanjaro climbing, Kilimanjaro routes, Machame route, Lemosho route, Marangu route, Tanzania mountain climbing, Uhuru Peak" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/destinations/kilimanjaro" />
+        <link rel="canonical" href="https://safari.flit.tz/destinations/kilimanjaro" />
       </Helmet>
 
       <div className="min-h-screen">
