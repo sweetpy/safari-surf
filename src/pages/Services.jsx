@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import SEO from '../components/SEO';
 import { 
   Home, 
   Building, 
@@ -80,6 +81,11 @@ const Services = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Safari Surf WiFi Services - Residential & Business Internet"
+        description="Discover our range of internet services for homes, businesses and events across Tanzania."
+        url="https://safari.flit.tz/services"
+      />
       {/* Hero Section */}
       <section 
         ref={heroRef}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -135,34 +136,30 @@ const Home = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery | Safari Surf WiFi</title>
-        <meta name="description" content="Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage. Get connected instantly in Tanzania!" />
-        <meta name="keywords" content="WiFi rental Tanzania, portable WiFi Tanzania, internet rental Dar es Salaam, mobile WiFi Arusha, WiFi device rental Zanzibar, Tanzania internet, safari WiFi, travel WiFi Tanzania" />
-        <link rel="canonical" href="https://safari.flit.tz" />
-        
-        {/* Enhanced Local SEO */}
-        <script type="application/ld+json">
-        {JSON.stringify({
+      <SEO
+        title="Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery | Safari Surf WiFi"
+        description="Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage. Get connected instantly in Tanzania!"
+        url="https://safari.flit.tz"
+        schema={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery",
-          "description": "Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage.",
-          "url": "https://safari.flit.tz",
-          "mainEntity": {
+          name: "Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery",
+          description:
+            "Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage.",
+          url: "https://safari.flit.tz",
+          mainEntity: {
             "@type": "LocalBusiness",
-            "name": "Safari Surf WiFi",
-            "priceRange": "$4.85-$150",
-            "telephone": "+255764928408",
-            "address": {
+            name: "Safari Surf WiFi",
+            priceRange: "$4.85-$150",
+            telephone: "+255764928408",
+            address: {
               "@type": "PostalAddress",
-              "addressCountry": "TZ",
-              "addressRegion": "Dar es Salaam"
+              addressCountry: "TZ",
+              addressRegion: "Dar es Salaam"
             }
           }
-        })}
-        </script>
-      </Helmet>
+        }}
+      />
 
       <div className="min-h-screen overflow-hidden">
         {/* Optimized Floating Background Elements */}

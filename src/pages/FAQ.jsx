@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ChevronDown, ChevronUp, Search, HelpCircle, Phone, Mail } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const FAQ = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -126,6 +127,15 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Safari Surf WiFi FAQ - Get Answers to Common Questions"
+        description="Find answers about installation, plans and troubleshooting for Safari Surf WiFi services in Tanzania."
+        url="https://safari.flit.tz/faq"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage"
+        }}
+      />
       {/* Hero Section */}
       <section 
         ref={heroRef}

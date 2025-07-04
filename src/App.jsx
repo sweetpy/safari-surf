@@ -25,7 +25,8 @@ import Itineraries from './pages/Itineraries';
 import Guides from './pages/Guides';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import AirportWiFiTanzania from './pages/blog/AirportWiFiTanzania';
+import KilimanjaroInternetGuide from './pages/blog/KilimanjaroInternetGuide';
+import HowToPickup from './pages/faq/HowToPickup';
 import Booking from './pages/Booking';
 
 // Travel Hub Blog
@@ -63,13 +64,15 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/faq/how-to-pickup-your-device" element={<HowToPickup />} />
               <Route path="/checkout" element={<RentalCheckout />} />
               <Route path="/airport-wifi" element={<AirportWiFi />} />
+              <Route path="/wifi-rental-tanzania/airport" element={<AirportWiFi />} />
               
               {/* Blog Routes */}
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/blog/how-to-get-airport-wifi-tanzania-guide" element={<AirportWiFiTanzania />} />
+              <Route path="/blog/kilimanjaro-internet-guide" element={<KilimanjaroInternetGuide />} />
               
               {/* Travel Content - Secondary Features */}
               <Route path="/travel" element={<Destinations />} />

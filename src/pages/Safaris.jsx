@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Camera, MapPin, Clock, Users, Star, CheckCircle, ArrowRight, Calendar, Binary as Binoculars, Tent, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Safaris = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -112,6 +113,11 @@ const Safaris = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Tanzania Safari Tours - Top Wildlife Experiences"
+        description="Browse our curated safari packages to Serengeti, Ngorongoro and beyond."
+        url="https://safari.flit.tz/travel/safaris"
+      />
       {/* Hero Section */}
       <section 
         ref={heroRef}
