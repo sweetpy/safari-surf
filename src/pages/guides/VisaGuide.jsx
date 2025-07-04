@@ -103,7 +103,7 @@ const VisaGuide = () => {
         <title>Tanzania Visa Guide 2025 - Requirements, Application Process & Fees | Complete Guide</title>
         <meta name="description" content="Complete Tanzania visa guide: requirements, application process, fees, and processing times. eVisa, visa on arrival, and embassy options. Get your Tanzania visa hassle-free." />
         <meta name="keywords" content="Tanzania visa, Tanzania visa requirements, Tanzania eVisa, visa on arrival Tanzania, Tanzania visa application, Tanzania visa fees, Tanzania visa guide 2025" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/guides/visa-to-tanzania" />
+        <link rel="canonical" href="https://safari.flit.tz/guides/visa-to-tanzania" />
       </Helmet>
 
       <div className="min-h-screen">

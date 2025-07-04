@@ -283,7 +283,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
         <title>Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery | Safari Surf WiFi</title>
         <meta name="description" content="Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. Get connected instantly at all major Tanzania airports. Meet & greet service available." />
         <meta name="keywords" content="airport WiFi Tanzania, JNIA WiFi rental, Dar es Salaam airport internet, Kilimanjaro airport WiFi, Zanzibar airport WiFi, travel WiFi Tanzania" />
-        <link rel="canonical" href="https://safarisurfwifi.com/airport-wifi" />
+        <link rel="canonical" href="https://safari.flit.tz/airport-wifi" />
       </Helmet>
 
       <div className="min-h-screen">

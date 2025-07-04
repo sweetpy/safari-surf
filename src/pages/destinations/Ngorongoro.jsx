@@ -104,10 +104,10 @@ const Ngorongoro = () => {
         <title>Ngorongoro Crater Safari - Africa's Eden | Tanzania Travel Hub</title>
         <meta name="description" content="Explore Ngorongoro Crater, the world's largest unbroken volcanic caldera. Big Five safari, black rhinos, and stunning landscapes in Tanzania's natural wonder." />
         <meta name="keywords" content="Ngorongoro Crater, Tanzania safari, Big Five, black rhino, volcanic caldera, Africa Eden, wildlife safari, crater tour" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/destinations/ngorongoro" />
+        <link rel="canonical" href="https://safari.flit.tz/destinations/ngorongoro" />
         <meta property="og:title" content="Ngorongoro Crater Safari - Africa's Eden" />
         <meta property="og:description" content="Experience the world's largest volcanic caldera with incredible wildlife viewing including the Big Five." />
-        <meta property="og:url" content="https://tanzaniatravelhub.com/destinations/ngorongoro" />
+        <meta property="og:url" content="https://safari.flit.tz/destinations/ngorongoro" />
       </Helmet>
 
       <div className="min-h-screen">

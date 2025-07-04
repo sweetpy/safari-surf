@@ -121,7 +121,7 @@ const Arusha = () => {
         <title>Arusha Tanzania - Gateway to Safari Adventures | Cultural Heritage & Mount Meru</title>
         <meta name="description" content="Discover Arusha, Tanzania's safari capital. Explore cultural heritage, visit Mount Meru, experience Maasai culture, and start your northern circuit safari adventure." />
         <meta name="keywords" content="Arusha Tanzania, safari gateway, cultural heritage centre, Mount Meru, Maasai culture, coffee tours, northern safari circuit" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/destinations/arusha" />
+        <link rel="canonical" href="https://safari.flit.tz/destinations/arusha" />
       </Helmet>
 
       <div className="min-h-screen">

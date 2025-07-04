@@ -211,7 +211,7 @@ const PackingList = () => {
         <title>Tanzania Packing List 2025 - Safari, Kilimanjaro & Zanzibar Essentials | Complete Guide</title>
         <meta name="description" content="Complete Tanzania packing list for safari, Kilimanjaro climbing, and Zanzibar holidays. Essential items, seasonal tips, and expert packing advice for 2025." />
         <meta name="keywords" content="Tanzania packing list, safari packing, Kilimanjaro packing list, Zanzibar packing, Tanzania travel essentials, safari gear, mountain climbing gear" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/guides/tanzania-packing-list" />
+        <link rel="canonical" href="https://safari.flit.tz/guides/tanzania-packing-list" />
       </Helmet>
 
       <div className="min-h-screen">

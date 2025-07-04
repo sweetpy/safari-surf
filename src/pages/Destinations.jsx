@@ -110,7 +110,7 @@ const Destinations = () => {
         <title>Top Tanzania Destinations - Zanzibar, Serengeti, Kilimanjaro | Travel Guide 2025</title>
         <meta name="description" content="Explore Tanzania's best destinations: pristine Zanzibar beaches, Serengeti wildlife safaris, Mount Kilimanjaro climbing, and Ngorongoro Crater. Expert travel guides and booking." />
         <meta name="keywords" content="Tanzania destinations, Zanzibar beaches, Serengeti safari, Kilimanjaro climbing, Ngorongoro crater, Tarangire national park, Arusha travel" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/destinations" />
+        <link rel="canonical" href="https://safari.flit.tz/destinations" />
       </Helmet>
 
       <div className="min-h-screen">

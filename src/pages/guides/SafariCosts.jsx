@@ -162,7 +162,7 @@ const SafariCosts = () => {
         <title>Tanzania Safari Costs 2025 - Complete Pricing Guide & Budget Calculator</title>
         <meta name="description" content="Complete guide to Tanzania safari costs 2025. Budget breakdown, pricing factors, money-saving tips. Plan your dream safari within budget. Free cost calculator included." />
         <meta name="keywords" content="Tanzania safari cost, safari prices, budget safari Tanzania, luxury safari cost, Serengeti cost, safari budget calculator, Tanzania travel cost" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/guides/tanzania-safari-cost" />
+        <link rel="canonical" href="https://safari.flit.tz/guides/tanzania-safari-cost" />
       </Helmet>
 
       <div className="min-h-screen">
