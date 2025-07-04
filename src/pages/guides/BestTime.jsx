@@ -170,7 +170,7 @@ const BestTime = () => {
         <title>Best Time to Visit Tanzania 2025 - Weather, Safari & Travel Guide</title>
         <meta name="description" content="Discover the best time to visit Tanzania for safari, Kilimanjaro climbing, and beach holidays. Complete weather guide, seasonal tips, and expert travel advice for 2025." />
         <meta name="keywords" content="best time visit Tanzania, Tanzania weather, safari season, Kilimanjaro climbing season, Tanzania travel guide, when to visit Tanzania" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/guides/best-time-to-visit-tanzania" />
+        <link rel="canonical" href="https://safari.flit.tz/guides/best-time-to-visit-tanzania" />
       </Helmet>
 
       <div className="min-h-screen">

@@ -108,7 +108,7 @@ Message: ${formData.message}`;
         <title>Book Your Tanzania Safari & Travel Adventure | Best Deals 2025</title>
         <meta name="description" content="Book your dream Tanzania safari, Kilimanjaro climb, or Zanzibar holiday. Expert planning, best prices, instant booking confirmation. Start your adventure today!" />
         <meta name="keywords" content="book Tanzania safari, safari booking, Kilimanjaro booking, Zanzibar holidays, Tanzania travel booking, safari packages" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/booking" />
+        <link rel="canonical" href="https://safari.flit.tz/booking" />
       </Helmet>
 
       <div className="min-h-screen">

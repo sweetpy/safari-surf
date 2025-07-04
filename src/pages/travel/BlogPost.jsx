@@ -412,11 +412,11 @@ const TravelBlogPost = () => {
         <title>{post.title} | Travel Technology Blog - Safari Surf WiFi</title>
         <meta name="description" content={post.excerpt} />
         <meta name="keywords" content={`${post.category}, Tanzania travel, WiFi, ${post.tags?.join(', ')}`} />
-        <link rel="canonical" href={`https://safarisurfwifi.com/travel/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://safari.flit.tz/travel/blog/${post.slug}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:image" content={post.image} />
-        <meta property="og:url" content={`https://safarisurfwifi.com/travel/blog/${post.slug}`} />
+        <meta property="og:url" content={`https://safari.flit.tz/travel/blog/${post.slug}`} />
         <meta property="og:type" content="article" />
       </Helmet>
 

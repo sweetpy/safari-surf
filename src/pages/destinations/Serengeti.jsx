@@ -87,7 +87,7 @@ const Serengeti = () => {
         <title>Serengeti National Park Safari - Great Migration & Big Five | Tanzania Travel Hub</title>
         <meta name="description" content="Experience the legendary Serengeti National Park - witness the Great Migration, spot the Big Five, and explore endless plains. Book your Serengeti safari adventure today!" />
         <meta name="keywords" content="Serengeti safari, Great Migration, Big Five, Tanzania national park, wildlife safari, Serengeti tours, Africa safari" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/destinations/serengeti" />
+        <link rel="canonical" href="https://safari.flit.tz/destinations/serengeti" />
       </Helmet>
 
       <div className="min-h-screen">

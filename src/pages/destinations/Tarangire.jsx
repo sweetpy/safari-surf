@@ -95,10 +95,10 @@ const Tarangire = () => {
         <title>Tarangire National Park Safari - Land of Giants & Baobab Trees | Tanzania Travel Hub</title>
         <meta name="description" content="Experience Tarangire National Park - home to massive elephant herds, ancient baobab trees, and tree-climbing lions. Book your Tarangire safari adventure today!" />
         <meta name="keywords" content="Tarangire National Park, Tarangire safari, Tanzania elephants, baobab trees, tree climbing lions, Tanzania wildlife, northern circuit safari" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/destinations/tarangire" />
+        <link rel="canonical" href="https://safari.flit.tz/destinations/tarangire" />
         <meta property="og:title" content="Tarangire National Park Safari - Land of Giants & Baobab Trees" />
         <meta property="og:description" content="Discover Tarangire's massive elephant herds, ancient baobab trees, and unique wildlife. Perfect for photography and authentic safari experiences." />
-        <meta property="og:url" content="https://tanzaniatravelhub.com/destinations/tarangire" />
+        <meta property="og:url" content="https://safari.flit.tz/destinations/tarangire" />
       </Helmet>
 
       <div className="min-h-screen">

@@ -113,7 +113,7 @@ const Guides = () => {
         <title>Tanzania Travel Guides 2025 - Visa, Safari Costs, Best Time to Visit | Expert Tips</title>
         <meta name="description" content="Complete Tanzania travel guides covering visa requirements, safari costs, best time to visit, packing lists, and budget planning. Free expert advice for 2025." />
         <meta name="keywords" content="Tanzania travel guide, Tanzania visa guide, safari costs, best time visit Tanzania, Tanzania packing list, travel budget Tanzania" />
-        <link rel="canonical" href="https://tanzaniatravelhub.com/guides" />
+        <link rel="canonical" href="https://safari.flit.tz/guides" />
       </Helmet>
 
       <div className="min-h-screen">

@@ -176,7 +176,7 @@ CASH ON DELIVERY AVAILABLE - I can pay when receiving the device.`;
         <title>Rent WiFi Instantly | Contact Safari Surf WiFi Tanzania</title>
         <meta name="description" content="Rent portable WiFi devices instantly in Tanzania. Contact our 24/7 support via WhatsApp, phone, or email. High-speed internet rental for tourists and business travelers." />
         <meta name="keywords" content="rent WiFi Tanzania, contact WiFi rental, portable internet Tanzania, Dar es Salaam WiFi rental, tourist WiFi, travel internet Tanzania" />
-        <link rel="canonical" href="https://safarisurfwifi.com/contact" />
+        <link rel="canonical" href="https://safari.flit.tz/contact" />
       </Helmet>
 
       <div className="min-h-screen">
