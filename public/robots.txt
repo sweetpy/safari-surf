@@ -6,4 +6,4 @@ Disallow: /admin
 Disallow: /api/
 Disallow: /*.json$
 
-Sitemap: https://safari.flit.tz/sitemap.xml
+Sitemap: https://tanzaniatravelhub.com/sitemap.xml
