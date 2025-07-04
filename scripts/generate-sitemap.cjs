@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseUrl = 'https://safarisurfwifi.com';
+const baseUrl = 'https://safari.flit.tz';
 
 function extractRoutes() {
   const appFile = path.join(__dirname, '../src/App.jsx');

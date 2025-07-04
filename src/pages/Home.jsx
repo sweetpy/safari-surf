@@ -139,7 +139,7 @@ const Home = () => {
         <title>Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery | Safari Surf WiFi</title>
         <meta name="description" content="Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage. Get connected instantly in Tanzania!" />
         <meta name="keywords" content="WiFi rental Tanzania, portable WiFi Tanzania, internet rental Dar es Salaam, mobile WiFi Arusha, WiFi device rental Zanzibar, Tanzania internet, safari WiFi, travel WiFi Tanzania" />
-        <link rel="canonical" href="https://safarisurfwifi.com" />
+        <link rel="canonical" href="https://safari.flit.tz" />
         
         {/* Enhanced Local SEO */}
         <script type="application/ld+json">
@@ -148,7 +148,7 @@ const Home = () => {
           "@type": "WebPage",
           "name": "Get WiFi in Tanzania in Under 5 Minutes – Airport & Home Delivery",
           "description": "Unlimited 4G WiFi delivered at any airport, hotel, or home across Tanzania. From $4.85/day or TSh 6,600 – Unlimited Usage.",
-          "url": "https://safarisurfwifi.com",
+          "url": "https://safari.flit.tz",
           "mainEntity": {
             "@type": "LocalBusiness",
             "name": "Safari Surf WiFi",
