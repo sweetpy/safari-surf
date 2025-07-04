@@ -6,4 +6,4 @@ Disallow: /admin
 Disallow: /api/
 Disallow: /*.json$
 
-Sitemap: https://tanzaniatravelhub.com/sitemap.xml
+Sitemap: https://safarisurfwifi.com/sitemap.xml
